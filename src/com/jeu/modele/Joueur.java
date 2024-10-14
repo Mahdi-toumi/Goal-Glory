@@ -14,13 +14,14 @@ public abstract class Joueur {
     private String prenom;
     private int age;
     private String position;
-    //equipe 
+    private Equipe equipe  ;
 
-    public Joueur(String nom, String prenom, int age, String position) {
+    public Joueur(String nom, String prenom, int age, String position , Equipe equipe) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
         this.position = position;
+        this.equipe=equipe ;
     }
 
     public String getNom() {
@@ -54,7 +55,7 @@ public abstract class Joueur {
     public void setPosition(String position) {
         this.position = position;
     }
-    /*
+    
     public Equipe getEquipe() {
         return equipe;
     }
@@ -62,6 +63,6 @@ public abstract class Joueur {
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
     }
-     */
+   
 
 }

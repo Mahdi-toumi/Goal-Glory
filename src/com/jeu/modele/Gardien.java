@@ -11,8 +11,8 @@ package com.jeu.modele;
 public class Gardien extends Joueur {
     private double pourcentageDeSauvete; // Pourcentage de réussite des arrêts
 
-    public Gardien(String nom,String prenom , int age,  double pourcentageDeSauvete) {
-        super(nom ,prenom , age, "Gardien");  //a ajouter equipe
+    public Gardien(String nom,String prenom , int age,Equipe equipe,  double pourcentageDeSauvete) {
+        super(nom ,prenom , age, "Gardien",equipe);  //a ajouter equipe
         this.pourcentageDeSauvete = pourcentageDeSauvete;
     }
 

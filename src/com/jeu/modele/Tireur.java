@@ -11,8 +11,8 @@ package com.jeu.modele;
 public class Tireur  extends Joueur {
     private double precisionDeTir; // Précision du joueur lors des tirs
 
-    public Tireur(String nom , String prenom, int age, double precisionDeTir) {
-        super(nom, prenom,age, "Attaquant");
+    public Tireur(String nom , String prenom, int age,Equipe equipe, double precisionDeTir) {
+        super(nom, prenom,age, "Attaquant",equipe);
         this.precisionDeTir = precisionDeTir;
     }
 
