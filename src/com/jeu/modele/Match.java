@@ -4,6 +4,8 @@
  */
 package com.jeu.modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author toumi
@@ -12,23 +14,58 @@ class Match {
     private Equipe equipe1;
     private Equipe equipe2;
     private Score score;
+    private Stade stade ; 
+    private ArrayList<TirAuBut> tirAubuts;
 
-    public Match(Equipe equipe1, Equipe equipe2) {
+    public Match(Equipe equipe1, Equipe equipe2, Stade stade) {
         this.equipe1 = equipe1;
         this.equipe2 = equipe2;
+        this.stade = stade ; 
         this.score = new Score();
+        this.tirAubuts = new ArrayList<>(); 
     }
 
-    public void demarrerMatch() {
-        
+    // Getters
+    public Equipe getEquipe1() {
+        return equipe1;
     }
 
-    public void terminerMatch() {
-        
+    public Equipe getEquipe2() {
+        return equipe2;
     }
 
-    public void obtenirVainqueur() {
-        // Logique pour déterminer le vainqueur
-        
+    public Score getScore() {
+        return score;
     }
+
+    public ArrayList<TirAuBut> getTirAubuts() {
+        return tirAubuts;
+    }
+
+    // Setters
+    public void setEquipe1(Equipe equipe1) {
+        this.equipe1 = equipe1;
+    }
+
+    public void setEquipe2(Equipe equipe2) {
+        this.equipe2 = equipe2;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
+    public void setTirAubuts(ArrayList<TirAuBut> tirAubuts) {
+        this.tirAubuts = tirAubuts;
+    }
+
+    public void ajouterTirAuBut(TirAuBut tirAuBut) {
+        this.tirAubuts.add(tirAuBut);
+    }
+
+    public void supprimerTirAuBut(TirAuBut tirAuBut) {
+        this.tirAubuts.remove(tirAuBut);
+    }
+
+    
 }

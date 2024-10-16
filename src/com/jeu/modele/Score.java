@@ -17,16 +17,22 @@ class Score {
         this.scoreEquipe2 = 0;
     }
 
-    public void incrementerScore(Equipe equipe) {
-      /*  if (equipe == ) {
-            scoreEquipe1++;
-        } else if (equipe == ) {
-            scoreEquipe2++;
-        }
-       */
+    // Getters
+    public int getScoreEquipe1() {
+        return scoreEquipe1;
     }
 
-    public String obtenirScore() {
-        return scoreEquipe1 + " - " + scoreEquipe2;
+    public int getScoreEquipe2() {
+        return scoreEquipe2;
+    }
+
+    // Setters
+    public void setScoreEquipe1(int scoreEquipe1) {
+        this.scoreEquipe1 = scoreEquipe1;
+    }
+
+    public void setScoreEquipe2(int scoreEquipe2) {
+        this.scoreEquipe2 = scoreEquipe2;
     }
 }
+

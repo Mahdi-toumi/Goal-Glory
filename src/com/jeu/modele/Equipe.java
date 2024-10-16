@@ -12,6 +12,7 @@ import java.util.Map;
  *
  * @author toumi
  */
+
 class Equipe {
     private String nom;
     private String entraineur;
@@ -23,18 +24,44 @@ class Equipe {
         this.joueurs = new ArrayList<>();
     }
 
+    // Getters
+    public String getNom() {
+        return nom;
+    }
+
+    public String getEntraineur() {
+        return entraineur;
+    }
+
+    public ArrayList<Joueur> getJoueurs() {
+        return joueurs;
+    }
+
+    // Setters
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setEntraineur(String entraineur) {
+        this.entraineur = entraineur;
+    }
+
+    public void setJoueurs(ArrayList<Joueur> joueurs) {
+        this.joueurs = joueurs;
+    }
+
     public void ajouterJoueur(Joueur joueur) {
         joueurs.add(joueur);
     }
-    
-    public void SupprimerJoueur(Joueur joueur) {
+
+    public void supprimerJoueur(Joueur joueur) { // Correction : nom de méthode en minuscule
         joueurs.remove(joueur);
     }
 
-    public Map<String,String> obtenirCompositionEquipe() {
-        Map<String , String> nomsJoueurs = new HashMap<>(); 
+    public Map<String, String> obtenirCompositionEquipe() {
+        Map<String, String> nomsJoueurs = new HashMap<>();
         for (Joueur joueur : joueurs) {
-            nomsJoueurs.put(joueur.getNom(),joueur.getPosition());
+            nomsJoueurs.put(joueur.getNom(), joueur.getPosition());
         }
         return nomsJoueurs;
     }

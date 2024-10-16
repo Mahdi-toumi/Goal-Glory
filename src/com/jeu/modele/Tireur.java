@@ -8,17 +8,12 @@ package com.jeu.modele;
  *
  * @author toumi
  */
-public class Tireur  extends Joueur {
+public class Tireur extends Joueur {
     private double precisionDeTir; // Précision du joueur lors des tirs
 
-    public Tireur(String nom , String prenom, int age,Equipe equipe, double precisionDeTir) {
-        super(nom, prenom,age, "Attaquant",equipe);
+    public Tireur(String nom, String prenom, int age, Equipe equipe, double precisionDeTir) {
+        super(nom, prenom, age, "Attaquant", equipe);
         this.precisionDeTir = precisionDeTir;
-    }
-
-    public void tirerTirAuBut() {
-        // Logique pour déterminer si l'attaquant marque un but
-        
     }
 
     // Getters et Setters
@@ -29,6 +24,12 @@ public class Tireur  extends Joueur {
     public void setPrecisionDeTir(double precisionDeTir) {
         this.precisionDeTir = precisionDeTir;
     }
+
+    @Override
+    public void jouer() {
+        
+    }
 }
+
     
 

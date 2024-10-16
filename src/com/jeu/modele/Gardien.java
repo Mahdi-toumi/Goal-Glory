@@ -9,24 +9,25 @@ package com.jeu.modele;
  * @author toumi
  */
 public class Gardien extends Joueur {
-    private double pourcentageDeSauvete; // Pourcentage de réussite des arrêts
+    private double pourcentageDeSauvetage; // Pourcentage de réussite des arrêts
 
-    public Gardien(String nom,String prenom , int age,Equipe equipe,  double pourcentageDeSauvete) {
-        super(nom ,prenom , age, "Gardien",equipe);  //a ajouter equipe
-        this.pourcentageDeSauvete = pourcentageDeSauvete;
-    }
-
-    public void sauverTir() {
-        // Logique pour déterminer si le gardien réussit à sauver le tir
-       
+    public Gardien(String nom, String prenom, int age, Equipe equipe, double pourcentageDeSauvetage) {
+        super(nom, prenom, age, "Gardien", equipe);
+        this.pourcentageDeSauvetage = pourcentageDeSauvetage;
     }
 
     // Getters et Setters
-    public double getPourcentageDeSauvete() {
-        return pourcentageDeSauvete;
+    public double getPourcentageDeSauvetage() {
+        return pourcentageDeSauvetage;
     }
 
-    public void setPourcentageDeSauvete(double pourcentageDeSauvete) {
-        this.pourcentageDeSauvete = pourcentageDeSauvete;
+    public void setPourcentageDeSauvetage(double pourcentageDeSauvetage) {
+        this.pourcentageDeSauvetage = pourcentageDeSauvetage;
+    }
+
+    @Override
+    public void jouer() {
+        
     }
 }
+
