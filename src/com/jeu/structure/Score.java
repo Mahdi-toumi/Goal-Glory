@@ -34,5 +34,10 @@ class Score {
     public void setScoreEquipe2(int scoreEquipe2) {
         this.scoreEquipe2 = scoreEquipe2;
     }
+    
+    @Override
+    public String toString() {
+        return this.scoreEquipe1 + " - " + this.scoreEquipe2;
+    }
 }
 

@@ -13,12 +13,10 @@ package com.jeu.structure;
 public class Jeu {
     
     private Match matchActuel;
-    private Score scoreActuel;
     private Tournoi tournoi;
 
     public Jeu(Match matchActuel, Score scoreActuel, Tournoi tournoi) {
         this.matchActuel = matchActuel;
-        this.scoreActuel = scoreActuel;
         this.tournoi = tournoi;
     }
 

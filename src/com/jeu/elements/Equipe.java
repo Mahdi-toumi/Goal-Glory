@@ -65,4 +65,14 @@ public class  Equipe {
         }
         return nomsJoueurs;
     }
+    
+    
+    @Override
+    public String toString() {
+        return nom + " | Entraîneur: " + entraineur;
+    }
+    
+    
+    
+    
 }
