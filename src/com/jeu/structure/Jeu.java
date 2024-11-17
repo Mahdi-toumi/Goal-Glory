@@ -15,7 +15,7 @@ public class Jeu {
     private Match matchActuel;
     private Tournoi tournoi;
 
-    public Jeu(Match matchActuel, Score scoreActuel, Tournoi tournoi) {
+    public Jeu(Match matchActuel, Tournoi tournoi) {
         this.matchActuel = matchActuel;
         this.tournoi = tournoi;
     }
@@ -25,9 +25,7 @@ public class Jeu {
         return matchActuel;
     }
 
-    public Score getScoreActuel() {
-        return scoreActuel;
-    }
+  
 
     public Tournoi getTournoi() {
         return tournoi;
@@ -38,9 +36,6 @@ public class Jeu {
         this.matchActuel = matchActuel;
     }
 
-    public void setScoreActuel(Score scoreActuel) {
-        this.scoreActuel = scoreActuel;
-    }
 
     public void setTournoi(Tournoi tournoi) {
         this.tournoi = tournoi;
