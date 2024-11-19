@@ -13,15 +13,18 @@ public class NewMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Créer les objets nécessaires
-        Jeu jeu = new Jeu(); // Initialisez votre objet Jeu
+        // Créer le modèle (Jeu)
+        Jeu jeu = new Jeu();
+
+        // Créer la première vue (WelcomeView)
         WelcomeView welcomeView = new WelcomeView(primaryStage);
 
         // Associer le contrôleur à la vue et au modèle
-        WelcomeController welcomeController = new WelcomeController(welcomeView, jeu);
+        new WelcomeController(welcomeView, jeu);
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 }
+

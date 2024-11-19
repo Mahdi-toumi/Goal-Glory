@@ -40,6 +40,21 @@ public class Jeu {
     public void setTournoi(Tournoi tournoi) {
         this.tournoi = tournoi;
     }
+    
+    public void ajouterPlayer (Player e ) {
+       
+        for (Player player : Joueurs) {
+            if (player.getNom() == e.getNom()) {
+                if (player.getScore() >= e.getScore())   return  ;
+                
+            }
+            else {
+                this.Joueurs.add(e) ;
+            }
+        }
+        
+        
+    }
 
     public void afficherClassementJoeurs (){
         for(Player joueur : Joueurs) {

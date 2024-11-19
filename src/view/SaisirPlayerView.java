@@ -26,9 +26,9 @@ public class SaisirPlayerView {
         StackPane root = new StackPane();
 
         // Ajouter une image en arrière-plan
-        ImageView background = new ImageView(new Image(getClass().getResourceAsStream("/images/Background.png")));
+        ImageView background = new ImageView(new Image(getClass().getResourceAsStream("/images/Background.jpeg")));
         background.setFitWidth(900);
-        background.setFitHeight(500);
+        background.setFitHeight(600);
         
          // Ajouter un texte avant l'input (label)
         Label label = new Label("Saisir votre nom:");

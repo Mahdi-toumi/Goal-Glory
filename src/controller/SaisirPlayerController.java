@@ -4,33 +4,52 @@
  */
 package controller;
 
+import javafx.stage.Stage;
+import model.structure.Jeu;
 import model.structure.Player;
+import view.ChoisirTournoiView;
 import view.SaisirPlayerView;
 
 public class SaisirPlayerController {
 
     private SaisirPlayerView view;
-    private Player player;
+    private Jeu jeu;
 
-    public SaisirPlayerController(SaisirPlayerView view) {
+    public SaisirPlayerController(SaisirPlayerView view, Jeu jeu) {
         this.view = view;
+        this.jeu = jeu;
 
         // Gérer l'événement de clic sur le bouton "Valider"
         view.getValiderButton().setOnAction(e -> {
-            String nom = view.getNomField().getText();
+            String nom = view.getNomField().getText().trim();
 
             if (!nom.isEmpty()) {
-                player = new Player(nom, 0); // Créer le joueur avec un score initial de 0
-                view.close();
+                // Ajouter le joueur dans le modèle
+                Player player = new Player(nom, 0);
+                jeu.ajouterPlayer(player);
+
+                // Naviguer vers la vue de choix de tournoi
+                redirectToTournamentChoice();
             } else {
-                System.out.println("Veuillez saisir un nom.");
+                System.out.println("Veuillez saisir un nom valide.");
             }
         });
     }
 
-    public Player getPlayer() {
-        return player;
+    private void redirectToTournamentChoice() {
+        // Créer la vue de choix de tournoi
+        ChoisirTournoiView choisirTournoiView = new ChoisirTournoiView();
+        Stage stage = (Stage) view.getNomField().getScene().getWindow();
+
+        // Naviguer vers cette vue
+        stage.setScene(choisirTournoiView.getScene());
+
+        // Associer un contrôleur pour gérer les interactions dans cette vue
+        new ChoisirTournoiController(choisirTournoiView, jeu);
     }
 }
+
+
+
 
 
