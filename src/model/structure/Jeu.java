@@ -15,30 +15,32 @@ import java.util.ArrayList;
 public class Jeu {
     
     private ArrayList<Player>  Joueurs ; 
-    private Difficulte niveau ;
-    private Tournoi tournoi;
+    private Coupe coupe;
+    private Championnat championnat ;
 
-    public Jeu(Match matchActuel, Tournoi tournoi) {
-        this.niveau = Difficulte.Intermediaire ; 
-        this.tournoi = tournoi;
-        Joueurs = new ArrayList<Player>() ;
-    }
     public Jeu() {
-        this.niveau = Difficulte.Intermediaire ; 
         Joueurs = new ArrayList<Player>() ;
     }
+
     
 
     public ArrayList<Player> getJoueurs() {
     return Joueurs;
 }    
     
-    public Tournoi getTournoi() {
-        return tournoi;
+    public Coupe getCoupe() {
+        return coupe;
+    }
+    public Championnat getTournoi() {
+        return championnat;
     }
 
-    public void setTournoi(Tournoi tournoi) {
-        this.tournoi = tournoi;
+    public void setCoupe(Coupe coupe) {
+        this.coupe = coupe;
+    }
+    
+    public void setChampionnat(Championnat championnat) {
+        this.championnat = championnat;
     }
     
     public void ajouterPlayer (Player e ) {

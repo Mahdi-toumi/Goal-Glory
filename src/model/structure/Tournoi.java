@@ -54,14 +54,9 @@ import java.util.stream.Collectors;
     
     
     //Ajouter une equipe au tournoi 
-    public void ajouterEquipe(Equipe e) throws AjoutEquipeException {
-        for (Equipe equipeExistante : equipes) {
-            if (equipeExistante.getNom().equals(e.getNom())) { 
-                throw new AjoutEquipeException("Cette équipe existe déjà dans le tournoi !");
-            }
-        }
+    public void ajouterEquipe(Equipe e)  {
         this.equipes.add(e);
-        System.out.println("Ajout avec succès");
+        
     }
     
     //Ajouter un tour au Tournoi 

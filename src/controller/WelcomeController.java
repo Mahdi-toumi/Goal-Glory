@@ -18,12 +18,18 @@ public class WelcomeController {
         this.welcomeView = welcomeView;
         this.jeu = jeu;
 
+        // Définir les actions des boutons après qu'ils deviennent interactifs
+        initializeButtonActions();
+    }
+
+    private void initializeButtonActions() {
         // Gérer le bouton Start
         welcomeView.getStartButton().setOnAction(event -> redirectToPlayerInput());
 
         // Gérer le bouton Quit
         welcomeView.getQuitButton().setOnAction(event -> quitApplication());
     }
+        
 
     private void redirectToPlayerInput() {
         // Créer la vue de saisie
@@ -41,6 +47,3 @@ public class WelcomeController {
         System.exit(0); // Fermer l'application
     }
 }
-
-
-
