@@ -21,16 +21,16 @@ public class Match {
     private Equipe gagnant;
     private int scoreEquipe1;
     private int scoreEquipe2;
-    private Stade stade ; 
+     
     private ArrayList<TirAuBut> tirAubuts;
     private boolean termine;
 
-    public Match(Equipe equipe1, Equipe equipe2 , Stade stade) {
+    public Match(Equipe equipe1, Equipe equipe2 ) {
         this.equipe1 = equipe1;
         this.equipe2 = equipe2; 
         this.scoreEquipe1 = 0;
         this.scoreEquipe2 = 0;
-        this.stade = stade ; 
+         
         this.tirAubuts = new ArrayList<>(); 
     }
 

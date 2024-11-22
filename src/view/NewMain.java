@@ -5,6 +5,7 @@
 package view;
 
 import controller.WelcomeController;
+import controller.GameController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.structure.Jeu;
@@ -17,10 +18,10 @@ public class NewMain extends Application {
         Jeu jeu = new Jeu();
 
         // Créer la première vue (WelcomeView)
-        WelcomeView welcomeView = new WelcomeView(primaryStage);
+        GameView gameView = new GameView();
 
         // Associer le contrôleur à la vue et au modèle
-        new WelcomeController(welcomeView, jeu);
+        new GameController( primaryStage);
     }
 
     public static void main(String[] args) {

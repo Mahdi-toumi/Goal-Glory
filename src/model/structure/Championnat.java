@@ -44,7 +44,7 @@ public class Championnat extends Tournoi {
         // Générer tous les matchs possibles (round-robin)
         for (int i = 0; i < this.getEquipes().size(); i++) {
             for (int j = i + 1; j < this.getEquipes().size(); j++) {
-                Match m = new Match(this.getEquipes().get(i), this.getEquipes().get(j), this.choisirStade());
+                Match m = new Match(this.getEquipes().get(i), this.getEquipes().get(j));
                 tousLesMatchs.add(m);
             }
         }

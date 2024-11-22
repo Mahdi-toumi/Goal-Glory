@@ -4,6 +4,8 @@
  */
 package controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import javafx.scene.control.Button;
 import model.structure.Jeu;
 import model.elements.Equipe;
@@ -11,6 +13,10 @@ import view.ChoisirEquipeView;
 
 import java.util.List;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import model.structure.Match;
+import view.BracketView;
+import view.SaisirPlayerView;
 
 public class ChoisirEquipeController {
 
@@ -30,6 +36,8 @@ public class ChoisirEquipeController {
             int finalI = i * 4 + j;  // Calculer l'index global
             equipeButton.setOnAction(e -> handleEquipeSelection(finalI));
         }
+        view.getBackButton().setOnAction(e -> goBackToSaisirPlayerView());
+
     }
 
     // Action pour le bouton "Valider"
@@ -44,12 +52,40 @@ public class ChoisirEquipeController {
         }
     }
 
-    private void handleValidation() {
+      private void handleValidation() {
         if (equipeSelectionnee != null) {
             System.out.println("Lancement du tournoi avec l'équipe : " + equipeSelectionnee.getNom());
+            // Generate the bracket
+            List<Equipe> remainingTeams = jeu.getCoupe().getEquipes();
+            BracketView bracketView = new BracketView(remainingTeams);
+            Stage stage = (Stage) view.getValiderButton().getScene().getWindow();
+            stage.setScene(bracketView.getBracketScene());
+            new BracketController(bracketView, remainingTeams,jeu);
         } else {
             System.out.println("Aucune équipe sélectionnée.");
         }
+    }
+    
+     private void goBackToSaisirPlayerView() {
+        // Créer la vue de saisie
+        SaisirPlayerView SaisirPlayerView = new SaisirPlayerView();
+        Stage stage = (Stage) view.getBackButton().getScene().getWindow();
+        stage.setScene(SaisirPlayerView.getScene());
+        new SaisirPlayerController(SaisirPlayerView, jeu);
+    }
+     
+       private List<Match> generateBracketMatches(List<Equipe> equipes) {
+        // Shuffle the teams randomly
+        Collections.shuffle(equipes);
+
+        // Create the matches for the first round (last 16)
+        List<Match> matches = new ArrayList<>();
+        for (int i = 0; i < equipes.size(); i += 2) {
+            Equipe equipe1 = equipes.get(i);
+            Equipe equipe2 = equipes.get(i + 1);
+            matches.add(new Match(equipe1, equipe2));
+        }
+        return matches;
     }
 }
 

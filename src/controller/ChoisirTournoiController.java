@@ -32,29 +32,53 @@ public class ChoisirTournoiController {
         if ("World Cup".equals(tournamentName)) {
             setupWorldCup();
         }
+        else{
+            setupChampionsLeague();
+        }
         // Ajouter la gestion pour "Champions League" ici si nécessaire
         redirectToEquipeSelection();
     }
 
+    private void setupChampionsLeague() {
+        Coupe coupe = new Coupe("Champions League");
+
+        // Ajouter les équipes à la coupe
+        String[][] equipesData = {
+            {"Real Madrid", "Carlo Ancelotti", "RMA"}, {"Barcelona", "Xavi Hernandez","BAR"}, {"Manchester City", "Pep Guardiola","MCY"},
+            {"Paris Saint-Germain", "Luis Enrique","PSG"}, {"Bayern Munich", "Thomas Tuchel","FCB"}, {"Chelsea", "Mauricio Pochettino","CHE"},
+            {"Liverpool", "Jurgen Klopp","LIV"}, {"Juventus", "Massimiliano Allegri","JUV"}, {"Atletico Madrid", "Diego Simeone","ATM"},
+            {"Inter Milan", "Simone Inzaghi","INT"}, {"AC Milan", "Stefano Pioli","MIL"}, {"Borussia Dortmund", "Edin Terzic","DOR"},
+            {"Arsenal", "Mikel Arteta","ARS"}, {"Tottenham Hotspur", "Ange Postecoglou","TOT"}, {"Napoli", "Rudi Garcia","NAP"}, {"Benfica", "Roger Schmidt","BEN"}
+        };
+
+        for (String[] data : equipesData) {
+            coupe.ajouterEquipe(new Equipe(data[0], data[1],data[2]));
+        }
+
+        jeu.setCoupe(coupe);
+        System.out.println("Tournoi 'Champions League' configuré avec " + coupe.getEquipes().size() + " équipes.");
+    }
+    
     private void setupWorldCup() {
         Coupe coupe = new Coupe("World Cup");
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
-            {"Real Madrid", "Carlo Ancelotti"}, {"Barcelona", "Xavi Hernandez"}, {"Manchester City", "Pep Guardiola"},
-            {"Paris Saint-Germain", "Luis Enrique"}, {"Bayern Munich", "Thomas Tuchel"}, {"Chelsea", "Mauricio Pochettino"},
-            {"Liverpool", "Jurgen Klopp"}, {"Juventus", "Massimiliano Allegri"}, {"Atletico Madrid", "Diego Simeone"},
-            {"Inter Milan", "Simone Inzaghi"}, {"AC Milan", "Stefano Pioli"}, {"Borussia Dortmund", "Edin Terzic"},
-            {"Arsenal", "Mikel Arteta"}, {"Tottenham Hotspur", "Ange Postecoglou"}, {"Napoli", "Rudi Garcia"}, {"Benfica", "Roger Schmidt"}
+            {"France", "Didier Deschamps","FRA"}, {"Spain", "De La Fuente","SPA"}, {"Germany", "Nagelsmann","GER"},
+            {"Argentina", "Lionel Scaloni","ARG"}, {"Italia", "Spaletti","ITA"}, {"Brazil", "Dorival Junior ","BRA"},
+            {"Uruguay", "Marcelo Bielsa","URG"}, {"Colombia", "Néstor Lorenzo ","COL"}, {"Belguim", "Domenico Tedesco","BEL"},
+            {"Portugal", "Martinez","POR"}, {"Morroco", "Walid Regragui","MOR"}, {"Croatia", "Zlatko Dalić","CRO"},
+            {"Netherlands", "Ronald Koeman","NET"}, {"Senegal", "Aliou Cissé","SEN"}, {"England", "Thomas Tuchel ","ENG"}, {"Poland", "Michał Probierz","POL"}
         };
 
         for (String[] data : equipesData) {
-            coupe.ajouterEquipe(new Equipe(data[0], data[1]));
+            coupe.ajouterEquipe(new Equipe(data[0], data[1],data[2]));
         }
 
         jeu.setCoupe(coupe);
         System.out.println("Tournoi 'World Cup' configuré avec " + coupe.getEquipes().size() + " équipes.");
     }
+
 
     private void redirectToEquipeSelection() {
         if (jeu.getCoupe() != null && !jeu.getCoupe().getEquipes().isEmpty()) {

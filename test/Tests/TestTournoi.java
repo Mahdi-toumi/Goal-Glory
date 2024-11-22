@@ -14,7 +14,7 @@ import model.structure.Tournoi;
  *
  * @author toumi
  */
-public class TestTournoi {
+/*public class TestTournoi {
     public static void main(String[] args) throws  AjoutEquipeException {
         // Création des équipes
         Equipe E1 = new Equipe("Real", "Zidane");
@@ -37,5 +37,6 @@ public class TestTournoi {
         // Affichage de la liste des équipes du tournoi
         System.out.println("Liste des équipes dans le tournoi : ");
         T.Afficher_list_equipes();*/
-    }
-}
+    /*}
+}*/
+

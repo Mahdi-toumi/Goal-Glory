@@ -16,11 +16,13 @@ import java.util.Map;
 public class  Equipe {
     private String nom;
     private String entraineur;
+    private String Abreviation;
     private ArrayList<Joueur> joueurs;
 
-    public Equipe(String nom, String entraineur) {
+    public Equipe(String nom, String entraineur, String Abr) {
         this.nom = nom;
         this.entraineur = entraineur;
+        this.Abreviation=Abr;
         this.joueurs = new ArrayList<>();
     }
 
@@ -28,7 +30,11 @@ public class  Equipe {
     public String getNom() {
         return nom;
     }
-
+    
+    public String getAbr() {
+        return Abreviation;
+    }
+    
     public String getEntraineur() {
         return entraineur;
     }

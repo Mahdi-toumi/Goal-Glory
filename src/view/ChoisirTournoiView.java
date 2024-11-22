@@ -31,19 +31,44 @@ public class ChoisirTournoiView {
         // Label d'instruction
         Label label = new Label("Choisissez votre tournoi :");
         label.setStyle(
-            "-fx-font-size: 26px;" +
+            "-fx-font-size: 20px;" +
+            "-fx-font-family: 'Sports World';" +
+            "-fx-pref-width: 1000px;" +
             "-fx-font-weight: bold;" +
-            "-fx-text-fill: #ffffff;" // Texte blanc
+            "-fx-text-fill: #ffffff;" + // White color for contrast
+            "-fx-effect: dropshadow(gaussian, black, 4, 0.5, 1, 1);" +// Shadow for better visibility
+            "-fx-alignment: center;" +  
+            "-fx-text-alignment: center;"  
         );
 
         // Bouton pour "World Cup"
         worldCupButton = new Button("World Cup");
-        styleButton(worldCupButton, "#1e90ff", "#000080"); // Couleurs bleu clair et bleu foncé
-
+        worldCupButton.setStyle(
+            "-fx-background-color: linear-gradient(to right, #00FF00, #008000);" +  // Dégradé vert (vert clair à vert foncé)
+            "-fx-text-fill: white;" +                                               // Texte en blanc
+            "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+            "-fx-font-size: 18px;" +                                                // Taille du texte
+            "-fx-padding: 15px 15px;" +                                             // Espacement interne
+            "-fx-background-radius: 20px;" +                                        // Coins arrondis
+            "-fx-border-radius: 20px;" +                                            // Bordure arrondie
+            "-fx-border-color: #006400;" +                                          // Bordure verte
+            "-fx-border-width: 3px;" +                                              // Largeur de la bordure
+            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"   // Ombre portée
+        );
         // Bouton pour "Champions League"
         championsLeagueButton = new Button("Champions League");
-        styleButton(championsLeagueButton, "#ff4500", "#b22222"); // Couleurs orange et rouge
-
+        championsLeagueButton.setStyle(
+            "-fx-background-color: linear-gradient(to right, #00FF00, #008000);" +  // Dégradé vert (vert clair à vert foncé)
+            "-fx-text-fill: white;" +                                               // Texte en blanc
+            "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+            "-fx-font-size: 18px;" +                                                // Taille du texte
+            "-fx-padding: 15px 15px;" +                                             // Espacement interne
+            "-fx-background-radius: 20px;" +                                        // Coins arrondis
+            "-fx-border-radius: 20px;" +                                            // Bordure arrondie
+            "-fx-border-color: #006400;" +                                          // Bordure verte
+            "-fx-border-width: 3px;" +                                              // Largeur de la bordure
+            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"   // Ombre portée
+        );
         // Positionner les éléments au centre
         VBox vbox = new VBox(30, label, worldCupButton, championsLeagueButton); // Espacement de 30px entre les éléments
         vbox.setAlignment(Pos.CENTER);

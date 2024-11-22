@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class SaisirPlayerView {
@@ -17,7 +18,7 @@ public class SaisirPlayerView {
     private Scene scene;
     private TextField nomField;
     private Button validerButton;
-    private Button backButton;
+    private Button gobackButton;
 
     public SaisirPlayerView() {
         // Main container
@@ -103,40 +104,48 @@ public class SaisirPlayerView {
         });
 
         // "Retour" Button
-        backButton = new Button("Retour");
-        backButton.setStyle(
-            "-fx-background-color: #1e90ff;" +  // Dégradé vert (vert clair à vert foncé)
+        gobackButton = new Button("Retour");
+        gobackButton.setStyle(
+            "-fx-background-color: #1e90ff;" +                                      // Dégradé vert (vert clair à vert foncé)
+            "-fx-font-family: 'Sports World';" +                                    // Police Sportive
             "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
             "-fx-font-size: 16px;" +                                                // Taille du texte
             "-fx-padding: 10px 10px;" +                                             // Espacement interne
             "-fx-background-radius: 20px;" +                                        // Coins arrondis
             "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
-            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"   // Ombre portée
+            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+            "-fx-border-color: #006400;" +                                          // Bordure verte
+            "-fx-border-width: 3px;"                                               // Largeur de la bordure
         );
         
-        backButton.setOnMouseEntered(e -> {
-            backButton.setStyle(
-                "-fx-background-color:  #1e90ff ;" +  // Dégradé vert (vert clair à vert foncé)
-                "-fx-text-fill: white;" +
-                "-fx-font-size: 16px;" +
-                "-fx-padding: 10px 10px;" +
-                "-fx-background-radius: 20px;" +
-                "-fx-border-radius: 20px;" +
-
+        gobackButton.setOnMouseEntered(e -> {
+            gobackButton.setStyle(
+                "-fx-background-color: #1e90ff;" +  // Dégradé vert (vert clair à vert foncé)
+                "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                "-fx-font-size: 16px;" +                                                // Taille du texte
+                "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                "-fx-border-color: #006400;" +                                          // Bordure verte
+                "-fx-border-width: 3px;"  +
                 "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);" +
                 "-fx-scale-x: 1.1;" +  // Agrandissement du bouton au survol
                 "-fx-scale-y: 1.1;"    // Agrandissement du bouton au survol
             );
         });
 
-        backButton.setOnMouseExited(e -> {
-            backButton.setStyle(
-                "-fx-background-color: #1e90ff;" +  // Retour au dégradé initial
-                "-fx-text-fill: white;" +
-                "-fx-font-size: 16px;" +
-                "-fx-padding: 10px 10px;" +
-                "-fx-background-radius: 20px;" +
-                "-fx-border-radius: 20px;" +
+        gobackButton.setOnMouseExited(e -> {
+            gobackButton.setStyle(
+                 "-fx-background-color: #1e90ff;" +  // Dégradé vert (vert clair à vert foncé)
+                "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                "-fx-font-size: 16px;" +                                                // Taille du texte
+                "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                "-fx-border-color: #006400;" +                                          // Bordure verte
+                "-fx-border-width: 3px;"  +
                 "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);" +
                 "-fx-scale-x: 1;" +  // Réduire la taille du bouton après le survol
                 "-fx-scale-y: 1;"    // Réduire la taille du bouton après le survol
@@ -144,12 +153,12 @@ public class SaisirPlayerView {
         });
 
         // Layout: Centered elements
-        VBox vbox = new VBox(15, label, nomField, validerButton, backButton); // 15px spacing
+        VBox vbox = new VBox(15, label, nomField, validerButton, gobackButton); // 15px spacing
         label.setAlignment(Pos.CENTER);
         vbox.setAlignment(Pos.CENTER);
         
         vbox.setPadding(new Insets(20)); // Padding around the VBox
-        VBox.setMargin(backButton, new Insets(80, 0, 0, 0)); // Extra margin for "Retour" button
+        VBox.setMargin(gobackButton, new Insets(80, 0, 0, 0)); // Extra margin for "Retour" button
         VBox.setMargin(validerButton, new Insets(30, 0, 30, 0)); // Extra margin for "Retour" button
 
         // Add all elements to the main container
@@ -173,7 +182,7 @@ public class SaisirPlayerView {
     }
 
     public Button getBackButton() {
-        return backButton;
+        return gobackButton;
     }
 
     // Close method

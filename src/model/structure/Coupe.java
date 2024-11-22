@@ -54,7 +54,7 @@ public class Coupe extends Tournoi {
         // Créer des matchs par paires d'équipes
         for (int i = 0; i < equipesRestantes.size(); i += 2) {
             if (i + 1 < equipesRestantes.size()) {
-                Match m = new Match(equipesRestantes.get(i), equipesRestantes.get(i + 1), this.choisirStade());
+                Match m = new Match(equipesRestantes.get(i), equipesRestantes.get(i + 1));
                 matchsDuTour.add(m);
             } else {
                 System.out.println("L'équipe " + equipesRestantes.get(i).getNom() + " passe automatiquement au tour suivant !");

@@ -12,7 +12,7 @@ import model.structure.Stade;
  *
  * @author toumi
  */
-public class TestMatch {
+/*public class TestMatch {
     public static void main(String[] args) {
         // Créer deux équipes
         Equipe equipe1 = new Equipe("Équipe A" , "Xavi");
@@ -39,4 +39,4 @@ public class TestMatch {
         }
     }
     
-}
+}*/

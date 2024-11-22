@@ -10,6 +10,7 @@ import model.structure.Jeu;
 import model.structure.Player;
 import view.ChoisirTournoiView;
 import view.SaisirPlayerView;
+import view.WelcomeView;
 
 public class SaisirPlayerController {
 
@@ -22,6 +23,7 @@ public class SaisirPlayerController {
 
         // Gestion du clic sur le bouton "Valider"
         view.getValiderButton().setOnAction(e -> handlePlayerCreation());
+        view.getBackButton().setOnAction(e -> goBackToWelcomeView());
     }
 
     private void handlePlayerCreation() {
@@ -41,6 +43,14 @@ public class SaisirPlayerController {
         Stage stage = (Stage) view.getNomField().getScene().getWindow();
         stage.setScene(choisirTournoiView.getScene());
         new ChoisirTournoiController(choisirTournoiView, jeu);
+    }
+    private void goBackToWelcomeView(){
+         Stage stage = (Stage) view.getScene().getWindow();
+
+        // Create the WelcomeView with the same primaryStage
+        WelcomeView welcomeView = new WelcomeView(stage);
+        new WelcomeController(welcomeView, jeu);
+
     }
 }
 
