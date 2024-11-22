@@ -56,6 +56,7 @@ public class ChoisirTournoiController {
         }
 
         jeu.setCoupe(coupe);
+       // coupe.Commencer_tournoi();
         System.out.println("Tournoi 'Champions League' configuré avec " + coupe.getEquipes().size() + " équipes.");
     }
     
@@ -76,6 +77,8 @@ public class ChoisirTournoiController {
         }
 
         jeu.setCoupe(coupe);
+        coupe.Initialiser_tournoi();
+        coupe.Initialiser_tour(); 
         System.out.println("Tournoi 'World Cup' configuré avec " + coupe.getEquipes().size() + " équipes.");
     }
 

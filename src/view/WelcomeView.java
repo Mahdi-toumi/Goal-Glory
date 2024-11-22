@@ -190,7 +190,7 @@ public class WelcomeView {
 
         private void setupTransitions(MediaPlayer mediaPlayer, ImageView backgroundImage, Text titleText, Button startButton, Button quitButton) {
         // Transition pour afficher l'image après 4 secondes
-        PauseTransition showImageTransition = new PauseTransition(Duration.seconds(6));
+        PauseTransition showImageTransition = new PauseTransition(Duration.seconds(6.3));
         showImageTransition.setOnFinished(event -> {
             mediaPlayer.stop(); // Arrêter la vidéo
             mediaView.setVisible(false); // Masquer la vidéo
@@ -207,7 +207,7 @@ public class WelcomeView {
             );
 
             // Transition de fondu de l'image (apparaît progressivement)
-            FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(1), backgroundImage);
+            FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(2), backgroundImage);
             fadeInTransition.setFromValue(0); // Commencer à partir d'une opacité nulle
             fadeInTransition.setToValue(1); // Finir avec une opacité de 1
 

@@ -24,6 +24,7 @@ public class ChoisirEquipeView {
     private HBox equipesContainer; // Conteneur pour afficher les équipes
     private Button validerButton;
     private Button gobackButton;
+    private Button selectedButton = null; // Bouton actuellement sélectionné
 
 
     public ChoisirEquipeView(List<Equipe> equipes) {
@@ -220,6 +221,23 @@ public class ChoisirEquipeView {
                 "-fx-scale-x: 1;" +  // Réduire la taille du bouton après le survol
                 "-fx-scale-y: 1;"    // Réduire la taille du bouton après le survol
         ));
+        
+        /*
+        button.setOnMouseClicked(e -> button.setStyle(
+                "-fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #3498db, #000000);" +  // Retour au dégradé initial
+                "-fx-text-fill: white;" +
+                "-fx-font-family: 'Sports World';" +
+                "-fx-font-size: 18px;" +
+                "-fx-padding: 15px 15px;" +
+                "-fx-background-radius: 20px;" +
+                "-fx-border-radius: 20px;" +
+                "-fx-border-color: #006400;" +
+                "-fx-border-width: 3px;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);" +
+                "-fx-scale-x: 1.1;" +  // Réduire la taille du bouton après le survol
+                "-fx-scale-y: 1.1;"    // Réduire la taille du bouton après le survol
+        ));
+*/
     }
 
     // Getters pour la scène et les éléments
@@ -238,6 +256,8 @@ public class ChoisirEquipeView {
     public Button getBackButton() {
         return gobackButton;
     }
+    
+    
 }
 
 

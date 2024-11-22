@@ -4,6 +4,8 @@
  */
 package model.structure;
 
+import model.elements.Equipe;
+
 /**
  *
  * @author toumi
@@ -11,6 +13,7 @@ package model.structure;
 public class Player {
     private String nom ; 
     private double score ; 
+    private Equipe equipe ;
     
     public Player(String nom, double score) {
         this.nom = nom;
@@ -34,6 +37,15 @@ public class Player {
     public void setScore(double score) {
         this.score = score;
     }
+    
+    public Equipe getEquipe (){
+        return equipe ; 
+    }
+    
+    public void setEquipe (Equipe e){
+        this.equipe = e ;
+    }
+    
 
     public void ajouterScore(double points) {
         if (points > 0) {

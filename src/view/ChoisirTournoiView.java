@@ -80,13 +80,6 @@ public class ChoisirTournoiView {
         scene = new Scene(root, 900, 600);
     }
 
-    /**
-     * Méthode pour styliser les boutons en fonction du thème du football.
-     *
-     * @param button Le bouton à styliser
-     * @param startColor Couleur initiale du dégradé
-     * @param endColor Couleur finale du dégradé
-     */
     private void styleButton(Button button, String startColor, String endColor) {
         button.setStyle(
             "-fx-font-size: 20px;" + // Taille du texte

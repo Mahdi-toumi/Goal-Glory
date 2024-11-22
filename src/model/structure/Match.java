@@ -187,6 +187,17 @@ public class Match {
     }
     
     
+    public String affichageAbr () {
+        if (this.scoreEquipe1 == 0 && this.scoreEquipe2== 0){
+             return equipe1.getAbr() + " vs " + equipe2.getAbr() ;
+        }
+        else {
+            return equipe1.getAbr() +" "+ this.scoreEquipe1 + " - " + this.scoreEquipe2 + " "+ equipe2.getAbr() ;
+        }
+    }
+    
+    
+    
     @Override
     public String toString() {
         if (this.scoreEquipe1 == 0 && this.scoreEquipe2== 0){
