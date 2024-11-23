@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.structure.Match;
 import view.BracketView;
+import view.RankingView;
 import view.SaisirPlayerView;
 
 public class ChoisirEquipeController {
@@ -23,6 +24,9 @@ public class ChoisirEquipeController {
     private final ChoisirEquipeView view;
     private final Jeu jeu;
     private Equipe equipeSelectionnee;
+    private  List <Equipe> equipes  ;
+    
+  
 
     public ChoisirEquipeController(ChoisirEquipeView view, Jeu jeu) {
         this.view = view;
@@ -45,7 +49,10 @@ public class ChoisirEquipeController {
     }
 
     private void handleEquipeSelection(int index) {
-        List<Equipe> equipes = jeu.getCoupe().getEquipes();
+        if (jeu.getCoupe()!= null ){
+        equipes = jeu.getCoupe().getEquipes() ;}
+        else if (jeu.getChampionnat()!= null ){
+        equipes = jeu.getChampionnat().getEquipes() ;}
         if (index >= 0 && index < equipes.size()) {
             equipeSelectionnee = equipes.get(index);
             System.out.println("Équipe choisie : " + equipeSelectionnee.getNom());
@@ -54,14 +61,24 @@ public class ChoisirEquipeController {
 
       private void handleValidation() {
         if (equipeSelectionnee != null) {
-            System.out.println("Lancement du tournoi avec l'équipe : " + equipeSelectionnee.getNom());
-            // Generate the bracket
-            this.jeu.getPlayer().setEquipe(equipeSelectionnee);
-            BracketView bracketView = new BracketView(jeu.getCoupe().getTours().get(1).getMatchs());
-            Stage stage = (Stage) view.getValiderButton().getScene().getWindow();
-            stage.setScene(bracketView.getBracketScene());
+            if (jeu.getCoupe()!= null){
+                System.out.println("Lancement du tournoi avec l'équipe : " + equipeSelectionnee.getNom());
+                // Generate the bracket
+                this.jeu.getPlayer().setEquipe(equipeSelectionnee);
+                BracketView bracketView = new BracketView(jeu.getCoupe().getTours().get(1).getMatchs());
+                Stage stage = (Stage) view.getValiderButton().getScene().getWindow();
+                stage.setScene(bracketView.getBracketScene());}
+            else  {
+                System.out.println("Lancement du tournoi avec l'équipe : " + equipeSelectionnee.getNom());
+                // Generate the bracket
+                this.jeu.getPlayer().setEquipe(equipeSelectionnee);
+                RankingView rankingView = new RankingView(jeu);
+                Stage stage = (Stage) view.getValiderButton().getScene().getWindow();
+                stage.setScene(rankingView.getScene());}
+                
+            } 
 
-        } else {
+         else {
             System.out.println("Aucune équipe sélectionnée.");
         }
     }

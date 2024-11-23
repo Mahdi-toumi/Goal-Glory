@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,11 +27,20 @@ public class ChoisirEquipeView {
     private Button validerButton;
     private Button gobackButton;
     private Button selectedButton = null; // Bouton actuellement sélectionné
+    private  List <Equipe> equipes  ;
 
 
     public ChoisirEquipeView(Jeu jeu) {
         // Conteneur principal
-        List <Equipe> equipes = jeu.getCoupe().getEquipes() ;
+         
+        if (jeu.getCoupe()!= null ){
+        this.equipes = jeu.getCoupe().getEquipes() ;}
+        else if (jeu.getChampionnat()!= null ){
+        this.equipes = jeu.getChampionnat().getEquipes() ;}
+        
+        
+        
+        
         StackPane root = new StackPane();
 
         

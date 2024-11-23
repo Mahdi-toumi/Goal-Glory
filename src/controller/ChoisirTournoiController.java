@@ -39,14 +39,17 @@ public class ChoisirTournoiController {
         if ("World Cup".equals(tournamentName)) {
             setupWorldCup();
         }
-        if ("La Liga".equals(tournamentName)) {
+        else if ("La Liga".equals(tournamentName)) {
             setupLaLiga();
         }
-        if ("Premier League".equals(tournamentName)){
+        else if ("Premier League".equals(tournamentName)){
             setupPremierLeague();
         }
-        else{
+        else if ("Champions League".equals(tournamentName)){
             setupChampionsLeague();
+        }
+        else {
+            System.out.println("Erreur");
         }
         // Ajouter la gestion pour "Champions League" ici si nécessaire
         redirectToEquipeSelection();
@@ -57,11 +60,11 @@ public class ChoisirTournoiController {
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
-            {"Real Madrid", "Carlo Ancelotti", "RMA"}, {"Barcelona", "Xavi Hernandez","BAR"}, {"Manchester City", "Pep Guardiola","MCY"},
-            {"Paris Saint-Germain", "Luis Enrique","PSG"}, {"Bayern Munich", "Thomas Tuchel","FCB"}, {"Chelsea", "Mauricio Pochettino","CHE"},
-            {"Liverpool", "Jurgen Klopp","LIV"}, {"Juventus", "Massimiliano Allegri","JUV"}, {"Atletico Madrid", "Diego Simeone","ATM"},
-            {"Inter Milan", "Simone Inzaghi","INT"}, {"AC Milan", "Stefano Pioli","MIL"}, {"Borussia Dortmund", "Edin Terzic","DOR"},
-            {"Arsenal", "Mikel Arteta","ARS"}, {"Tottenham Hotspur", "Ange Postecoglou","TOT"}, {"Napoli", "Rudi Garcia","NAP"}, {"Benfica", "Roger Schmidt","BEN"}
+            {"Madrid", "Carlo Ancelotti", "RMA"}, {"Barcelona", "Xavi Hernandez","BAR"}, {"City", "Pep Guardiola","MCY"},
+            {"PSG", "Luis Enrique","PSG"}, {"Bayern", "Thomas Tuchel","FCB"}, {"Chelsea", "Mauricio Pochettino","CHE"},
+            {"Liverpool", "Jurgen Klopp","LIV"}, {"Juventus", "Massimiliano Allegri","JUV"}, {"Atletico", "Diego Simeone","ATM"},
+            {"Inter", "Simone Inzaghi","INT"}, {"Milan", "Stefano Pioli","MIL"}, {"Dortmund", "Edin Terzic","DOR"},
+            {"Arsenal", "Mikel Arteta","ARS"}, {"Tottenham", "Ange Postecoglou","TOT"}, {"Napoli", "Rudi Garcia","NAP"}, {"Benfica", "Roger Schmidt","BEN"}
         };
 
         for (String[] data : equipesData) {
@@ -101,11 +104,11 @@ public class ChoisirTournoiController {
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
-            {"France", "Didier Deschamps","FRA"}, {"Spain", "De La Fuente","SPA"}, {"Germany", "Nagelsmann","GER"},
-            {"Argentina", "Lionel Scaloni","ARG"}, {"Italia", "Spaletti","ITA"}, {"Brazil", "Dorival Junior ","BRA"},
-            {"Uruguay", "Marcelo Bielsa","URG"}, {"Colombia", "Néstor Lorenzo ","COL"}, {"Belguim", "Domenico Tedesco","BEL"},
-            {"Portugal", "Martinez","POR"}, {"Morroco", "Walid Regragui","MOR"}, {"Croatia", "Zlatko Dalić","CRO"},
-            {"Netherlands", "Ronald Koeman","NET"}, {"Senegal", "Aliou Cissé","SEN"}, {"England", "Thomas Tuchel ","ENG"}, {"Poland", "Michał Probierz","POL"}
+            {"Madrid", "Carlo Ancelotti", "RMA"}, {"Barcelona", "Xavi Hernandez", "BAR"}, {"Atletico", "Diego Simeone", "ATM"},
+            {"Sevilla", "Diego Alonso", "SEV"}, {"Sociedad", "Imanol Alguacil", "RSO"}, {"Betis", "Manuel Pellegrini", "BET"},
+            {"Villarreal", "Quique Setien", "VIL"}, {"Valencia", "Ruben Baraja", "VAL"}, {"Athletic", "Ernesto Valverde", "ATH"},
+            {"Vigo", "Rafael Benitez", "CEL"}, {"Osasuna", "Jagoba Arrasate", "OSA"}, {"Espanyol", "Luis Garcia", "ESP"},
+            {"Mallorca", "Javier Aguirre", "MAL"}, {"Granada", "Paco Lopez", "GRA"}, {"Alaves", "Luis Garcia Plaza", "ALA"}, {"Getafe", "Jose Bordalas", "GET"}
         };
         
 
@@ -115,7 +118,7 @@ public class ChoisirTournoiController {
 
         jeu.setChampionnat(championnat);
         championnat.Initialiser_tournoi();
-        System.out.println("Tournoi 'World Cup' configuré avec " + championnat.getEquipes().size() + " équipes.");
+        System.out.println("Tournoi 'La Liga' configuré avec " + championnat.getEquipes().size() + " équipes.");
         
     }
     
@@ -125,11 +128,11 @@ public class ChoisirTournoiController {
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
-            {"France", "Didier Deschamps","FRA"}, {"Spain", "De La Fuente","SPA"}, {"Germany", "Nagelsmann","GER"},
-            {"Argentina", "Lionel Scaloni","ARG"}, {"Italia", "Spaletti","ITA"}, {"Brazil", "Dorival Junior ","BRA"},
-            {"Uruguay", "Marcelo Bielsa","URG"}, {"Colombia", "Néstor Lorenzo ","COL"}, {"Belguim", "Domenico Tedesco","BEL"},
-            {"Portugal", "Martinez","POR"}, {"Morroco", "Walid Regragui","MOR"}, {"Croatia", "Zlatko Dalić","CRO"},
-            {"Netherlands", "Ronald Koeman","NET"}, {"Senegal", "Aliou Cissé","SEN"}, {"England", "Thomas Tuchel ","ENG"}, {"Poland", "Michał Probierz","POL"}
+            {"City", "Pep Guardiola", "MCY"}, {"Arsenal", "Mikel Arteta", "ARS"}, {"Liverpool", "Jurgen Klopp", "LIV"},
+            {"United", "Erik ten Hag", "MUN"}, {"Chelsea", "Mauricio Pochettino", "CHE"}, {"Tottenham", "Ange Postecoglou", "TOT"},
+            {"Newcastle", "Eddie Howe", "NEW"}, {"Brighton", "Roberto De Zerbi", "BHA"}, {"Aston", "Unai Emery", "AVL"},
+            {"West Ham", "David Moyes", "WHU"}, {"Crystal", "Roy Hodgson", "CRY"}, {"Fulham", "Marco Silva", "FUL"},
+            {"Wolverhampton", "Gary O'Neil", "WOL"}, {"Everton", "Sean Dyche", "EVE"}, {"Brentford", "Thomas Frank", "BRE"}, {"Bournemouth", "Andoni Iraola", "BOU"}
         };
         
 
@@ -139,7 +142,7 @@ public class ChoisirTournoiController {
 
         jeu.setChampionnat(championnat);
         championnat.Initialiser_tournoi();
-        System.out.println("Tournoi 'World Cup' configuré avec " + championnat.getEquipes().size() + " équipes.");
+        System.out.println("Tournoi 'Premier League' configuré avec " + championnat.getEquipes().size() + " équipes.");
         
     }
 
@@ -150,7 +153,13 @@ public class ChoisirTournoiController {
             Stage stage = (Stage) view.getWorldCupButton().getScene().getWindow();
             stage.setScene(choisirEquipeView.getScene());
             new ChoisirEquipeController(choisirEquipeView, jeu);
-        } else {
+        } else if (jeu.getChampionnat() != null && !jeu.getChampionnat().getEquipes().isEmpty()) {
+            ChoisirEquipeView choisirEquipeView = new ChoisirEquipeView(jeu);
+            Stage stage = (Stage) view.getWorldCupButton().getScene().getWindow();
+            stage.setScene(choisirEquipeView.getScene());
+            new ChoisirEquipeController(choisirEquipeView, jeu);
+        }
+        else{
             System.out.println("Erreur : Aucune équipe n'est disponible pour le tournoi.");
         }
     }

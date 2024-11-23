@@ -18,6 +18,7 @@ public class  Equipe {
     private String entraineur;
     private String Abreviation;
     private ArrayList<Joueur> joueurs;
+    private int points = 0 ;
 
     public Equipe(String nom, String entraineur, String Abr) {
         this.nom = nom;
@@ -29,6 +30,14 @@ public class  Equipe {
     // Getters
     public String getNom() {
         return nom;
+    }
+    
+    public int  getPoints (){
+        return this.points ;
+    }
+    
+    public void  setPoints (int p){
+        this.points = p ;
     }
     
     public String getAbr() {
