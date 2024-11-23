@@ -6,6 +6,7 @@ package controller;
 
 import javafx.stage.Stage;
 import model.elements.Equipe;
+import model.structure.Championnat;
 import model.structure.Coupe;
 import model.structure.Jeu;
 import view.ChoisirEquipeView;
@@ -25,12 +26,24 @@ public class ChoisirTournoiController {
 
         // Gestion du clic sur le bouton "Champions League"
         view.getChampionsLeagueButton().setOnAction(e -> handleTournamentSelection("Champions League"));
+        
+        // Gestion du clic sur le bouton "La Liga"
+        view.getlaLigaButton().setOnAction(e -> handleTournamentSelection("La Liga"));
+
+        // Gestion du clic sur le bouton "Premier League"
+        view.getpremierLeagueButton().setOnAction(e -> handleTournamentSelection("Premier League"));
     }
 
     private void handleTournamentSelection(String tournamentName) {
         System.out.println("Tournoi sélectionné : " + tournamentName);
         if ("World Cup".equals(tournamentName)) {
             setupWorldCup();
+        }
+        if ("La Liga".equals(tournamentName)) {
+            setupLaLiga();
+        }
+        if ("Premier League".equals(tournamentName)){
+            setupPremierLeague();
         }
         else{
             setupChampionsLeague();
@@ -56,7 +69,8 @@ public class ChoisirTournoiController {
         }
 
         jeu.setCoupe(coupe);
-       // coupe.Commencer_tournoi();
+        coupe.Initialiser_tournoi();
+        coupe.Initialiser_tour(); 
         System.out.println("Tournoi 'Champions League' configuré avec " + coupe.getEquipes().size() + " équipes.");
     }
     
@@ -81,11 +95,58 @@ public class ChoisirTournoiController {
         coupe.Initialiser_tour(); 
         System.out.println("Tournoi 'World Cup' configuré avec " + coupe.getEquipes().size() + " équipes.");
     }
+    
+    private void setupLaLiga(){
+        Championnat championnat = new Championnat("La Liga");
+
+        // Ajouter les équipes à la coupe
+        String[][] equipesData = {
+            {"France", "Didier Deschamps","FRA"}, {"Spain", "De La Fuente","SPA"}, {"Germany", "Nagelsmann","GER"},
+            {"Argentina", "Lionel Scaloni","ARG"}, {"Italia", "Spaletti","ITA"}, {"Brazil", "Dorival Junior ","BRA"},
+            {"Uruguay", "Marcelo Bielsa","URG"}, {"Colombia", "Néstor Lorenzo ","COL"}, {"Belguim", "Domenico Tedesco","BEL"},
+            {"Portugal", "Martinez","POR"}, {"Morroco", "Walid Regragui","MOR"}, {"Croatia", "Zlatko Dalić","CRO"},
+            {"Netherlands", "Ronald Koeman","NET"}, {"Senegal", "Aliou Cissé","SEN"}, {"England", "Thomas Tuchel ","ENG"}, {"Poland", "Michał Probierz","POL"}
+        };
+        
+
+        for (String[] data : equipesData) {
+            championnat.ajouterEquipe(new Equipe(data[0], data[1],data[2]));
+        }
+
+        jeu.setChampionnat(championnat);
+        championnat.Initialiser_tournoi();
+        System.out.println("Tournoi 'World Cup' configuré avec " + championnat.getEquipes().size() + " équipes.");
+        
+    }
+    
+    
+    private void setupPremierLeague(){
+         Championnat championnat = new Championnat("Premier League");
+
+        // Ajouter les équipes à la coupe
+        String[][] equipesData = {
+            {"France", "Didier Deschamps","FRA"}, {"Spain", "De La Fuente","SPA"}, {"Germany", "Nagelsmann","GER"},
+            {"Argentina", "Lionel Scaloni","ARG"}, {"Italia", "Spaletti","ITA"}, {"Brazil", "Dorival Junior ","BRA"},
+            {"Uruguay", "Marcelo Bielsa","URG"}, {"Colombia", "Néstor Lorenzo ","COL"}, {"Belguim", "Domenico Tedesco","BEL"},
+            {"Portugal", "Martinez","POR"}, {"Morroco", "Walid Regragui","MOR"}, {"Croatia", "Zlatko Dalić","CRO"},
+            {"Netherlands", "Ronald Koeman","NET"}, {"Senegal", "Aliou Cissé","SEN"}, {"England", "Thomas Tuchel ","ENG"}, {"Poland", "Michał Probierz","POL"}
+        };
+        
+
+        for (String[] data : equipesData) {
+            championnat.ajouterEquipe(new Equipe(data[0], data[1],data[2]));
+        }
+
+        jeu.setChampionnat(championnat);
+        championnat.Initialiser_tournoi();
+        System.out.println("Tournoi 'World Cup' configuré avec " + championnat.getEquipes().size() + " équipes.");
+        
+    }
 
 
     private void redirectToEquipeSelection() {
         if (jeu.getCoupe() != null && !jeu.getCoupe().getEquipes().isEmpty()) {
-            ChoisirEquipeView choisirEquipeView = new ChoisirEquipeView(jeu.getCoupe().getEquipes());
+            ChoisirEquipeView choisirEquipeView = new ChoisirEquipeView(jeu);
             Stage stage = (Stage) view.getWorldCupButton().getScene().getWindow();
             stage.setScene(choisirEquipeView.getScene());
             new ChoisirEquipeController(choisirEquipeView, jeu);

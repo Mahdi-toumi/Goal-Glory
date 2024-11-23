@@ -13,13 +13,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Créer le modèle (Jeu)
+        // Modèle principal du jeu
         Jeu jeu = new Jeu();
 
-        // Créer la première vue (WelcomeView)
+        // Vue d'accueil (WelcomeView)
         WelcomeView welcomeView = new WelcomeView(primaryStage);
 
-        // Associer le contrôleur à la vue et au modèle
+        // Contrôleur associé à la vue et au modèle
         new WelcomeController(welcomeView, jeu);
     }
 

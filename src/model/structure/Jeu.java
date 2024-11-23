@@ -17,6 +17,7 @@ public class Jeu {
     private ArrayList<Player>  Joueurs ; 
     private Coupe coupe;
     private Championnat championnat ;
+    private Player JoueurCourant ;
 
     public Jeu() {
         Joueurs = new ArrayList<Player>() ;
@@ -33,6 +34,14 @@ public class Jeu {
     }
     public Championnat getTournoi() {
         return championnat;
+    }
+    
+    public Player getPlayer() {
+        return JoueurCourant;
+    }
+    
+    public void setPlayer(Player JoueurCourant) {
+        this.JoueurCourant = JoueurCourant;
     }
 
     public void setCoupe(Coupe coupe) {

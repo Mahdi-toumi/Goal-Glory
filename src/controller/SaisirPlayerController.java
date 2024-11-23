@@ -32,6 +32,7 @@ public class SaisirPlayerController {
         if (!nom.isEmpty()) {
             Player player = new Player(nom, 0);
             jeu.ajouterPlayer(player);
+            jeu.setPlayer(player);
             redirectToTournamentChoice();
         } else {
             System.out.println("Veuillez saisir un nom valide.");

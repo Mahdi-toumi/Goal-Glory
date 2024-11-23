@@ -17,6 +17,7 @@ import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import model.structure.Jeu;
 
 public class ChoisirEquipeView {
 
@@ -27,11 +28,12 @@ public class ChoisirEquipeView {
     private Button selectedButton = null; // Bouton actuellement sélectionné
 
 
-    public ChoisirEquipeView(List<Equipe> equipes) {
+    public ChoisirEquipeView(Jeu jeu) {
         // Conteneur principal
+        List <Equipe> equipes = jeu.getCoupe().getEquipes() ;
         StackPane root = new StackPane();
 
-        // Ajouter un fond (thème football)
+        
         ImageView background = new ImageView(new Image(getClass().getResourceAsStream("/images/Background.jpeg")));  // Exemple d'image d'un terrain de foot
         background.setFitWidth(900);
         background.setFitHeight(600);
