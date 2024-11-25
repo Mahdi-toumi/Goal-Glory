@@ -177,7 +177,7 @@ public class RankingView {
         return scene;
     }
 
-    public Button getGobackButton() {
-        return gobackButton;
+    public Button getBackButton(){
+        return this.gobackButton ;
     }
 }

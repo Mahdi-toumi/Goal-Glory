@@ -9,19 +9,22 @@ package model.elements;
  * @author toumi
  */
 public class TirAuBut {
-    private Tireur tireur;
-    private Gardien gardien;
+    /*private Tireur tireur;
+    private Gardien gardien;*/
     private Ballon ballon;
+    private String position;
     private boolean estBut;
 
-    public TirAuBut(Tireur tireur, Gardien gardien, Ballon ballon) {
-        this.tireur = tireur;
-        this.gardien = gardien;
+    public TirAuBut(//Tireur tireur, Gardien gardien, 
+            Ballon ballon, String position) {
+        /*this.tireur = tireur;
+        this.gardien = gardien;*/
         this.ballon = ballon;
+        this.position=position;
         this.estBut = false;
     }
 
-    public void effectuerTir() {
+    /*public void effectuerTir() {
         this.estBut = ballon.estBut(gardien, tireur);
     }
 
@@ -33,11 +36,23 @@ public class TirAuBut {
     public Gardien getGardien() {
         return gardien;
     }
-
+*/
     public Ballon getBallon() {
         return ballon;
     }
+    
+    public String getPosition() {
+        return position;
+    }
 
+    public void setPosition(String pos) {
+        this.position=pos;
+    }
+    
+    public void setBallon (Ballon ballon) {
+        this.ballon=ballon;
+    }
+    
     public boolean isEstBut() {
         return estBut;
     }

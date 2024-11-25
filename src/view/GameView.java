@@ -14,12 +14,18 @@ public class GameView extends Pane {
     private ImageView terrainView;
     private ImageView ballonView;
     private double ballonStartX = 425;
-    private double ballonStartY = 540;
-    private Rectangle cageRect;
+    private double ballonStartY = 400;
+    private Rectangle cageRectTR;
+    private Rectangle cageRectTL;
+    private Rectangle cageRectBR;
+    private Rectangle cageRectBL;
+    private Rectangle cageRectM;
+    private Rectangle test;
+
 
     public GameView() {
         // Charger les images
-        Image terrainImage = new Image(getClass().getResource("/images/terrain.jpg").toExternalForm());
+        Image terrainImage = new Image(getClass().getResource("/images/backgroud_penalty.png").toExternalForm());
         Image ballonImage = new Image(getClass().getResource("/images/ballon.png").toExternalForm());
 
         // Initialiser l'image du terrain
@@ -29,17 +35,37 @@ public class GameView extends Pane {
 
         // Initialiser l'image du ballon
         ballonView = new ImageView(ballonImage);
-        ballonView.setFitWidth(50);
-        ballonView.setFitHeight(50);
+        ballonView.setFitWidth(27);
+        ballonView.setFitHeight(27);
 
         // Initialiser le rectangle pour la cage
-        cageRect = new Rectangle(110, 195, 680, 230);
-        cageRect.setFill(Color.TRANSPARENT);
-        cageRect.setStroke(Color.TRANSPARENT);
-        cageRect.setStrokeWidth(2);
+        cageRectTL =  new Rectangle(216,95,140,92);
+        cageRectTL.setFill(Color.RED);
+        cageRectTL.setStroke(Color.RED);
+        cageRectTL.setStrokeWidth(2);
+        
+        cageRectBL =  new Rectangle(216,180,140,92);
+        cageRectBL.setFill(Color.BLUE);
+        cageRectBL.setStroke(Color.BLUE);
+        cageRectBL.setStrokeWidth(2);
+        
+        cageRectTR =  new Rectangle(503,95,140,92);
+        cageRectTR.setFill(Color.BLUE);
+        cageRectTR.setStroke(Color.BLUE);
+        cageRectTR.setStrokeWidth(2);
+        
+        cageRectBR =  new Rectangle(503,180,140,92);
+        cageRectBR.setFill(Color.RED);
+        cageRectBR.setStroke(Color.RED);
+        cageRectBR.setStrokeWidth(2);
+        
+        cageRectM =  new Rectangle(360,95,140,180);
+        cageRectM.setFill(Color.WHITE);
+        cageRectM.setStroke(Color.WHITE);
+        cageRectM.setStrokeWidth(2);
 
         // Ajouter les éléments à la scène
-        getChildren().addAll(terrainView, cageRect, ballonView);
+        getChildren().addAll(terrainView, cageRectTL,cageRectBL,cageRectTR,cageRectBR,cageRectM, ballonView);
 
         // Réinitialiser la position du ballon
         resetBallPosition();
@@ -89,6 +115,18 @@ public class GameView extends Pane {
     }
 
     public Rectangle getCageRect() {
-        return cageRect;
+        return cageRectTL;
+    }
+    public void setBallonXY(double X, double Y){
+        this.ballonStartX=X;
+        this.ballonStartY=Y;
+    }
+    
+    public double getBallonX(){
+        return this.ballonStartX;
+    }
+    
+    public double getBallonY(){
+        return this.ballonStartY;
     }
 }

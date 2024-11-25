@@ -124,6 +124,11 @@ public class ChoisirEquipeView {
                 Equipe equipe = equipes.get(i + j);
                 Button equipeButton = new Button(equipe.getNom());
                 styleEquipeButton(equipeButton); // Appliquer le style personnalisé
+                /*equipeButton.setOnAction(e -> {
+                    selectButton(equipeButton);          
+                });*/
+                
+                 // Add a click listener to handle selection
                 vboxEquipe.getChildren().add(equipeButton);
             }
 
@@ -190,23 +195,25 @@ public class ChoisirEquipeView {
      * Appliquer un style spécifique aux boutons d'équipe.
      */
     private void styleEquipeButton(Button button) {
-        button.setStyle(
-             "-fx-background-color: #3498db;" +  // Dégradé vert (vert clair à vert foncé)
-            "-fx-text-fill: white;" +                                               // Texte en blanc
-            "-fx-font-family: 'Sports World';" +                                    // Police Sportive
-            "-fx-font-size: 18px;" +                                                // Taille du texte
-            "-fx-padding: 15px 15px;" +                                             // Espacement interne
-            "-fx-background-radius: 20px;" +                                        // Coins arrondis
-            "-fx-border-radius: 20px;" +                                            // Bordure arrondie
-            "-fx-border-color: #006400;" +                                          // Bordure verte
-            "-fx-border-width: 3px;" +                                              // Largeur de la bordure
-            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"   // Ombre portée
-        );
-        button.setMinWidth(150);
+        
+        if (button!=selectedButton){
+            button.setStyle(
+                "-fx-background-color: #3498db;" +  // Dégradé vert (vert clair à vert foncé)
+                "-fx-text-fill: white;" +                                               // Texte en blanc
+                "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                "-fx-font-size: 18px;" +                                                // Taille du texte
+                "-fx-padding: 15px 15px;" +                                             // Espacement interne
+                "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                "-fx-border-radius: 20px;" +                                            // Bordure arrondie
+                "-fx-border-color: #006400;" +                                          // Bordure verte
+                "-fx-border-width: 3px;" +                                              // Largeur de la bordure
+                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"   // Ombre portée
+            );
+            button.setMinWidth(150);
 
-        // Appliquer l'effet hover sur chaque bouton d'équipe
-        button.setOnMouseEntered(e -> button.setStyle(
-            "-fx-background-color: #3498db;" +  // Dégradé vert (vert clair à vert foncé)
+            // Appliquer l'effet hover sur chaque bouton d'équipe
+            button.setOnMouseEntered(e -> button.setStyle(
+                "-fx-background-color: #3498db;" +  // Dégradé vert (vert clair à vert foncé)
                 "-fx-text-fill: white;" +
                 "-fx-font-family: 'Sports World';" +
                 "-fx-font-size: 18px;" +
@@ -218,9 +225,9 @@ public class ChoisirEquipeView {
                 "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);" +
                 "-fx-scale-x: 1.1;" +  // Agrandissement du bouton au survol
                 "-fx-scale-y: 1.1;"    // Agrandissement du bouton au survol
-        ));
-        button.setOnMouseExited(e -> button.setStyle(
-           "-fx-background-color: #3498db;" +  // Retour au dégradé initial
+            ));
+            button.setOnMouseExited(e -> button.setStyle(
+                "-fx-background-color: #3498db;" +  // Retour au dégradé initial
                 "-fx-text-fill: white;" +
                 "-fx-font-family: 'Sports World';" +
                 "-fx-font-size: 18px;" +
@@ -232,24 +239,99 @@ public class ChoisirEquipeView {
                 "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);" +
                 "-fx-scale-x: 1;" +  // Réduire la taille du bouton après le survol
                 "-fx-scale-y: 1;"    // Réduire la taille du bouton après le survol
-        ));
-        
-        /*
-        button.setOnMouseClicked(e -> button.setStyle(
-                "-fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #3498db, #000000);" +  // Retour au dégradé initial
-                "-fx-text-fill: white;" +
+            ));
+        }
+        else{
+            button.setStyle(
+                "-fx-background-color: yellow;" +  // Highlight with yellow
+                "-fx-text-fill: black;" +          // Black text for contrast
                 "-fx-font-family: 'Sports World';" +
                 "-fx-font-size: 18px;" +
                 "-fx-padding: 15px 15px;" +
                 "-fx-background-radius: 20px;" +
                 "-fx-border-radius: 20px;" +
-                "-fx-border-color: #006400;" +
+                "-fx-border-color: #FFD700;" +     // Yellow border
                 "-fx-border-width: 3px;" +
-                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);" +
-                "-fx-scale-x: 1.1;" +  // Réduire la taille du bouton après le survol
-                "-fx-scale-y: 1.1;"    // Réduire la taille du bouton après le survol
-        ));
-*/
+                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"
+            );
+            button.setOnMouseEntered(e -> button.setStyle(
+                "-fx-background-color: yellow;" +  // Highlight with yellow
+                "-fx-text-fill: black;" +          // Black text for contrast
+                "-fx-font-family: 'Sports World';" +
+                "-fx-font-size: 18px;" +
+                "-fx-padding: 15px 15px;" +
+                "-fx-background-radius: 20px;" +
+                "-fx-border-radius: 20px;" +
+                "-fx-border-color: #FFD700;" +     // Yellow border
+                "-fx-border-width: 3px;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+
+                "-fx-scale-x: 1.1;" +  // Agrandissement du bouton au survol
+                "-fx-scale-y: 1.1;"    // Agrandissement du bouton au survol
+            ));
+            button.setOnMouseExited(e -> button.setStyle(
+                "-fx-background-color: yellow;" +  // Highlight with yellow
+                "-fx-text-fill: black;" +          // Black text for contrast
+                "-fx-font-family: 'Sports World';" +
+                "-fx-font-size: 18px;" +
+                "-fx-padding: 15px 15px;" +
+                "-fx-background-radius: 20px;" +
+                "-fx-border-radius: 20px;" +
+                "-fx-border-color: #FFD700;" +     // Yellow border
+                "-fx-border-width: 3px;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+
+                "-fx-scale-x: 1;" +  // Réduire la taille du bouton après le survol
+                "-fx-scale-y: 1;"    // Réduire la taille du bouton après le survol
+            ));
+        }
+    }
+    public void selectButton(Button button ){
+        if (selectedButton != null) {
+                        // Reset the previously selected button's style
+                        selectedButton.setStyle(
+                             "-fx-background-color: #3498db;" +  // Reset to default blue
+                            "-fx-text-fill: white;" +
+                            "-fx-font-family: 'Sports World';" +
+                            "-fx-font-size: 18px;" +
+                            "-fx-padding: 15px 15px;" +
+                            "-fx-background-radius: 20px;" +
+                            "-fx-border-radius: 20px;" +
+                            "-fx-border-color: #006400;" +
+                            "-fx-border-width: 3px;" +
+                            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"
+                        );
+                        selectedButton.setOnMouseEntered(e -> selectedButton.setStyle(
+                            "-fx-background-color: #3498db;" +  // Dégradé vert (vert clair à vert foncé)
+                            "-fx-text-fill: white;" +
+                            "-fx-font-family: 'Sports World';" +
+                            "-fx-font-size: 18px;" +
+                            "-fx-padding: 15px 15px;" +
+                            "-fx-background-radius: 20px;" +
+                            "-fx-border-radius: 20px;" +
+                            "-fx-border-color: #006400;" +
+                            "-fx-border-width: 3px;" +
+                            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);" +
+                            "-fx-scale-x: 1.1;" +  // Agrandissement du bouton au survol
+                            "-fx-scale-y: 1.1;"    // Agrandissement du bouton au survol
+                        ));
+                        selectedButton.setOnMouseExited(e -> selectedButton.setStyle(
+                            "-fx-background-color: #3498db;" +  // Retour au dégradé initial
+                            "-fx-text-fill: white;" +
+                            "-fx-font-family: 'Sports World';" +
+                            "-fx-font-size: 18px;" +
+                            "-fx-padding: 15px 15px;" +
+                            "-fx-background-radius: 20px;" +
+                            "-fx-border-radius: 20px;" +
+                            "-fx-border-color: #006400;" +
+                            "-fx-border-width: 3px;" +
+                            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);" +
+                            "-fx-scale-x: 1;" +  // Réduire la taille du bouton après le survol
+                            "-fx-scale-y: 1;"    // Réduire la taille du bouton après le survol
+                        ));
+                    }
+                    selectedButton=null;
+                    // Set the new selected button and change its style
+                    selectedButton = button;
+                    styleEquipeButton(button);  
     }
 
     // Getters pour la scène et les éléments

@@ -38,7 +38,10 @@ public class ChoisirEquipeController {
         for (int j = 0; j < vboxEquipe.getChildren().size(); j++) {
             Button equipeButton = (Button) vboxEquipe.getChildren().get(j);  // Récupérer le Button à l'intérieur du VBox
             int finalI = i * 4 + j;  // Calculer l'index global
-            equipeButton.setOnAction(e -> handleEquipeSelection(finalI));
+            equipeButton.setOnAction(e -> {
+                handleEquipeSelection(finalI);
+                view.selectButton(equipeButton);
+            });
         }
         view.getBackButton().setOnAction(e -> goBackToSaisirPlayerView());
 
@@ -67,14 +70,19 @@ public class ChoisirEquipeController {
                 this.jeu.getPlayer().setEquipe(equipeSelectionnee);
                 BracketView bracketView = new BracketView(jeu.getCoupe().getTours().get(1).getMatchs());
                 Stage stage = (Stage) view.getValiderButton().getScene().getWindow();
-                stage.setScene(bracketView.getBracketScene());}
+                stage.setScene(bracketView.getBracketScene());
+                new BracketController(bracketView, jeu);
+            }
             else  {
                 System.out.println("Lancement du tournoi avec l'équipe : " + equipeSelectionnee.getNom());
                 // Generate the bracket
                 this.jeu.getPlayer().setEquipe(equipeSelectionnee);
                 RankingView rankingView = new RankingView(jeu);
                 Stage stage = (Stage) view.getValiderButton().getScene().getWindow();
-                stage.setScene(rankingView.getScene());}
+                stage.setScene(rankingView.getScene());
+                new RankingController(rankingView, jeu);
+
+            }
                 
             } 
 

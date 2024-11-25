@@ -57,6 +57,7 @@ public class ChoisirTournoiController {
 
     private void setupChampionsLeague() {
         Coupe coupe = new Coupe("Champions League");
+        jeu.setChampionnat(null);
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
@@ -79,6 +80,7 @@ public class ChoisirTournoiController {
     
     private void setupWorldCup() {
         Coupe coupe = new Coupe("World Cup");
+        jeu.setChampionnat(null);
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
@@ -101,6 +103,7 @@ public class ChoisirTournoiController {
     
     private void setupLaLiga(){
         Championnat championnat = new Championnat("La Liga");
+        jeu.setCoupe(null);
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
@@ -124,8 +127,8 @@ public class ChoisirTournoiController {
     
     
     private void setupPremierLeague(){
-         Championnat championnat = new Championnat("Premier League");
-
+        Championnat championnat = new Championnat("Premier League");
+        jeu.setCoupe(null);
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
             {"City", "Pep Guardiola", "MCY"}, {"Arsenal", "Mikel Arteta", "ARS"}, {"Liverpool", "Jurgen Klopp", "LIV"},
@@ -155,7 +158,7 @@ public class ChoisirTournoiController {
             new ChoisirEquipeController(choisirEquipeView, jeu);
         } else if (jeu.getChampionnat() != null && !jeu.getChampionnat().getEquipes().isEmpty()) {
             ChoisirEquipeView choisirEquipeView = new ChoisirEquipeView(jeu);
-            Stage stage = (Stage) view.getWorldCupButton().getScene().getWindow();
+            Stage stage = (Stage) view.getlaLigaButton().getScene().getWindow();
             stage.setScene(choisirEquipeView.getScene());
             new ChoisirEquipeController(choisirEquipeView, jeu);
         }

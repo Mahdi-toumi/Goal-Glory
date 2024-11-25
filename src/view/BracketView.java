@@ -378,7 +378,7 @@ public class BracketView {
         fullScene.getChildren().addAll(fullBracket,  Buttons);
 
         layout.getChildren().addAll(background, fullScene);
-        return new Scene(layout, 800, 600);
+        return new Scene(layout, 900, 600);
     }
     
     public Button getBackButton(){
