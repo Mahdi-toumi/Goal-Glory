@@ -2,14 +2,16 @@ package view;
 
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class GameView extends Pane {
+public class GameView {
 
     private ImageView terrainView;
     private ImageView ballonView;
@@ -21,7 +23,8 @@ public class GameView extends Pane {
     private Rectangle cageRectBL;
     private Rectangle cageRectM;
     private Rectangle test;
-
+    private Scene scene;
+    private Pane Pane;
 
     public GameView() {
         // Charger les images
@@ -65,17 +68,21 @@ public class GameView extends Pane {
         cageRectM.setStrokeWidth(2);
 
         // Ajouter les éléments à la scène
-        getChildren().addAll(terrainView, cageRectTL,cageRectBL,cageRectTR,cageRectBR,cageRectM, ballonView);
+        Pane = new Pane();
+        Pane.getChildren().addAll(terrainView, cageRectTL,cageRectBL,cageRectTR,cageRectBR,cageRectM, ballonView);
 
+        scene = new Scene(Pane, 900, 600);
         // Réinitialiser la position du ballon
         resetBallPosition();
 
         // Gérer l'événement de clic sur le terrain
-        setOnMouseClicked(event -> {
+        Pane.setOnMouseClicked(event -> {
             double clickX = event.getX();
             double clickY = event.getY();
             animateBallToPosition(clickX, clickY);
         });
+        
+        
     }
 
     private void resetBallPosition() {
@@ -114,9 +121,7 @@ public class GameView extends Pane {
         return ballonView;
     }
 
-    public Rectangle getCageRect() {
-        return cageRectTL;
-    }
+    
     public void setBallonXY(double X, double Y){
         this.ballonStartX=X;
         this.ballonStartY=Y;
@@ -128,5 +133,13 @@ public class GameView extends Pane {
     
     public double getBallonY(){
         return this.ballonStartY;
+    }
+    
+    public Scene getScene(){
+        return scene;
+    }
+    
+    public Pane getPane(){
+        return Pane;
     }
 }

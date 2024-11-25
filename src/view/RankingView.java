@@ -180,4 +180,8 @@ public class RankingView {
     public Button getBackButton(){
         return this.gobackButton ;
     }
+    
+    public Button getNextButton(){
+        return this.NextButton ;
+    }
 }

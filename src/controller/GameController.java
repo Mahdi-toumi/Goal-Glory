@@ -5,34 +5,26 @@ import javafx.stage.Stage;
 import model.elements.Ballon;
 import view.GameView;
 import model.elements.TirAuBut;
+import model.structure.Jeu;
 
 public class GameController {
 
-    private Stage primaryStage;
+    private Jeu jeu;
     private GameView gameView;
     private TirAuBut Tir;
 
-    public GameController(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        
+    public GameController(GameView view, Jeu jeu) {
+        this.jeu=jeu;
+        this.gameView=view;
         // Créer la vue de jeu
-        gameView = new GameView();
         Ballon ballon= new Ballon(gameView.getBallonView());
         Tir=new TirAuBut(ballon,"");
         // Réinitialiser l'événement de clic de la souris dans la vue de jeu
-        String Position=ShotPosition(Tir);
-        
-
-        // Créer une scène avec la vue de jeu
-        Scene gameScene = new Scene(gameView, 900, 600);
-
-        // Afficher la scène de jeu
-        primaryStage.setScene(gameScene);
-        primaryStage.show();
+        String Position=ShotPosition(Tir);  
     }
     
     public String ShotPosition(TirAuBut Tir){
-        gameView.setOnMouseClicked(event -> {
+        gameView.getPane().setOnMouseClicked(event -> {
             double BallonX = event.getX();
             double BallonY = event.getY();
             gameView.animateBallToPosition(BallonX, BallonY);// Déplacer le ballon vers la position cliquée
