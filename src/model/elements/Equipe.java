@@ -5,22 +5,30 @@
 package model.elements;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import model.elements.exceptions.EquipePleineException;
+import model.elements.exceptions.EquipeVideException;
+import model.elements.exceptions.JoueurNonTrouveException;
+import model.elements.exceptions.PointsInvalideException;
 
 /**
  *
  * @author toumi
  */
 
-public class  Equipe {
+public class  Equipe  implements Comparable<Equipe> {
+    
     private String nom;
     private String entraineur;
-    private String Abreviation;
+    private final String Abreviation;
     private ArrayList<Joueur> joueurs;
     private int points = 0 ;
 
-    public Equipe(String nom, String entraineur, String Abr) {
+    public Equipe(String nom, String entraineur, String Abr)  {
         this.nom = nom;
         this.entraineur = entraineur;
         this.Abreviation=Abr;
@@ -28,63 +36,93 @@ public class  Equipe {
     }
 
     // Getters
-    public String getNom() {
-        return nom;
-    }
+    public String getNom() {return nom;}
     
-    public int  getPoints (){
-        return this.points ;
-    }
+    public int  getPoints (){return this.points ;}
     
-    public void  setPoints (int p){
-        this.points = p ;
-    }
+    public String getAbr() {return Abreviation;}
     
-    public String getAbr() {
-        return Abreviation;
-    }
-    
-    public String getEntraineur() {
-        return entraineur;
-    }
+    public String getEntraineur() {return entraineur;}
 
-    public ArrayList<Joueur> getJoueurs() {
-        return joueurs;
-    }
+    public ArrayList<Joueur> getJoueurs() {return joueurs;}
+    
+    
 
     // Setters
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom(String nom) {this.nom = nom;}
+
+    public void setEntraineur(String entraineur) {this.entraineur = entraineur;}
+
+    public void setJoueurs(ArrayList<Joueur> joueurs) {this.joueurs = joueurs;}
+    
+    public void setPoints(int points) throws PointsInvalideException {
+        if (points < 0) {
+            throw new PointsInvalideException("Les points ne peuvent pas être négatifs !");
+        }
+        this.points = points;
     }
 
-    public void setEntraineur(String entraineur) {
-        this.entraineur = entraineur;
-    }
 
-    public void setJoueurs(ArrayList<Joueur> joueurs) {
-        this.joueurs = joueurs;
-    }
-
-    public void ajouterJoueur(Joueur joueur) {
+    
+    
+    // Ajouter un joueur
+    public void ajouterJoueur(Joueur joueur) throws EquipePleineException {
+        if (joueurs.size() >= 11) { // Limite de 11 joueurs
+            throw new EquipePleineException("L'équipe est déjà complète !");
+        }
         joueurs.add(joueur);
     }
 
-    public void supprimerJoueur(Joueur joueur) { // Correction : nom de méthode en minuscule
+    // Supprimer un joueur
+    public void supprimerJoueur(Joueur joueur) throws JoueurNonTrouveException {
+        if (!joueurs.contains(joueur)) {
+            throw new JoueurNonTrouveException("Le joueur n'existe pas dans l'équipe !");
+        }
         joueurs.remove(joueur);
     }
-
-    public Map<String, String> obtenirCompositionEquipe() {
-        Map<String, String> nomsJoueurs = new HashMap<>();
-        for (Joueur joueur : joueurs) {
-            nomsJoueurs.put(joueur.getNom(), joueur.getPosition());
+    
+    
+    // Vérifier si l'équipe est vide
+    public void verifierEquipeVide() throws EquipeVideException {
+        if (joueurs.isEmpty()) {
+            throw new EquipeVideException("L'équipe est vide !");
         }
-        return nomsJoueurs;
+    }
+    
+    
+    public List<Joueur> obtenirJoueursParPoste(Poste poste) {
+        return joueurs.stream()
+                .filter(joueur -> joueur.getPoste().equals(poste))
+                .collect(Collectors.toList());
+    }
+    
+    public static List<Joueur> trierJoueurNom(List<Joueur> players) {
+        return players.stream()
+                      .sorted(Comparator.comparing(Joueur::getNom))
+                      .collect(Collectors.toList());
+    }
+    
+
+    
+
+    public Map<Joueur, Poste> obtenirCompositionEquipe() { // Obtenir un map sur les joeurs avec son poste 
+        Map<Joueur, Poste> Composition = new HashMap<>();
+        for (Joueur joueur : joueurs) {
+            Composition.put(joueur, joueur.getPoste());
+        }
+        return Composition;
+    }
+    
+    // Implémentation de Comparable pour trier les équipes par nombre de points
+    @Override
+    public int compareTo(Equipe autreEquipe) {
+        return Integer.compare(this.points, autreEquipe.points); // Tri par points
     }
     
     
     @Override
     public String toString() {
-        return nom + " | Entraîneur: " + entraineur;
+        return "Equipe : " + nom + " Entraineur: " + entraineur + " Points : " + this.points +  " Abreviation: " +this.Abreviation ;
     }
     
     

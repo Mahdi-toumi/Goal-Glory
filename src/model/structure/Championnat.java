@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * 
  * @author toumi
  */
-public class Championnat extends Tournoi {
+public final class Championnat extends Tournoi {
     private Map<Equipe, Integer> Classement;
 
     public Championnat(String Nom) {

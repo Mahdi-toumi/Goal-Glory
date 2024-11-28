@@ -7,6 +7,8 @@ package model.structure;
 import model.elements.Equipe;
 import model.structure.exceptions.AjoutMatchException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -18,49 +20,74 @@ public class Tour {
     private ArrayList<Match> matchs;
 
     public Tour(int numTour) {
+        if (numTour <= 0) {
+            throw new IllegalArgumentException("Le numéro du tour doit être supérieur à 0.");
+        }
         this.numTour = numTour;
         this.matchs = new ArrayList<>();
     }
+    
+    
+    // Getters  
+    public int getNumTour() {return this.numTour;}
 
+    public ArrayList<Match> getMatchs() {return this.matchs;}
+    
+    //Setters
+    public void setNumTour(int num) {this.numTour = num ;}
+     
+    public void setMatchs(ArrayList<Match> m) {this.matchs = m ;}
+
+    
+    
     public void afficherMatchs() {
         System.out.println("Matchs du Tour " + numTour + ":");
-        for (Match match : matchs) {
-            System.out.println(match);
-        }
+        matchs.forEach(System.out::println);
     }
 
-    public boolean ajouterMatch(Match m) {
-        // Ajoute un match si il n'est pas déjà présent
+    public void ajouterMatch(Match m) throws AjoutMatchException {
+        // Vérifie si le match est déjà présent
         for (Match matchExistant : this.matchs) {
             if (matchExistant.equals(m)) {
-                System.out.println("Le match est déjà présent dans ce tour.");
-                return false;
+                throw new AjoutMatchException("Le match est déjà présent dans ce tour.");
             }
         }
+
+        // Vérifie si l'une des équipes participe déjà à un autre match
+        if (equipeExistante(m.getEquipe1()) || equipeExistante(m.getEquipe2())) {
+            throw new AjoutMatchException("Une des équipes est déjà engagée dans un autre match du tour.");
+        }
+
         this.matchs.add(m);
         System.out.println("Match ajouté avec succès.");
-        return true;
     }
 
     public boolean equipeExistante(Equipe e) {
-        for (Match matchExistant : this.matchs) {
-            if (matchExistant.getEquipe1().equals(e) || matchExistant.getEquipe2().equals(e)) {
-                return true;
-            }
-        }
-        return false;
+        return matchs.stream().anyMatch(match -> match.getEquipe1().equals(e) || match.getEquipe2().equals(e));
     }
 
-    // Getters et Setters
-    public int getNumTour() {
-        return numTour;
-    }
 
-    public ArrayList<Match> getMatchs() {
-        return matchs;
+    
+    
+    // Get all winners of the matches
+    public List<Equipe> getGagnants() {
+        return matchs.stream()
+                .map(Match::getGagnant)
+                .collect(Collectors.toList());
     }
     
-    public void setMatchs(ArrayList<Match> m) {
-        this.matchs = m ;
+    // Get matches where a specific team is playing
+    public List<Match> getMatchsParEquipe(Equipe equipe) {
+        return matchs.stream()
+                .filter(match -> match.getEquipe1().equals(equipe) || match.getEquipe2().equals(equipe))
+                .collect(Collectors.toList());
     }
+    
+    
+    
+        @Override
+    public String toString() {
+        return "Tour " + numTour + " : " + matchs.size() + " matchs";
+    }
+    
 }

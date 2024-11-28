@@ -8,8 +8,10 @@ package model.structure;
 import model.elements.TirAuBut;
 import model.elements.Equipe;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -19,8 +21,7 @@ public class Match {
     private Equipe equipe1;
     private Equipe equipe2;
     private Equipe gagnant;
-    private int scoreEquipe1;
-    private int scoreEquipe2;
+    private Score score ;
      
     private ArrayList<TirAuBut> tirAubuts;
     private boolean termine;
@@ -28,8 +29,7 @@ public class Match {
     public Match(Equipe equipe1, Equipe equipe2 ) {
         this.equipe1 = equipe1;
         this.equipe2 = equipe2; 
-        this.scoreEquipe1 = 0;
-        this.scoreEquipe2 = 0;
+        this.score = new Score() ;
          
         this.tirAubuts = new ArrayList<>(); 
     }
@@ -83,9 +83,9 @@ public class Match {
     
     public void marquerBut(Equipe equipe) {
         if (equipe.equals(equipe1)) {
-            scoreEquipe1++;
+            score.incrementEquipe1() ;
         } else if (equipe.equals(equipe2)) {
-            scoreEquipe2++;
+            score.incrementEquipe2() ;
         }
     }
     
@@ -94,14 +94,14 @@ public class Match {
     }
     
     public String afficherScore() {
-        return equipe1.getNom() + " " + scoreEquipe1 + " - " + scoreEquipe2 + " " + equipe2.getNom();
+        return equipe1.getNom() + " " + score.getScoreEquipe1() + " - " + score.getScoreEquipe2() + " " + equipe2.getNom();
     }
     
     public void Obtenir_gagnants(){
-        if (this.scoreEquipe1 > this.scoreEquipe2 ) {
+        if (this.score.getScoreEquipe1() > this.score.getScoreEquipe2() ) {
             this.gagnant = equipe1 ;
         }
-        if (this.scoreEquipe1 < this.scoreEquipe2 ) {
+        if (this.score.getScoreEquipe1() < this.score.getScoreEquipe2() ) {
             this.gagnant = equipe2 ;
         }
     }
@@ -131,6 +131,7 @@ public class Match {
         return result;
     }
 }
+    
     
     public void jouerMatch() {
         Scanner scanner = new Scanner(System.in);
@@ -174,6 +175,13 @@ public class Match {
         this.Obtenir_gagnants() ;
     }
     
+    
+    // Use streams to get the list of shots taken by a team
+    public List<TirAuBut> getTirAuButEquipe(Equipe equipe) {
+        return tirAubuts.stream()
+                .filter(tir -> tir.getPosition().equals(equipe.getNom())) // Assuming `position` can help identify the team
+                .collect(Collectors.toList());
+    }
      
     // Surcharge de la méthode equals pour comparer les matchs
     @Override
@@ -188,23 +196,21 @@ public class Match {
     
     
     public String affichageAbr () {
-        if (this.scoreEquipe1 == 0 && this.scoreEquipe2== 0){
+        if (this.score.getScoreEquipe1()  == 0 && this.score.getScoreEquipe2() == 0){
              return equipe1.getAbr() + " vs " + equipe2.getAbr() ;
         }
         else {
-            return equipe1.getAbr() +" "+ this.scoreEquipe1 + " - " + this.scoreEquipe2 + " "+ equipe2.getAbr() ;
+            return equipe1.getAbr() +" "+ this.score.getScoreEquipe1() + " - " + this.score.getScoreEquipe2() + " "+ equipe2.getAbr() ;
         }
     }
-    
-    
-    
+
     @Override
     public String toString() {
-        if (this.scoreEquipe1 == 0 && this.scoreEquipe2== 0){
+        if (this.score.getScoreEquipe1() == 0 && this.score.getScoreEquipe2()== 0){
              return equipe1.getNom() + " vs " + equipe2.getNom();
         }
         else {
-            return equipe1.getNom() +" "+ this.scoreEquipe1 + " - " + this.scoreEquipe2 + " "+ equipe2.getNom() ;
+            return equipe1.getNom() +" "+ this.score.getScoreEquipe1() + " - " + this.score.getScoreEquipe2() + " "+ equipe2.getNom() ;
         }
     }
 

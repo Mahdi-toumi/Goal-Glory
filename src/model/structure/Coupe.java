@@ -17,7 +17,7 @@ import java.util.Iterator;
  * 
  * @author toumi
  */
-public class Coupe extends Tournoi {
+public final class Coupe extends Tournoi {
     private ArrayList<Equipe> equipesEliminees;
     private ArrayList<Equipe> equipesRestantes;
     private int TourActuel = 0 ;

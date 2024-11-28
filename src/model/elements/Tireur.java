@@ -8,27 +8,24 @@ package model.elements;
  *
  * @author toumi
  */
-public class Tireur extends Joueur {
-    private double precisionDeTir; // Précision du joueur lors des tirs
+public final class Tireur extends Joueur {  
+    private double precisionDeTir;
+    private int penaltiesReussis ; 
 
-    public Tireur(String nom, String prenom, int age, Equipe equipe, double precisionDeTir) {
-        super(nom, prenom, age, "Attaquant", equipe);
+    public Tireur(String nom, String prenom, int age,Poste poste, Equipe equipe, double precisionDeTir) {
+        super(nom, prenom, age, poste, equipe);
         this.precisionDeTir = precisionDeTir;
     }
 
-    // Getters et Setters
-    public double getPrecisionDeTir() {
-        return precisionDeTir;
-    }
+    // Getters 
+    public double getPrecisionDeTir() {return precisionDeTir;}
+    public double getPenaltiesReussis() {return penaltiesReussis;}
 
-    public void setPrecisionDeTir(double precisionDeTir) {
-        this.precisionDeTir = precisionDeTir;
-    }
+    //Setters
+    public void setPrecisionDeTir(double precisionDeTir) {this.precisionDeTir = precisionDeTir;}
+    public void setPenaltiesReussis(int penaltiesReussis) {this.penaltiesReussis = penaltiesReussis;}
 
-    @Override
-    public void jouer() {
-        
-    }
+ 
 }
 
     

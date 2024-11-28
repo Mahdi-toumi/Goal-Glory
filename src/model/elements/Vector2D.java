@@ -1,44 +1,21 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Record.java to edit this template
  */
 package model.elements;
 
+
 /**
- *
- * @author toumi
+ * Représente un vecteur 2D avec des opérations d'ajout et de multiplication par un scalaire.
  */
-public class Vector2D {
-    private double x;
-    private double y;
+public record Vector2D(double x, double y) {
 
-    public Vector2D(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    // Getters
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    // Setters
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
+    // Méthode pour ajouter un autre vecteur
     public Vector2D ajouter(Vector2D v) {
-        return new Vector2D(this.x + v.getX(), this.y + v.getY());
+        return new Vector2D(this.x + v.x, this.y + v.y);
     }
 
+    // Méthode pour multiplier le vecteur par un scalaire
     public Vector2D multiplier(double scalaire) {
         return new Vector2D(this.x * scalaire, this.y * scalaire);
     }

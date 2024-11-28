@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * 
  * @author toumi
  */
-    public abstract class Tournoi {
+    public abstract sealed class Tournoi permits Coupe, Championnat {
     private String Nom ; 
     private ArrayList<Equipe> equipes;
     private ArrayList<Tour> Tours;

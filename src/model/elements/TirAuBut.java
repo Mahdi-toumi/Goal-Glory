@@ -8,7 +8,7 @@ package model.elements;
  *
  * @author toumi
  */
-public class TirAuBut {
+public class TirAuBut implements Comparable<TirAuBut> {
     /*private Tireur tireur;
     private Gardien gardien;*/
     private Ballon ballon;
@@ -59,5 +59,20 @@ public class TirAuBut {
 
     public void setEstBut(boolean estBut) {
         this.estBut = estBut;
+    }
+    
+    
+
+    @Override
+    public int compareTo(TirAuBut other) {
+        return Boolean.compare(this.estBut, other.estBut); 
+    }
+    
+    @Override
+    public String toString() {
+        return "TirAuBut{" +
+               "position='" + position + '\'' +
+               ", estBut=" + estBut +
+               '}';
     }
 }

@@ -9,32 +9,25 @@ package model.elements;
  * @author toumi
  */
 // Gardien.java
-public class Gardien extends Joueur {
+public final class Gardien extends Joueur {
+    
     private double pourcentageDeSauvetage;
+    private int arretsEffectues ;
 
     public Gardien(String nom, String prenom, int age, Equipe equipe, double pourcentageDeSauvetage) {
-        super(nom, prenom, age, "Gardien", equipe);
+        super(nom, prenom, age, Poste.GARDIEN, equipe);
         this.pourcentageDeSauvetage = pourcentageDeSauvetage;
     }
 
-    // Méthode pour essayer d'arrêter un tir
-    public boolean arreterTir(Ballon ballon) {
-        double chanceArrêt = this.pourcentageDeSauvetage;
-        return Math.random() < chanceArrêt;
-    }
+    
 
-    @Override
-    public void jouer() {
-        // Logique de jeu du gardien
-    }
+   
+    public double getPourcentageDeSauvetage() {return pourcentageDeSauvetage;}
+    public int getArretsEffectues() {return arretsEffectues;}
 
-    public double getPourcentageDeSauvetage() {
-        return pourcentageDeSauvetage;
-    }
-
-    public void setPourcentageDeSauvetage(double pourcentageDeSauvetage) {
-        this.pourcentageDeSauvetage = pourcentageDeSauvetage;
-    }
+    public void setArretsEffectues(int arretsEffectues) {this.arretsEffectues = arretsEffectues;}
+    public void setPourcentageDeSauvetage(double pourcentageDeSauvetage) {this.pourcentageDeSauvetage = pourcentageDeSauvetage;}
+    
 }
 
 
