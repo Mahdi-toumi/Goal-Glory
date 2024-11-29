@@ -123,6 +123,9 @@ public final class Coupe extends Tournoi {
     public Equipe Obtenir_gagnants() {
         return equipesRestantes.size() == 1 ? equipesRestantes.get(0) : null;
     }
+    public ArrayList<Equipe> getEquipesRestantes(){
+        return this.equipesRestantes;
+    }
 
     
     

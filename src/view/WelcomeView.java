@@ -206,7 +206,7 @@ public class WelcomeView {
             );
 
             // Transition de fondu de l'image (apparaît progressivement)
-            FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(2), backgroundImage);
+            FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(1), backgroundImage);
             fadeInTransition.setFromValue(0); // Commencer à partir d'une opacité nulle
             fadeInTransition.setToValue(1); // Finir avec une opacité de 1
 

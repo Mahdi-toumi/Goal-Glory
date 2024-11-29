@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.elements;
+
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -10,24 +8,39 @@ package model.elements;
  */
 // Gardien.java
 public final class Gardien extends Joueur {
-    
     private double pourcentageDeSauvetage;
-    private int arretsEffectues ;
-
-    public Gardien(String nom, String prenom, int age, Equipe equipe, double pourcentageDeSauvetage) {
+    private ImageView gloves;
+    private String Position;
+    public Gardien(String nom, String prenom, int age, Equipe equipe,ImageView gloves,String Position ) {
         super(nom, prenom, age, Poste.GARDIEN, equipe);
-        this.pourcentageDeSauvetage = pourcentageDeSauvetage;
+        this.gloves=gloves;
+        this.Position=Position;
+        //this.pourcentageDeSauvetage = pourcentageDeSauvetage;
     }
 
-    
+    // Méthode pour essayer d'arrêter un tir
+    public boolean arreterTir(Ballon ballon) {
+        double chanceArrêt = this.pourcentageDeSauvetage;
+        return Math.random() < chanceArrêt;
+    }
 
-   
-    public double getPourcentageDeSauvetage() {return pourcentageDeSauvetage;}
-    public int getArretsEffectues() {return arretsEffectues;}
+    //@Override
+    public void jouer() {
+        // Logique de jeu du gardien
+    }
 
-    public void setArretsEffectues(int arretsEffectues) {this.arretsEffectues = arretsEffectues;}
-    public void setPourcentageDeSauvetage(double pourcentageDeSauvetage) {this.pourcentageDeSauvetage = pourcentageDeSauvetage;}
-    
+    /*public double getPourcentageDeSauvetage() {
+        return pourcentageDeSauvetage;
+    }
+
+    public void setPourcentageDeSauvetage(double pourcentageDeSauvetage) {
+        this.pourcentageDeSauvetage = pourcentageDeSauvetage;
+    }*/
+    public String getPosition() {
+        return Position;
+    }
+
+    public void setPosition(String pos) {
+        this.Position=pos;
+    }
 }
-
-
