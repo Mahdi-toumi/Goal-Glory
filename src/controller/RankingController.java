@@ -37,7 +37,7 @@ public class RankingController {
     private void redirectToGamePreview(){
         Stage stage = (Stage) view.getNextButton().getScene().getWindow();
         Equipe E1=jeu.getPlayer().getEquipe();
-        List <Match> Matchs= jeu.getChampionnat().getTours().get(1).getMatchs();
+        List <Match> Matchs= jeu.getChampionnat().getTours().get(this.jeu.getTour()+1).getMatchs();
         for (int i=0;i<8;i++){
             if (Matchs.get(i).getEquipe1()== E1 || Matchs.get(i).getEquipe2()== E1){
                 Match match= Matchs.get(i);

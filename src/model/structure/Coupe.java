@@ -39,7 +39,7 @@ public final class Coupe extends Tournoi {
     @Override
     public void Initialiser_tournoi() {
         this.equipesRestantes = this.getEquipes() ;
-        this.Initialiser_tour();
+        
     }
     
     public void Initialiser_tour() {
@@ -76,7 +76,7 @@ public final class Coupe extends Tournoi {
                 System.out.println("Erreur lors de l'ajout du tour : " + e.getMessage());
             }
         }
-        this.Commencer_tournoi();
+        
         
     }
     

@@ -28,7 +28,7 @@ public class GamePreviewController {
     }
     
     private void redirectToGameView(){
-        GameView GameView= new GameView();
+        GameView GameView= new GameView(jeu);
         Stage stage = (Stage) view.getNextButton().getScene().getWindow();
         stage.setScene(GameView.getScene());
         new GameController(GameView, jeu);

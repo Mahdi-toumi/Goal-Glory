@@ -3,6 +3,7 @@ package view;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -11,6 +12,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import model.elements.Equipe;
+import model.structure.Jeu;
+import model.structure.Match;
 
 public class GameView {
 
@@ -26,6 +30,13 @@ public class GameView {
     private Rectangle cageRectBR;
     private Rectangle cageRectBL;
     private Rectangle cageRectM;
+    private Button scoreBoardButton;
+    private Jeu jeu ;
+    private Text playerNameText;
+    private Text TournoiNameText ;
+    Equipe equipe1 ;
+    Equipe equipe2 ;
+    
 
     private Scene scene;
     private Pane Pane;
@@ -33,7 +44,8 @@ public class GameView {
     // Scoreboard Text
     private Text scoreBoard;
 
-    public GameView() {
+    public GameView(Jeu jeu) {
+        this.jeu = jeu ;
         // Load images
         Image terrainImage = new Image(getClass().getResource("/images/backgroud_penalty.png").toExternalForm());
         Image ballonImage = new Image(getClass().getResource("/images/ballon.png").toExternalForm());
@@ -79,17 +91,57 @@ public class GameView {
         cageRectM.setFill(Color.WHITE);
         cageRectM.setStroke(Color.WHITE);
         cageRectM.setStrokeWidth(2);
+        
+        // Player's name and score in the top-left corner
+        
+        playerNameText = new Text("   "+this.jeu.getPlayer().getNom() + " -   Score: " + this.jeu.getPlayer().getScore());
+        playerNameText.setFont(Font.font("Sports World", 24));
+        playerNameText.setFill(Color.WHITE);
+        playerNameText.setLayoutX(10);
+        playerNameText.setLayoutY(60);  // Slightly below the score
+        
+         // Player's name and score in the top-left corner
+        
+        TournoiNameText = new Text("   "+this.jeu.getChampionnat().getNom());
+        TournoiNameText.setFont(Font.font("Sports World", 24));
+        TournoiNameText.setFill(Color.WHITE);
+        TournoiNameText.setLayoutX(550);
+        TournoiNameText.setLayoutY(60);  // Slightly below the score
 
-        // Initialize scoreboard
-        scoreBoard = new Text("Player: 0 | AI: 0");
-        scoreBoard.setFont(Font.font("Arial", 24));
-        scoreBoard.setFill(Color.WHITE);
-        scoreBoard.setLayoutX(10); // Position in the top-left corner
-        scoreBoard.setLayoutY(30);
+        
+        
+        
+        // Initialize scoreboard button
+        for (Match match : this.jeu.getChampionnat().getTours().get(this.jeu.getTour()+1).getMatchs()) {
+             if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom() || match.getEquipe2().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+
+                     this.equipe1  = match.getEquipe1();
+                     this.equipe2 = match.getEquipe2();}
+             
+        }
+        
+
+        scoreBoardButton = new Button(equipe1.getNom() + "    0 | 0    " + equipe2.getNom());
+        scoreBoardButton.setFont(Font.font("Sports World", 20));
+        scoreBoardButton.setTextFill(Color.WHITE);
+        scoreBoardButton.setStyle(
+            "-fx-background-color: linear-gradient(#4caf50, #087f23); " + // Football field gradient
+            "-fx-border-color: #ffffff; " +                                // White border
+            "-fx-border-width: 3px; " +                                   // Thick border
+            "-fx-background-radius: 20; " +                               // Rounded corners
+            "-fx-border-radius: 20; " +                                   // Match background radius
+            "-fx-padding: 10; "   +                                        // Padding for better spacing
+            "-fx-background-opacity: 0.5;"          
+        );
+        scoreBoardButton.setPrefWidth(450);  // Set button width
+        scoreBoardButton.setPrefHeight(60); // Set button height
+        scoreBoardButton.setLayoutX(225);   // Center the button horizontally
+        scoreBoardButton.setLayoutY(530);   // Position at the bottom of the screen
+        scoreBoardButton.setFocusTraversable(false); // Remove focus highlight
 
         // Add all elements to the pane
         Pane = new Pane();
-        Pane.getChildren().addAll(terrainView, cageRectTL, cageRectBL, cageRectTR, cageRectBR, cageRectM, ballonView, glovesView, scoreBoard);
+        Pane.getChildren().addAll(terrainView, cageRectTL, cageRectBL, cageRectTR, cageRectBR, cageRectM, ballonView, glovesView, scoreBoardButton, playerNameText,TournoiNameText);
 
         // Set scene
         scene = new Scene(Pane, 900, 600);
@@ -160,7 +212,8 @@ public class GameView {
 
     // Method to update the scoreboard
     public void updateScoreBoard(int playerScore, int aiScore) {
-        scoreBoard.setText("Player: " + playerScore + " | AI: " + aiScore);
+        scoreBoardButton.setText( equipe1.getNom()+ "   " + playerScore + "    |    " + aiScore + "   "+ equipe2.getNom());
+        playerNameText.setText("   "+this.jeu.getPlayer().getNom() + " -   Score: " + this.jeu.getPlayer().getScore()); // Update player's name and score
     }
 
     public ImageView getBallonView() {
@@ -204,4 +257,10 @@ public class GameView {
     public Pane getPane() {
         return Pane;
     }
+    
+    public Rectangle[] getCageRects() {
+        return new Rectangle[]{cageRectTL, cageRectBL, cageRectTR, cageRectBR, cageRectM};
+    }
+    
+    
 }

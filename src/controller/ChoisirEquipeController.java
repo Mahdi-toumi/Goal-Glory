@@ -68,7 +68,7 @@ public class ChoisirEquipeController {
                 System.out.println("Lancement du tournoi avec l'équipe : " + equipeSelectionnee.getNom());
                 // Generate the bracket
                 this.jeu.getPlayer().setEquipe(equipeSelectionnee);
-                BracketView bracketView = new BracketView(jeu.getCoupe().getTours().get(1).getMatchs());
+                BracketView bracketView = new BracketView(jeu.getCoupe().getTours().get(0).getMatchs());
                 Stage stage = (Stage) view.getValiderButton().getScene().getWindow();
                 stage.setScene(bracketView.getBracketScene());
                 new BracketController(bracketView, jeu);

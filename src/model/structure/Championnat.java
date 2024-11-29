@@ -34,6 +34,7 @@ public final class Championnat extends Tournoi {
     }
     
     
+    
     //Creer les match du tour d'un tournoi 
     @Override
     public void Initialiser_tournoi() {
@@ -107,7 +108,16 @@ public final class Championnat extends Tournoi {
         System.out.println("L'équipe " + equipe.getNom() + " a maintenant " + nouveauScore + " points.");
     });
 }
-    
+    public void AjoutPointsEquipe(int points , Equipe e) {
+        
+        for ( Equipe equipe : this.getEquipes()){
+            if (equipe == e ) {
+                Classement.put(equipe, points+ e.getPoints());
+                e.setPoints(points+ e.getPoints());
+            }
+        }
+    }
+ 
         
         
     @Override
@@ -117,6 +127,33 @@ public final class Championnat extends Tournoi {
         }
     }
     
+            public void randomizeTour(Equipe equipe , int tour) {
+        // Parcourir tous les tours du tournoi
+       
+            // Pour chaque match du tour, générer un résultat aléatoire si les équipes ne sont pas l'équipe donnée
+            for (Match match : this.getTours().get(tour).getMatchs()) {
+                Equipe equipe1 = match.getEquipe1();
+                Equipe equipe2 = match.getEquipe2();
+
+                // Si l'équipe donnée ne participe pas au match, générer un résultat aléatoire
+                if (!equipe1.equals(equipe) && !equipe2.equals(equipe)) {
+                    Random rand = new Random();
+                    // Générer un gagnant aléatoire
+                    Equipe gagnant = rand.nextBoolean() ? equipe1 : equipe2;
+
+                    // Ajouter des points à l'équipe gagnante
+                    int pointsGagnant = gagnant.getPoints()+ 3; // 3 points pour une victoire
+                    Classement.put(gagnant, pointsGagnant);
+
+                    // Afficher le résultat
+                    System.out.println("Match entre " + equipe1.getNom() + " et " + equipe2.getNom() + " : " 
+                                       + gagnant.getNom() + " gagne !");
+                }
+            }
+        
+
+
+    }
   
     
     @Override

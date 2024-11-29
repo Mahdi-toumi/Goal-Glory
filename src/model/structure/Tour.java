@@ -83,6 +83,9 @@ public class Tour {
                 .collect(Collectors.toList());
     }
     
+
+
+    
     
     
         @Override

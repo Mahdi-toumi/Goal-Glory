@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Collections;
+import java.util.Comparator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -77,23 +79,32 @@ public class RankingView {
         gridPane.add(pointsHeader, 2, 0);
 
         // Remplir les données des équipes
-        for (int i = 0; i < equipes.size(); i++) {
-            Equipe equipe = equipes.get(i);
-
-            Label rankLabel = new Label((i + 1) + ".");
-            Label teamLabel = new Label(equipe.getNom());
-            Label pointsLabel = new Label(String.valueOf(equipe.getPoints()));
-
-            styleCell(rankLabel);
-            styleCell(teamLabel);
-            styleCell(pointsLabel);
-
-            gridPane.add(rankLabel, 0, i + 1);
-            gridPane.add(teamLabel, 1, i + 1);
-            gridPane.add(pointsLabel, 2, i + 1);
-            
-            
+        
+        Collections.sort(equipes, new Comparator<Equipe>() {
+        @Override
+        public int compare(Equipe e1, Equipe e2) {
+            return Integer.compare(e2.getPoints(), e1.getPoints()); // Tri décroissant des points
         }
+    });
+
+    for (int i = 0; i < equipes.size(); i++) {
+        Equipe equipe = equipes.get(i);
+
+        // Créer les labels pour afficher le classement
+        Label rankLabel = new Label((i + 1) + ".");
+        Label teamLabel = new Label(equipe.getNom());
+        Label pointsLabel = new Label(String.valueOf(equipe.getPoints()));
+
+        // Appliquer le style à chaque cellule (optionnel)
+        styleCell(rankLabel);
+        styleCell(teamLabel);
+        styleCell(pointsLabel);
+
+        // Ajouter les labels à la GridPane
+        gridPane.add(rankLabel, 0, i + 1); // La première colonne est pour le rang
+        gridPane.add(teamLabel, 1, i + 1);  // La deuxième colonne est pour le nom de l'équipe
+        gridPane.add(pointsLabel, 2, i + 1); // La troisième colonne est pour les points
+    }
 
         // Barre de défilement
         ScrollPane scrollPane = new ScrollPane(gridPane);

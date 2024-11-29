@@ -19,6 +19,7 @@ public class Jeu {
     private Championnat championnat = null ;
     private Player JoueurCourant = null ;
     private Difficulte difficulte ;
+    private int tour = 0;
 
     public Jeu() {
         Joueurs = new ArrayList<Player>() ;
@@ -42,6 +43,11 @@ public class Jeu {
         return JoueurCourant;
     }
     
+    public int getTour() {
+        return tour ;
+    }
+    
+    
     public void setPlayer(Player JoueurCourant) {
         this.JoueurCourant = JoueurCourant;
     }
@@ -49,6 +55,11 @@ public class Jeu {
     public void setCoupe(Coupe coupe) {
         this.coupe = coupe;
     }
+    
+    public void setTour(int t) {
+        this.tour = t;
+    }
+    
     
     public void setChampionnat(Championnat championnat) {
         this.championnat = championnat;
