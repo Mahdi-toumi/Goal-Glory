@@ -92,19 +92,21 @@ public final class Championnat extends Tournoi {
 
     // Méthode pour afficher le classement trié des équipes
     public void afficherClassement() {
-        // Trier par points
-        List<Map.Entry<Equipe, Integer>> classementTrie = Classement.entrySet()
-                .stream()
-                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue())) // Tri décroissant des scores
-                .collect(Collectors.toList());
-
-        System.out.println("Classement des équipes :");
-        int rang = 1;
-        for (Map.Entry<Equipe, Integer> entry : classementTrie) {
-            System.out.println(rang + ". " + entry.getKey().getNom() + " - " + entry.getValue() + " points");
-            rang++;
-        }
+        Classement.entrySet().stream()
+            .sorted(Map.Entry.<Equipe, Integer>comparingByValue().reversed())
+            .forEach(entry -> System.out.println(entry.getKey().getNom() + " - " + entry.getValue() + " points"));
     }
+    
+    
+    //Ajouter des points aux equipes
+    public void AjoutPointsEquipes(int points) {
+    appliquerActionSurEquipes(equipe -> {
+        int pointsActuel = Classement.containsKey(equipe) ? Classement.get(equipe) : 0;
+        int nouveauScore = pointsActuel + points ;
+        Classement.put(equipe, nouveauScore);
+        System.out.println("L'équipe " + equipe.getNom() + " a maintenant " + nouveauScore + " points.");
+    });
+}
     
         
         
@@ -119,26 +121,10 @@ public final class Championnat extends Tournoi {
     
     @Override
     public Equipe Obtenir_gagnants() {
-        // Vérifie si le classement est vide
-        if (Classement.isEmpty()) {
-            System.out.println("Aucune équipe dans le classement.");
-            return null; // Aucun gagnant si aucune équipe
-        }
-
-        // Utilise un flux pour trier les équipes par score décroissant
-        Map.Entry<Equipe, Integer> gagnant = Classement.entrySet()
-            .stream()
-            .max(Map.Entry.comparingByValue()) // Trouve l'entrée avec la valeur maximale (le plus grand score)
-            .orElse(null); // Si la map est vide, renvoie null
-
-        // Si un gagnant est trouvé, renvoie l'équipe gagnante
-        if (gagnant != null) {
-            System.out.println("L'équipe gagnante est : " + gagnant.getKey().getNom() + " avec " + gagnant.getValue() + " points");
-            return gagnant.getKey();
-        } else {
-            System.out.println("Aucun gagnant trouvé.");
-            return null; // Si aucun gagnant n'est trouvé
-        }
+        return Classement.entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+            .orElse(null);
     }
 
 

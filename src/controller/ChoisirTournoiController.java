@@ -4,11 +4,14 @@
  */
 package controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.Stage;
 import model.elements.Equipe;
 import model.structure.Championnat;
 import model.structure.Coupe;
 import model.structure.Jeu;
+import model.structure.exceptions.AjoutEquipeException;
 import view.ChoisirEquipeView;
 import view.ChoisirTournoiView;
 
@@ -22,19 +25,39 @@ public class ChoisirTournoiController {
         this.jeu = jeu;
 
         // Gestion du clic sur le bouton "World Cup"
-        view.getWorldCupButton().setOnAction(e -> handleTournamentSelection("World Cup"));
+        view.getWorldCupButton().setOnAction(e -> {
+            try {
+                handleTournamentSelection("World Cup");
+            } catch (AjoutEquipeException ex) {
+            }
+        });
 
         // Gestion du clic sur le bouton "Champions League"
-        view.getChampionsLeagueButton().setOnAction(e -> handleTournamentSelection("Champions League"));
+        view.getChampionsLeagueButton().setOnAction(e -> {
+            try {
+                handleTournamentSelection("Champions League");
+            } catch (AjoutEquipeException ex) {
+            }
+        });
         
         // Gestion du clic sur le bouton "La Liga"
-        view.getlaLigaButton().setOnAction(e -> handleTournamentSelection("La Liga"));
+        view.getlaLigaButton().setOnAction(e -> {
+            try {
+                handleTournamentSelection("La Liga");
+            } catch (AjoutEquipeException ex) {
+            }
+        });
 
         // Gestion du clic sur le bouton "Premier League"
-        view.getpremierLeagueButton().setOnAction(e -> handleTournamentSelection("Premier League"));
+        view.getpremierLeagueButton().setOnAction(e -> {
+            try {
+                handleTournamentSelection("Premier League");
+            } catch (AjoutEquipeException ex) {
+            }
+        });
     }
 
-    private void handleTournamentSelection(String tournamentName) {
+    private void handleTournamentSelection(String tournamentName) throws AjoutEquipeException {
         System.out.println("Tournoi sélectionné : " + tournamentName);
         if ("World Cup".equals(tournamentName)) {
             setupWorldCup();
@@ -55,7 +78,7 @@ public class ChoisirTournoiController {
         redirectToEquipeSelection();
     }
 
-    private void setupChampionsLeague() {
+    private void setupChampionsLeague() throws AjoutEquipeException {
         Coupe coupe = new Coupe("Champions League");
         jeu.setChampionnat(null);
 
@@ -74,11 +97,10 @@ public class ChoisirTournoiController {
 
         jeu.setCoupe(coupe);
         coupe.Initialiser_tournoi();
-        coupe.Initialiser_tour(); 
         System.out.println("Tournoi 'Champions League' configuré avec " + coupe.getEquipes().size() + " équipes.");
     }
     
-    private void setupWorldCup() {
+    private void setupWorldCup() throws AjoutEquipeException {
         Coupe coupe = new Coupe("World Cup");
         jeu.setChampionnat(null);
 
@@ -97,11 +119,10 @@ public class ChoisirTournoiController {
 
         jeu.setCoupe(coupe);
         coupe.Initialiser_tournoi();
-        coupe.Initialiser_tour(); 
         System.out.println("Tournoi 'World Cup' configuré avec " + coupe.getEquipes().size() + " équipes.");
     }
     
-    private void setupLaLiga(){
+    private void setupLaLiga() throws AjoutEquipeException{
         Championnat championnat = new Championnat("La Liga");
         jeu.setCoupe(null);
 
@@ -126,7 +147,7 @@ public class ChoisirTournoiController {
     }
     
     
-    private void setupPremierLeague(){
+    private void setupPremierLeague() throws AjoutEquipeException{
         Championnat championnat = new Championnat("Premier League");
         jeu.setCoupe(null);
         // Ajouter les équipes à la coupe

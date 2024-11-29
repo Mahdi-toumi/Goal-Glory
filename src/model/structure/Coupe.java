@@ -76,6 +76,7 @@ public final class Coupe extends Tournoi {
                 System.out.println("Erreur lors de l'ajout du tour : " + e.getMessage());
             }
         }
+        this.Commencer_tournoi();
         
     }
     

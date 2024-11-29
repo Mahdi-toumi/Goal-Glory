@@ -18,9 +18,11 @@ public class Jeu {
     private Coupe coupe = null;
     private Championnat championnat = null ;
     private Player JoueurCourant = null ;
+    private Difficulte difficulte ;
 
     public Jeu() {
         Joueurs = new ArrayList<Player>() ;
+        difficulte = Difficulte.Intermediaire ;
     }
 
     

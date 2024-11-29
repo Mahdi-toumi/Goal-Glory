@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
     private String Nom ; 
     private ArrayList<Equipe> equipes;
     private ArrayList<Tour> Tours;
-    private ArrayList<Stade> Stads;
+    private ArrayList<Stade> stades;
     
     
     public Tournoi (String Nom) {
@@ -31,7 +31,26 @@ import java.util.stream.Collectors;
         this.equipes = new ArrayList<>() ;
         this.Tours = new ArrayList<>() ;
         this.Tours = new ArrayList<>() ;
-        this.Stads = new ArrayList<>();
+        this.stades = new ArrayList<>();
+    }
+    
+     // Méthode qui applique une action sur chaque équipe du tournoi
+    public void appliquerActionSurEquipes(ActionEquipe action) {
+        for (Equipe equipe : equipes) {
+            action.appliquer(equipe);
+        }
+    }
+    
+    public void appliquerActionSurMatchs(ActionMatch action) {
+        for (Tour tour : Tours) {
+            for (Match match : tour.getMatchs()) {
+                action.appliquer(match);
+            }
+        }
+    }
+    
+    public void afficherDetailsMatchs() {
+         appliquerActionSurMatchs(match -> System.out.println(match.toString()));
     }
     
     public String getNom () {
@@ -48,15 +67,28 @@ import java.util.stream.Collectors;
     
     //Choisir un stade au hasard
     public Stade choisirStade() {
-        Collections.shuffle(this.Stads); 
-        return this.Stads.get(0);
+        if (this.stades.isEmpty()) {
+            throw new IllegalStateException("Aucun stade n'est disponible.");
+        }
+        Collections.shuffle(this.stades);
+        return this.stades.get(0);
     }
     
     
-    //Ajouter une equipe au tournoi 
-    public void ajouterEquipe(Equipe e)  {
+        // Ajouter une équipe
+    public void ajouterEquipe(Equipe e) throws AjoutEquipeException {
+        if (equipes.contains(e)) {
+            throw new AjoutEquipeException("L'équipe " + e.getNom() + " existe déjà dans le tournoi !");
+        }
         this.equipes.add(e);
-        
+    }
+
+    // Ajouter un stade
+    public void ajouterStade(Stade s) throws AjoutStadeException {
+        if (stades.contains(s)) {
+            throw new AjoutStadeException("Le stade " + s.nom() + " existe déjà dans le tournoi !");
+        }
+        this.stades.add(s);
     }
     
     //Ajouter un tour au Tournoi 
@@ -71,21 +103,20 @@ import java.util.stream.Collectors;
     }
     
     
-    // Afficher la liste des equipes triees par nom (streams)
-    public void afficherListeEquipes () {
-        ArrayList<Equipe> equipesTriees = (ArrayList<Equipe>) equipes.stream()
-                .sorted((e1, e2) -> e1.getNom().compareTo(e2.getNom())) // Comparaison par nom
-                .collect(Collectors.toList());
-        
-        for (Equipe equipe : equipesTriees) {
-            System.out.println(equipe);
-        }
+    // Afficher les équipes triées
+    public void afficherListeEquipes() {
+        this.equipes.stream()
+            .sorted((e1, e2) -> e1.getNom().compareTo(e2.getNom()))
+            .forEach(System.out::println);
     }
     
     public abstract void Afficher_list_match ();
     public abstract void Initialiser_tournoi () ; // Creeer les match a jouer dans le tournoi
     public abstract Equipe Obtenir_gagnants () ;
     
-
+    @Override
+    public String toString() {
+        return "Tournoi : " + this.Nom ;
+    }
     
 }
