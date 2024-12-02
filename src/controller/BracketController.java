@@ -35,11 +35,11 @@ public class BracketController {
      private void redirectToGamePreview(){
         Stage stage = (Stage) view.getNextButton().getScene().getWindow();
         Equipe E1=jeu.getPlayer().getEquipe();
-        List <Match> Matchs= jeu.getCoupe().getTours().get(1).getMatchs();
+        List <Match> Matchs= jeu.getCoupe().getTours().get(this.jeu.getTour()).getMatchs();
         for (int i=0;i<jeu.getCoupe().getEquipesRestantes().size();i++){
             if (Matchs.get(i).getEquipe1()== E1 || Matchs.get(i).getEquipe2()== E1){
                 Match match= Matchs.get(i);
-                GamePreview GamePreview= new GamePreview(match);
+                GamePreview GamePreview= new GamePreview(match,jeu);
                 stage.setScene(GamePreview.getScene());
                 new GamePreviewController(GamePreview, jeu);
                 break;
@@ -47,6 +47,8 @@ public class BracketController {
             
         }
     }
+     
+    
     
 }
 

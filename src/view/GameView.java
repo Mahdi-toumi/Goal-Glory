@@ -68,28 +68,28 @@ public class GameView {
 
         // Initialize goal rectangles
         cageRectTL =  new Rectangle(216,95,140,92);
-        cageRectTL.setFill(Color.RED);
-        cageRectTL.setStroke(Color.RED);
+        cageRectTL.setFill(Color.TRANSPARENT);
+        cageRectTL.setStroke(Color.TRANSPARENT);
         cageRectTL.setStrokeWidth(2);
         
         cageRectBL =  new Rectangle(216,180,140,92);
-        cageRectBL.setFill(Color.BLUE);
-        cageRectBL.setStroke(Color.BLUE);
+        cageRectBL.setFill(Color.TRANSPARENT);
+        cageRectBL.setStroke(Color.TRANSPARENT);
         cageRectBL.setStrokeWidth(2);
         
         cageRectTR =  new Rectangle(503,95,140,92);
-        cageRectTR.setFill(Color.BLUE);
-        cageRectTR.setStroke(Color.BLUE);
+        cageRectTR.setFill(Color.TRANSPARENT);
+        cageRectTR.setStroke(Color.TRANSPARENT);
         cageRectTR.setStrokeWidth(2);
         
         cageRectBR =  new Rectangle(503,180,140,92);
-        cageRectBR.setFill(Color.RED);
-        cageRectBR.setStroke(Color.RED);
+        cageRectBR.setFill(Color.TRANSPARENT);
+        cageRectBR.setStroke(Color.TRANSPARENT);
         cageRectBR.setStrokeWidth(2);
         
         cageRectM =  new Rectangle(360,95,140,180);
-        cageRectM.setFill(Color.WHITE);
-        cageRectM.setStroke(Color.WHITE);
+        cageRectM.setFill(Color.TRANSPARENT);
+        cageRectM.setStroke(Color.TRANSPARENT);
         cageRectM.setStrokeWidth(2);
         
         // Player's name and score in the top-left corner
@@ -101,23 +101,47 @@ public class GameView {
         playerNameText.setLayoutY(60);  // Slightly below the score
         
          // Player's name and score in the top-left corner
-        
-        TournoiNameText = new Text("   "+this.jeu.getChampionnat().getNom());
-        TournoiNameText.setFont(Font.font("Sports World", 24));
-        TournoiNameText.setFill(Color.WHITE);
-        TournoiNameText.setLayoutX(550);
-        TournoiNameText.setLayoutY(60);  // Slightly below the score
+        if (jeu.getChampionnat()!=null){
+            TournoiNameText = new Text("   "+this.jeu.getChampionnat().getNom());
+            TournoiNameText.setFont(Font.font("Sports World", 24));
+            TournoiNameText.setFill(Color.WHITE);
+            TournoiNameText.setLayoutX(550);
+            TournoiNameText.setLayoutY(60);  // Slightly below the score
 
-        
-        
-        
-        // Initialize scoreboard button
-        for (Match match : this.jeu.getChampionnat().getTours().get(this.jeu.getTour()+1).getMatchs()) {
-             if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom() || match.getEquipe2().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+            // Initialize scoreboard button
+            for (Match match : this.jeu.getChampionnat().getTours().get(this.jeu.getTour()+1).getMatchs()) {
+                if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
 
-                     this.equipe1  = match.getEquipe1();
-                     this.equipe2 = match.getEquipe2();}
+                    this.equipe1  = match.getEquipe1();
+                    this.equipe2 = match.getEquipe2();
+                }
+                else if ( match.getEquipe2().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+                    this.equipe1  = match.getEquipe2();
+                    this.equipe2 = match.getEquipe1();
+                }
              
+            }   
+        }
+        else if (jeu.getCoupe()!=null){
+            TournoiNameText = new Text("   "+this.jeu.getCoupe().getNom());
+            TournoiNameText.setFont(Font.font("Sports World", 24));
+            TournoiNameText.setFill(Color.WHITE);
+            TournoiNameText.setLayoutX(550);
+            TournoiNameText.setLayoutY(60);  // Slightly below the score
+
+            // Initialize scoreboard button
+            for (Match match : this.jeu.getCoupe().getTours().get(this.jeu.getTour()).getMatchs()) {
+                if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+
+                    this.equipe1  = match.getEquipe1();
+                    this.equipe2 = match.getEquipe2();
+                }
+                else if ( match.getEquipe2().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+                    this.equipe1  = match.getEquipe2();
+                    this.equipe2 = match.getEquipe1();
+                }
+             
+            }   
         }
         
 

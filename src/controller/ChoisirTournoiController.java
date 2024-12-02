@@ -81,6 +81,7 @@ public class ChoisirTournoiController {
     private void setupChampionsLeague() throws AjoutEquipeException {
         Coupe coupe = new Coupe("Champions League");
         jeu.setChampionnat(null);
+        jeu.setCoupe(null);
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
@@ -104,6 +105,7 @@ public class ChoisirTournoiController {
     private void setupWorldCup() throws AjoutEquipeException {
         Coupe coupe = new Coupe("World Cup");
         jeu.setChampionnat(null);
+        jeu.setCoupe(null);
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
@@ -127,6 +129,7 @@ public class ChoisirTournoiController {
     private void setupLaLiga() throws AjoutEquipeException{
         Championnat championnat = new Championnat("La Liga");
         jeu.setCoupe(null);
+        jeu.setChampionnat(null);
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
@@ -152,6 +155,7 @@ public class ChoisirTournoiController {
     private void setupPremierLeague() throws AjoutEquipeException{
         Championnat championnat = new Championnat("Premier League");
         jeu.setCoupe(null);
+        jeu.setChampionnat(null);
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
             {"City", "Pep Guardiola", "MCY"}, {"Arsenal", "Mikel Arteta", "ARS"}, {"Liverpool", "Jurgen Klopp", "LIV"},

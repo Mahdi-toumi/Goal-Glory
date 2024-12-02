@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 import model.elements.Equipe;
 import model.structure.Match;
 import model.structure.Player;
+import view.BracketView;
+import view.ChampionsView;
+import view.EliminatedView;
 import view.RankingView;
 
 public class GameController {
@@ -215,99 +218,186 @@ public class GameController {
 
     private void displayGameOver() {
         if (this.jeu.getChampionnat()!= null){
-        System.out.println("Game Over!");
-        Text gameOverText = new Text();
-        gameOverText.setFont(Font.font("Sports World", 30));
-        gameOverText.setFill(Color.WHITE);
-        gameOverText.setLayoutX(300); // Center the text horizontally
-        gameOverText.setLayoutY(250); // Position it vertically
+            System.out.println("Game Over!");
+            Text gameOverText = new Text();
+            gameOverText.setFont(Font.font("Sports World", 30));
+            gameOverText.setFill(Color.WHITE);
+            gameOverText.setLayoutX(300); // Center the text horizontally
+            gameOverText.setLayoutY(250); // Position it vertically
 
-        if (playerScore > aiScore) {
-            this.jeu.getChampionnat().AjoutPointsEquipe(3, this.jeu.getPlayer().getEquipe()); // bech yetzedoulek el poinet 
-            System.out.println("You win! Final Score: " + playerScore + " - " + aiScore);
-            gameOverText.setText("You Win!");
-            gameOverText.setFont(Font.font("Sports World", 60));
-            gameOverText.setStyle(
-                "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #00FF00, #008000);" +  // Dégradé vert clair à vert foncé
-                "-fx-stroke: black;" +                                                   // Contour noir
-                "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
-                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
-            );
+            if (playerScore > aiScore) {
+                this.jeu.getChampionnat().AjoutPointsEquipe(3, this.jeu.getPlayer().getEquipe()); // bech yetzedoulek el poinet 
+                System.out.println("You win! Final Score: " + playerScore + " - " + aiScore);
+                gameOverText.setText("You Win!");
+                gameOverText.setFont(Font.font("Sports World", 60));
+                gameOverText.setStyle(
+                    "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #00FF00, #008000);" +  // Dégradé vert clair à vert foncé
+                    "-fx-stroke: black;" +                                                   // Contour noir
+                    "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                );
 
-        } else {
-            for( Match match : this.jeu.getChampionnat().getTours().get(this.jeu.getTour()).getMatchs() ){
-                if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom() || match.getEquipe2().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
-                if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
-                    this.jeu.getChampionnat().AjoutPointsEquipe(3, match.getEquipe2()); 
-                }
-                else {
-                    this.jeu.getChampionnat().AjoutPointsEquipe(3, match.getEquipe1()); 
-                }}
+            } else {
+                for( Match match : this.jeu.getChampionnat().getTours().get(this.jeu.getTour()).getMatchs() ){
+                    if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom() || match.getEquipe2().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+                        if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+                            this.jeu.getChampionnat().AjoutPointsEquipe(3, match.getEquipe2()); 
+                        }
+                        else {
+                            this.jeu.getChampionnat().AjoutPointsEquipe(3, match.getEquipe1()); 
+                        }
+                    }
                     
+                }
+                System.out.println("You lose! Final Score: " + playerScore + " - " + aiScore);
+                gameOverText.setText("You Lose!");
+                gameOverText.setFont(Font.font("Sports World", 60));
+                gameOverText.setStyle(
+                    "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #FF0000, #8B0000);" + // Dégradé rouge clair à rouge foncé
+                    "-fx-stroke: black;" +                                                   // Contour noir
+                    "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                );
             }
-            System.out.println("You lose! Final Score: " + playerScore + " - " + aiScore);
-            gameOverText.setText("You Lose!");
-            gameOverText.setFont(Font.font("Sports World", 60));
-            gameOverText.setStyle(
-                "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #FF0000, #8B0000);" + // Dégradé rouge clair à rouge foncé
-                "-fx-stroke: black;" +                                                   // Contour noir
-                "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
-                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
-            );
-        }
 
-        // Add the game over message to the pane
-        gameView.getPane().getChildren().add(gameOverText);
+            // Add the game over message to the pane
+            gameView.getPane().getChildren().add(gameOverText);
 
-        // Pause for 5 seconds before transitioning to the RankingView
-        PauseTransition pause = new PauseTransition(Duration.seconds(5));
-        pause.setOnFinished(e -> {
-            // Remove the game over text
-            gameView.getPane().getChildren().remove(gameOverText);
-            
-            
-            
-                
-                if (this.jeu.getTour()<=16 ){
-                
-                 // Transition to RankingView (assuming you have a method to switch views)
-                // this.jeu.getChampionnat().randomizeTour(this.jeu.getPlayer().getEquipe(),this.jeu.getTour())  ;
-                for (Match match : this.jeu.getChampionnat().getTours().get(this.jeu.getTour()+1).getMatchs()) {
-                     Equipe equipe1 = match.getEquipe1();
-                     Equipe equipe2 = match.getEquipe2();
+            // Pause for 5 seconds before transitioning to the RankingView
+            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            pause.setOnFinished(e -> {
+                // Remove the game over text
+                gameView.getPane().getChildren().remove(gameOverText);   
+                if (this.jeu.getTour()<15 ){
+                    // Transition to RankingView (assuming you have a method to switch views)
+                    // this.jeu.getChampionnat().randomizeTour(this.jeu.getPlayer().getEquipe(),this.jeu.getTour())  ;
+                    for (Match match : this.jeu.getChampionnat().getTours().get(this.jeu.getTour()+1).getMatchs()) {
+                        Equipe equipe1 = match.getEquipe1();
+                        Equipe equipe2 = match.getEquipe2();
 
-                     // Si l'équipe donnée ne participe pas au match, générer un résultat aléatoire
-                     if (!equipe1.equals(this.jeu.getPlayer().getEquipe()) && !equipe2.equals(this.jeu.getPlayer().getEquipe())) {
-                         Random rand = new Random();
-                         // Générer un gagnant aléatoire
-                         Equipe gagnant = rand.nextBoolean() ? equipe1 : equipe2;
+                        // Si l'équipe donnée ne participe pas au match, générer un résultat aléatoire
+                        if (!equipe1.equals(this.jeu.getPlayer().getEquipe()) && !equipe2.equals(this.jeu.getPlayer().getEquipe())) {
+                            Random rand = new Random();
+                            // Générer un gagnant aléatoire
+                            Equipe gagnant = rand.nextBoolean() ? equipe1 : equipe2;
 
-                         // Ajouter des points à l'équipe gagnante
-                         this.jeu.getChampionnat().AjoutPointsEquipe(3, gagnant);
+                            // Ajouter des points à l'équipe gagnante
+                            this.jeu.getChampionnat().AjoutPointsEquipe(3, gagnant);
 
 
-                         // Afficher le résultat
-                         System.out.println("Match entre " + equipe1.getNom() + " et " + equipe2.getNom() + " : " 
+                            // Afficher le résultat
+                            System.out.println("Match entre " + equipe1.getNom() + " et " + equipe2.getNom() + " : " 
                                             + gagnant.getNom() + " gagne !");
-                     }
-                 }
-                 this.jeu.setTour(this.jeu.getTour()+1) ;
+                        }
+                    }
+                    this.jeu.setTour(this.jeu.getTour()+1) ;
 
-                 transitionToRankingView();
+                    transitionToRankingView();
                 }
+                else if (this.jeu.getTour()==15)
+                    transitionToChampionsView();
+            });
+            pause.play(); 
+        }
+        else if(this.jeu.getCoupe()!= null) {
+            System.out.println("Game Over!");
+            Text gameOverText = new Text();
+            gameOverText.setFont(Font.font("Sports World", 30));
+            gameOverText.setFill(Color.WHITE);
+            gameOverText.setLayoutX(300); // Center the text horizontally
+            gameOverText.setLayoutY(250); // Position it vertically
+            if (playerScore > aiScore) {
+                for( Match match : this.jeu.getCoupe().getTours().get(this.jeu.getTour()).getMatchs() ){
+                    if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom() || match.getEquipe2().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+                        if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom()){
+                            this.jeu.getCoupe().eliminerEquipe(match.getEquipe2());
+                        }
+                        else {
+                            this.jeu.getCoupe().eliminerEquipe(match.getEquipe1());
+                        }
+                    }
+                    
+                }
+                System.out.println("You win! Final Score: " + playerScore + " - " + aiScore);
+                gameOverText.setText("You Win!");
+                gameOverText.setFont(Font.font("Sports World", 60));
+                gameOverText.setStyle(
+                    "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #00FF00, #008000);" +  // Dégradé vert clair à vert foncé
+                    "-fx-stroke: black;" +                                                   // Contour noir
+                    "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                );
+                gameView.getPane().getChildren().add(gameOverText);
+                PauseTransition pause = new PauseTransition(Duration.seconds(5));
+                pause.setOnFinished(e -> {
+                // Remove the game over text
+                gameView.getPane().getChildren().remove(gameOverText);   
+                if (this.jeu.getTour()<3 ){
+                    // Transition to BracketView (assuming you have a method to switch views)
+                    for (Match match : this.jeu.getCoupe().getTours().get(this.jeu.getTour()).getMatchs()) {
+                        Equipe equipe1 = match.getEquipe1();
+                        Equipe equipe2 = match.getEquipe2();
+
+                        // Si l'équipe donnée ne participe pas au match, générer un résultat aléatoire
+                        if (!equipe1.equals(this.jeu.getPlayer().getEquipe()) && !equipe2.equals(this.jeu.getPlayer().getEquipe())) {
+                            Random rand = new Random();
+                            // Générer un gagnant aléatoire
+                            Equipe gagnant = rand.nextBoolean() ? equipe1 : equipe2;
+                            Equipe perdant = new Equipe("","","");
+                            if (gagnant == equipe1)
+                                perdant= equipe2;
+                            else
+                                perdant=equipe1;
+                            
+                            // Eliminer lequipe qui a perdue
+                            this.jeu.getCoupe().eliminerEquipe(perdant);
+
+                            // Afficher le résultat
+                            System.out.println("Match entre " + equipe1.getNom() + " et " + equipe2.getNom() + " : " 
+                                            + gagnant.getNom() + " gagne !");
+                        }
+                    }
+                    this.jeu.setTour(this.jeu.getTour()+1);
+                    this.jeu.getCoupe().Initialiser_tour();
+                    transitionToBracketView();
+                }
+                else if (this.jeu.getTour()==3){
+                    transitionToChampionsView();
+                }
+                });
+                pause.play();
+
+
+            } else{
+                this.jeu.getCoupe().eliminerEquipe(jeu.getPlayer().getEquipe());
+                System.out.println("You lose! Final Score: " + playerScore + " - " + aiScore);
+                gameOverText.setText("You Lose!");
+                gameOverText.setFont(Font.font("Sports World", 60));
+                gameOverText.setStyle(
+                    "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #FF0000, #8B0000);" + // Dégradé rouge clair à rouge foncé
+                    "-fx-stroke: black;" +                                                   // Contour noir
+                    "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                );
                 
-
-                 
-            if (this.jeu.getCoupe()!= null){
-                //lena barcketView
+                gameView.getPane().getChildren().add(gameOverText);
+                PauseTransition pause = new PauseTransition(Duration.seconds(5));
+                pause.setOnFinished(e -> {
+                // Remove the game over text
+                    gameView.getPane().getChildren().remove(gameOverText);   
+                    transitionToEliminatedView();      
+                });
+                pause.play();
             }
-
-           
-        });
-        pause.play(); }
-        else {
-                    // la3ba wfet hazit chompionnat wela le 
-                }
+            
+                // Pause for 5 seconds before transitioning to the BracketView
+            
+            
+            
+             
+            
+            
+        }
     }
 
     private void transitionToRankingView() {
@@ -322,6 +412,26 @@ public class GameController {
 
             // Optionally, create a new controller for the ranking view if needed
             new RankingController(rankingView, jeu);
+        }
+    private void transitionToBracketView() {
+            BracketView BracketView = new BracketView(jeu.getCoupe().getTours().get(this.jeu.getTour()).getMatchs()); 
+            Stage currentStage = (Stage) gameView.getScene().getWindow();
+            currentStage.setScene(BracketView.getBracketScene());
+            new BracketController(BracketView, jeu);
+        }
+    
+    private void transitionToEliminatedView() {
+            EliminatedView EliminatedView = new EliminatedView(this.jeu);  
+            Stage currentStage = (Stage) gameView.getScene().getWindow();
+            currentStage.setScene(EliminatedView.getScene());
+            new EliminatedController(EliminatedView, jeu);
+        }
+    
+    private void transitionToChampionsView() {
+            ChampionsView ChampionsView = new ChampionsView(this.jeu);  
+            Stage currentStage = (Stage) gameView.getScene().getWindow();
+            currentStage.setScene(ChampionsView.getScene());
+            new ChampionsController(ChampionsView, jeu);
         }
 
     

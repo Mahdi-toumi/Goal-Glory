@@ -126,7 +126,21 @@ public final class Coupe extends Tournoi {
     public ArrayList<Equipe> getEquipesRestantes(){
         return this.equipesRestantes;
     }
-
+    public void eliminerEquipe(Equipe E){
+        for (int i=0;i<equipesRestantes.size();i++){
+            if (equipesRestantes.get(i)==E){
+                equipesRestantes.remove(i);
+            }
+        }
+        equipesEliminees.add(E);
+    }
+    
+    public int getTourActuel(){
+        return TourActuel;
+    }
+    
+    
+   
     
     
 

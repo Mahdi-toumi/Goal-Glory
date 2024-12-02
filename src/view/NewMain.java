@@ -4,10 +4,13 @@
  */
 /*package view;
 
+import controller.ChampionsController;
 import controller.WelcomeController;
 import controller.GameController;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.structure.Championnat;
+import model.structure.Coupe;
 import model.structure.Jeu;
 
 public class NewMain extends Application {
@@ -16,12 +19,15 @@ public class NewMain extends Application {
     public void start(Stage primaryStage) {
         // Créer le modèle (Jeu)
         Jeu jeu = new Jeu();
-
+        Coupe Coupe= new Coupe("World Cup");
+        jeu.setCoupe(Coupe);
         // Créer la première vue (WelcomeView)
-        GameView gameView = new GameView();
+        ChampionsView ChampionsView = new ChampionsView(jeu);
 
         // Associer le contrôleur à la vue et au modèle
-        new GameController( primaryStage);
+        new ChampionsController( ChampionsView, jeu);
+        primaryStage.setScene(ChampionsView.getScene());
+        primaryStage.show();
     }
 
     public static void main(String[] args) {

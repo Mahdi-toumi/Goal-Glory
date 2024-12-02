@@ -49,9 +49,9 @@ public class BracketView {
         
         // Filling in the brackets
         createFirstRound(Matchs);
-        createQuarterFinals();
-        createSemiFinals();
-        createFinalMatch();
+        createQuarterFinals(Matchs);
+        createSemiFinals(Matchs);
+        createFinalMatch(Matchs);
         
         gobackButton = new Button("Retour");
         gobackButton.setStyle(
@@ -153,7 +153,8 @@ public class BracketView {
     }
 
     private void createFirstRound(List<Match> Matchs) {
-        for (int i = 0; i < 8; i++ ) {
+        if (Matchs.size()==8){
+            for (int i = 0; i < 8; i++ ) {
             String match  ;
             match = Matchs.get(i).affichageAbr() ;
             if (i<4) {
@@ -199,105 +200,209 @@ public class BracketView {
                 rightSideBox.setPadding(new Insets(60, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
 
                 
+                }
             }
+            
+        }      
+    }
+
+    private void createQuarterFinals(List<Match> Matchs) {
+        if (Matchs.size()==4){
+            for (int i = 0; i < 4; i++ ) {
+                String match  ;
+                match = Matchs.get(i).affichageAbr() ;
+                if (i<2) {
+                    Button matchs=new Button(match );
+                    matchs.setPrefWidth(200); // Adjust button width
+                    matchs.setMinWidth(100); // Adjust button width
+                    matchs.setWrapText(true); // Allow wrapping for long text
+                    matchs.setStyle( 
+                        "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
+                        "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                        "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                        "-fx-font-size: 10px;" +                                                // Taille du texte
+                        "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                        "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                        "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                        "-fx-border-color: white;" +                                          // Bordure verte
+                        "-fx-border-width: 2px;" 
+                    );
+                
+                    quarterFinalsLeft.getChildren().add(matchs);
+                    quarterFinalsLeft.setPadding(new Insets(60, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+
+                
+                }else {
+                    Button matchs=new Button(match);
+                    matchs.setPrefWidth(200); // Adjust button width
+                    matchs.setMinWidth(100); // Adjust button width
+                    matchs.setWrapText(true); // Allow wrapping for long text
+                    matchs.setStyle( 
+                        "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
+                        "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                        "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                        "-fx-font-size: 10px;" +                                                // Taille du texte
+                        "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                        "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                        "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                        "-fx-border-color: white;" +                                          // Bordure verte
+                        "-fx-border-width: 2px;"   
+                    );
+                    quarterFinalsRight.getChildren().add(matchs);
+                    quarterFinalsRight.setPadding(new Insets(60, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+
+                
+                }
+            }
+        }
+        else{
+            // Quarter-finals (Empty Boxes)
+            Button match1=new Button("M1 vs M2");
+            Button match2=new Button("M3 vs M4");
+            Button match3=new Button("M5 vs M6");
+            Button match4=new Button("M7 vs M8");
+        
+            match1.setPrefWidth(200); // Adjust button width
+            match1.setWrapText(true); // Allow wrapping for long text
+            match1.setMinWidth(100); // Adjust button width
+
+            match2.setPrefWidth(200); // Adjust button width
+            match2.setWrapText(true); // Allow wrapping for long text                
+            match2.setMinWidth(100); // Adjust button width
+
+            match3.setPrefWidth(200); // Adjust button width
+            match3.setWrapText(true); // Allow wrapping for long text
+            match3.setMinWidth(100); // Adjust button width
+
+            match4.setPrefWidth(200); // Adjust button width
+            match4.setWrapText(true); // Allow wrapping for long text
+            match4.setMinWidth(100); // Adjust button width
+
+            match1.setStyle( 
+                    "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
+                    "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                    "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                    "-fx-font-size: 10px;" +                                                // Taille du texte
+                    "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                    "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                    "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                    "-fx-border-color: white;" +                                          // Bordure verte
+                    "-fx-border-width: 2px;"   
+            );
+            match2.setStyle( 
+                    "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
+                    "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                    "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                    "-fx-font-size: 10px;" +                                                // Taille du texte
+                    "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                    "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                    "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                    "-fx-border-color: white;" +                                          // Bordure verte
+                    "-fx-border-width: 2px;"   
+            );
+            match3.setStyle( 
+                    "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
+                    "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                    "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                    "-fx-font-size: 10px;" +                                                // Taille du texte
+                    "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                    "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                    "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                    "-fx-border-color: white;" +                                          // Bordure verte
+                    "-fx-border-width: 2px;"   
+            );
+            match4.setStyle( 
+                    "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
+                    "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                    "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                    "-fx-font-size: 10px;" +                                                // Taille du texte
+                    "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                    "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                    "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                    "-fx-border-color: white;" +                                          // Bordure verte
+                    "-fx-border-width: 2px;"   
+            );
+            quarterFinalsLeft.getChildren().add(match1);
+            quarterFinalsLeft.getChildren().add(match2);
+        
+            quarterFinalsRight.getChildren().add(match3);
+            quarterFinalsRight.getChildren().add(match4);
+            quarterFinalsRight.setPadding(new Insets(110, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+            quarterFinalsLeft.setPadding(new Insets(110, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+
         }
         
     }
 
-    private void createQuarterFinals() {
-        // Quarter-finals (Empty Boxes)
-        Button match1=new Button("M1 vs M2");
-        Button match2=new Button("M3 vs M4");
-        Button match3=new Button("M5 vs M6");
-        Button match4=new Button("M7 vs M8");
-        
-        match1.setPrefWidth(200); // Adjust button width
-        match1.setWrapText(true); // Allow wrapping for long text
-        match1.setMinWidth(100); // Adjust button width
+    private void createSemiFinals(List<Match> Matchs) {
+        if (Matchs.size()==2){
+            for (int i = 0; i < 2; i++ ) {
+                String match  ;
+                match = Matchs.get(i).affichageAbr() ;
+                if (i<1) {
+                    Button matchs=new Button(match );
+                    matchs.setPrefWidth(280); // Adjust button width
+                    matchs.setMinWidth(280); // Adjust button width
+                    matchs.setWrapText(true); // Allow wrapping for long text
+                    matchs.setStyle( 
+                        "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
+                        "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                        "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                        "-fx-font-size: 10px;" +                                                // Taille du texte
+                        "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                        "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                        "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                        "-fx-border-color: white;" +                                          // Bordure verte
+                        "-fx-border-width: 2px;" 
+                    );
+                
+                    semiFinalsLeft.getChildren().add(matchs);
+                    semiFinalsLeft.setPadding(new Insets(60, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
 
-        match2.setPrefWidth(200); // Adjust button width
-        match2.setWrapText(true); // Allow wrapping for long text                
-        match2.setMinWidth(100); // Adjust button width
+                
+                }else {
+                    Button matchs=new Button(match);
+                    matchs.setPrefWidth(280); // Adjust button width
+                    matchs.setMinWidth(280); // Adjust button width
+                    matchs.setWrapText(true); // Allow wrapping for long text
+                    matchs.setStyle( 
+                        "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
+                        "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                        "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                        "-fx-font-size: 10px;" +                                                // Taille du texte
+                        "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                        "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                        "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                        "-fx-border-color: white;" +                                          // Bordure verte
+                        "-fx-border-width: 2px;"   
+                    );
+                    semiFinalsRight.getChildren().add(matchs);
+                    semiFinalsRight.setPadding(new Insets(60, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
 
-        match3.setPrefWidth(200); // Adjust button width
-        match3.setWrapText(true); // Allow wrapping for long text
-        match3.setMinWidth(100); // Adjust button width
+                
+                }
+            }
+        }
+        else{
+            Button match1=new Button("QF1 vs QF2");
+            Button match2=new Button("QF3 vs QF4");
+            match1.setPrefWidth(200); // Adjust button width
+            match1.setWrapText(true); // Allow wrapping for long text
+            match1.setMinWidth(100); // Adjust button width
 
-        match4.setPrefWidth(200); // Adjust button width
-        match4.setWrapText(true); // Allow wrapping for long text
-        match4.setMinWidth(100); // Adjust button width
+            match2.setPrefWidth(200); // Adjust button width
+            match2.setWrapText(true); // Allow wrapping for long text
+            match2.setMinWidth(100); // Adjust button width
 
-        match1.setStyle( 
-                    "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
-                    "-fx-font-family: 'Sports World';" +                                    // Police Sportive
-                    "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
-                    "-fx-font-size: 10px;" +                                                // Taille du texte
-                    "-fx-padding: 10px 10px;" +                                             // Espacement interne
-                    "-fx-background-radius: 20px;" +                                        // Coins arrondis
-                    "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
-                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
-                    "-fx-border-color: white;" +                                          // Bordure verte
-                    "-fx-border-width: 2px;"   
-                );
-                match2.setStyle( 
-                    "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
-                    "-fx-font-family: 'Sports World';" +                                    // Police Sportive
-                    "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
-                    "-fx-font-size: 10px;" +                                                // Taille du texte
-                    "-fx-padding: 10px 10px;" +                                             // Espacement interne
-                    "-fx-background-radius: 20px;" +                                        // Coins arrondis
-                    "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
-                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
-                    "-fx-border-color: white;" +                                          // Bordure verte
-                    "-fx-border-width: 2px;"   
-                );
-                match3.setStyle( 
-                    "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
-                    "-fx-font-family: 'Sports World';" +                                    // Police Sportive
-                    "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
-                    "-fx-font-size: 10px;" +                                                // Taille du texte
-                    "-fx-padding: 10px 10px;" +                                             // Espacement interne
-                    "-fx-background-radius: 20px;" +                                        // Coins arrondis
-                    "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
-                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
-                    "-fx-border-color: white;" +                                          // Bordure verte
-                    "-fx-border-width: 2px;"   
-                );
-                match4.setStyle( 
-                    "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
-                    "-fx-font-family: 'Sports World';" +                                    // Police Sportive
-                    "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
-                    "-fx-font-size: 10px;" +                                                // Taille du texte
-                    "-fx-padding: 10px 10px;" +                                             // Espacement interne
-                    "-fx-background-radius: 20px;" +                                        // Coins arrondis
-                    "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
-                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
-                    "-fx-border-color: white;" +                                          // Bordure verte
-                    "-fx-border-width: 2px;"   
-                );
-        quarterFinalsLeft.getChildren().add(match1);
-        quarterFinalsLeft.getChildren().add(match2);
-        
-        quarterFinalsRight.getChildren().add(match3);
-        quarterFinalsRight.getChildren().add(match4);
-        quarterFinalsRight.setPadding(new Insets(110, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
-        quarterFinalsLeft.setPadding(new Insets(110, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
-
-
-    }
-
-    private void createSemiFinals() {
-        Button match1=new Button("QF1 vs QF2");
-        Button match2=new Button("QF3 vs QF4");
-        match1.setPrefWidth(200); // Adjust button width
-        match1.setWrapText(true); // Allow wrapping for long text
-        match1.setMinWidth(100); // Adjust button width
-
-        match2.setPrefWidth(200); // Adjust button width
-        match2.setWrapText(true); // Allow wrapping for long text
-        match2.setMinWidth(100); // Adjust button width
-
-        match1.setStyle( 
+            match1.setStyle( 
                     "-fx-background-color: linear-gradient(#32cd32, #228b22);" +                                      // Dégradé vert (vert clair à vert foncé)
                     "-fx-font-family: 'Sports World';" +                                    // Police Sportive
                     "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
@@ -321,22 +426,58 @@ public class BracketView {
                     "-fx-border-color: white;" +                                          // Bordure verte
                     "-fx-border-width: 2px;"    
                 );
-        // Semi-finals (Empty Boxes)
-        semiFinalsLeft.getChildren().add(match1);
-        semiFinalsRight.getChildren().add(match2);
-        semiFinalsRight.setPadding(new Insets(200, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
-        semiFinalsLeft.setPadding(new Insets(200, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+            // Semi-finals (Empty Boxes)
+            semiFinalsLeft.getChildren().add(match1);
+            semiFinalsRight.getChildren().add(match2);
+            semiFinalsRight.setPadding(new Insets(200, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+            semiFinalsLeft.setPadding(new Insets(200, 0, 0, 5)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
 
+        }
+        if (Matchs.size()==4){
+             semiFinalsRight.setPadding(new Insets(150, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+            semiFinalsLeft.setPadding(new Insets(150, 0, 0, 0)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+        }
+        
 
     }
 
-    private void createFinalMatch() {
-        // Final (Empty Box)
-        Button match=new Button("Final");
-        match.setPrefWidth(200); // Adjust button width
-        match.setMinWidth(100); // Adjust button width
-        match.setWrapText(true); // Allow wrapping for long text
-        match.setStyle( 
+    private void createFinalMatch(List<Match> Matchs) {
+        if (Matchs.size()==1){
+            for (int i = 0; i < 1; i++ ) {
+                String match  ;
+                match = Matchs.get(i).affichageAbr() ;
+                
+                Button matchF=new Button(match );
+                matchF.setPrefWidth(300); // Adjust button width
+                matchF.setMinWidth(300); // Adjust button width
+                matchF.setWrapText(true); // Allow wrapping for long text
+                matchF.setStyle( 
+                        "-fx-background-color: #A57C00;" +                                      // Dégradé vert (vert clair à vert foncé)
+                        "-fx-font-family: 'Sports World';" +                                    // Police Sportive
+                        "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
+                        "-fx-font-size: 10px;" +                                                // Taille du texte
+                        "-fx-padding: 10px 10px;" +                                             // Espacement interne
+                        "-fx-background-radius: 20px;" +                                        // Coins arrondis
+                        "-fx-border-radius: 20px;" +                                            // Bordure arrondie                                           // Largeur de la bordure
+                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 0, 4);"+   // Ombre portée
+                        "-fx-border-color: white;" +                                          // Bordure verte
+                        "-fx-border-width: 2px;" 
+                );
+                
+                finalMatchBox.getChildren().add(matchF);
+                finalMatchBox.setPadding(new Insets(110, 0, 0, 300)); // Top: 240px, Right: 0px, Bottom: 0px, Left: 0px
+
+                
+            }
+        }
+        else{
+            
+            // Final (Empty Box)
+            Button match=new Button("Final");
+            match.setWrapText(true); // Allow wrapping for long text
+            match.setPrefWidth(200); // Adjust button width
+            match.setMinWidth(100); // Adjust button width
+            match.setStyle( 
                     "-fx-background-color: #A57C00;" +                                      // Dégradé vert (vert clair à vert foncé)
                     "-fx-font-family: 'Sports World';" +                                    // Police Sportive
                     "-fx-text-fill: white;" +                                               // Texte en blanc                                   // Police Sportive
@@ -348,8 +489,23 @@ public class BracketView {
                     "-fx-border-color: #FFB300;" +                                          // Bordure verte
                     "-fx-border-width: 3px;"   
                 );
-        finalMatchBox.getChildren().add(match);
-        finalMatchBox.setPadding(new Insets(200, 0, 0, 0)); // Top: 240px, Right: 0px, Bottom: 0px, Left: 0px
+            finalMatchBox.setPadding(new Insets(200, 10, 0, 10)); // Top: 240px, Right: 0px, Bottom: 0px, Left: 0px
+        
+            if (Matchs.size()==4 ){
+                finalMatchBox.getChildren().add(match);
+                finalMatchBox.setPadding(new Insets(150, 10, 0, 10)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+            }
+            else if ( Matchs.size()==8){
+                finalMatchBox.getChildren().add(match);
+            }
+            else if (Matchs.size()==2){
+                match.setMinWidth(300); // Adjust button width
+                match.setPrefWidth(300); // Adjust button width
+                finalMatchBox.getChildren().add(match);
+                finalMatchBox.setPadding(new Insets(60, 10, 0, 10)); // Top: 20px, Right: 0px, Bottom: 0px, Left: 0px
+            }
+            
+        }
 
     }
 
@@ -361,22 +517,39 @@ public class BracketView {
 
         StackPane layout = new StackPane();
         HBox fullBracket = new HBox(0);
-        fullBracket.getChildren().addAll(leftSideBox, quarterFinalsLeft, semiFinalsLeft, finalMatchBox, semiFinalsRight, quarterFinalsRight, rightSideBox);
-
         HBox Buttons = new HBox(20);
         Buttons.getChildren().addAll(gobackButton, NextButton);
         Buttons.setAlignment(Pos.CENTER);
+        VBox.setMargin(Buttons,new Insets(20,0,0,0) ) ;
+        if (Matchs.size()==8){
+            fullBracket.getChildren().addAll(leftSideBox, quarterFinalsLeft, semiFinalsLeft, finalMatchBox, semiFinalsRight, quarterFinalsRight, rightSideBox);
+        }
+        else if (Matchs.size()==4){
+           fullBracket.getChildren().addAll( quarterFinalsLeft, semiFinalsLeft, finalMatchBox, semiFinalsRight, quarterFinalsRight);
+
+        }
+        else if (Matchs.size()==2){
+           fullBracket.getChildren().addAll( semiFinalsLeft, finalMatchBox, semiFinalsRight);
+           VBox.setMargin(Buttons,new Insets(120,0,0,0) ) ;
+
+        }
+        else if (Matchs.size()==1){
+           fullBracket.getChildren().addAll(  finalMatchBox);
+           VBox.setMargin(Buttons,new Insets(120,0,0,0) ) ;
+
+        }
+
+        
         
 
         VBox fullScene = new VBox(0);
-        VBox.setMargin(Buttons,new Insets(20,0,0,0) ) ;
         VBox.setMargin(fullBracket,new Insets(0,0,0,0) ) ;
         fullScene.setAlignment(Pos.CENTER);
-
+        
 
 
         fullScene.getChildren().addAll(fullBracket,  Buttons);
-
+        
         layout.getChildren().addAll(background, fullScene);
         return new Scene(layout, 900, 600);
     }
