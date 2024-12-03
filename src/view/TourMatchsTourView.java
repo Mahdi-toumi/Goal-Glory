@@ -1,37 +1,51 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package view;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import model.elements.Equipe;
 import model.structure.Jeu;
+import model.structure.Match;
 
-import java.util.List;
-
-public class RankingView {
-
+/**
+ *
+ * @author toumi
+ */
+public class TourMatchsTourView {
+    
     private Scene scene;
     private Button NextButton;
     private Button gobackButton;
-    private List<Equipe> equipes;
+    private List<Match> matchs;
+    private Jeu jeu ;
 
-    public RankingView(Jeu jeu) {
+    public TourMatchsTourView(Jeu jeu) {
+        
+        this.jeu = jeu ;
 
         // Récupérer les équipes
         if (jeu.getCoupe() != null) {
-            this.equipes = jeu.getCoupe().getEquipes();
+            this.matchs = jeu.getCoupe().getTours().get(jeu.getCoupe().getTourActuel()+1).getMatchs();
         } else if (jeu.getChampionnat() != null) {
-            this.equipes = jeu.getChampionnat().getEquipes();
+            this.matchs = jeu.getChampionnat().getTours().get(jeu.getTour()+1).getMatchs();
         }
 
         // Fond d'écran
@@ -43,14 +57,15 @@ public class RankingView {
         StackPane root = new StackPane();
 
         // Titre
-        Label title = new Label("Classement du Championnat");
+        int tour = this.jeu.getTour()+1 ;
+        Label title = new Label("Match du Tour num : "+ tour);
         title.setFont(Font.font("Sports World", FontWeight.BOLD, 30));
         title.setTextFill(Color.WHITE);
 
         // Tableau des équipes
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(10);
+        gridPane.setHgap(20);
+        gridPane.setVgap(0);
         
         gridPane.setPrefWidth(400);  // Largeur préférée de 500 px
 
@@ -63,47 +78,50 @@ public class RankingView {
                 "-fx-background-radius: 10; " +
                 "-fx-padding: 10; " +
                 "-fx-border-color: yellow; " +
-                "-fx-border-radius: 10; -fx-border-width: 2;");
+                "-fx-border-radius: 10; -fx-border-width: 2;"+
+                "-fx-alignment: center;"+
+                 "-fx-text-alignment: center;" );
 
         // En-têtes de colonnes
-        Label rankHeader = new Label("Position");
-        Label teamHeader = new Label("Équipe");
-        Label pointsHeader = new Label("Points");
+        Label team1Header = new Label("Equipe 1");
+        Label VSHeader = new Label("  ");
+        Label team2Header = new Label("Equipe 2");
+        team1Header.setAlignment(Pos.CENTER);
+        VSHeader.setAlignment(Pos.CENTER);
+        team2Header.setAlignment(Pos.CENTER);
+        styleHeader(team1Header);
+        styleHeader(VSHeader);
+        styleHeader(team2Header);
 
-        styleHeader(rankHeader);
-        styleHeader(teamHeader);
-        styleHeader(pointsHeader);
+        gridPane.add(team1Header, 0, 0);
+        gridPane.add(VSHeader, 1, 0);
+        gridPane.add(team2Header, 2, 0);
+        gridPane.setAlignment(Pos.CENTER);
 
-        gridPane.add(rankHeader, 0, 0);
-        gridPane.add(teamHeader, 1, 0);
-        gridPane.add(pointsHeader, 2, 0);
-
-        // Remplir les données des équipes
         
-        Collections.sort(equipes, new Comparator<Equipe>() {
-        @Override
-        public int compare(Equipe e1, Equipe e2) {
-            return Integer.compare(e2.getPoints(), e1.getPoints()); // Tri décroissant des points
-        }
-    });
 
-    for (int i = 0; i < equipes.size(); i++) {
-        Equipe equipe = equipes.get(i);
+    for (int i = 0; i < matchs.size(); i++) {
+        Match match = matchs.get(i);
 
         // Créer les labels pour afficher le classement
-        Label rankLabel = new Label((i + 1) + ".");
-        Label teamLabel = new Label(equipe.getNom());
-        Label pointsLabel = new Label(String.valueOf(equipe.getPoints()));
+
+        Label teamLabel1 = new Label(match.getEquipe1().getNom());
+        Label VsLabel = new Label("VS");
+        Label teamLabel2 = new Label(match.getEquipe2().getNom());
+        teamLabel1.setAlignment(Pos.CENTER);
+        VsLabel.setAlignment(Pos.CENTER);
+        teamLabel2.setAlignment(Pos.CENTER);
 
         // Appliquer le style à chaque cellule (optionnel)
-        styleCell(rankLabel);
-        styleCell(teamLabel);
-        styleCell(pointsLabel);
+        styleCell(teamLabel1);
+        styleCell(VsLabel);
+        styleCell(teamLabel2);
 
         // Ajouter les labels à la GridPane
-        gridPane.add(rankLabel, 0, i + 1); // La première colonne est pour le rang
-        gridPane.add(teamLabel, 1, i + 1);  // La deuxième colonne est pour le nom de l'équipe
-        gridPane.add(pointsLabel, 2, i + 1); // La troisième colonne est pour les points
+        gridPane.add(teamLabel1, 0, i + 1); // La première colonne est pour le rang
+        gridPane.add(VsLabel, 1, i + 1);  // La deuxième colonne est pour le nom de l'équipe
+        gridPane.add(teamLabel2, 2, i + 1); // La troisième colonne est pour les points
+        gridPane.setAlignment(Pos.CENTER);
     }
 
         // Barre de défilement
@@ -137,12 +155,28 @@ public class RankingView {
     }
 
     private void styleHeader(Label label) {
-        label.setStyle("-fx-font-weight: bold; -fx-font-family: 'Sports World';  -fx-text-fill: yellow; -fx-text-alignment: center; -fx-font-size: 18px;");
-    }
+    label.setStyle("-fx-font-weight: bold; " +
+                   "-fx-font-family: 'Sports World'; " +
+                   "-fx-padding: 15; " +
+                   "-fx-text-fill: yellow; " +
+                   "-fx-text-alignment: center; " +
+                   "-fx-font-size: 18px; " +
+                   "-fx-alignment: center;"); // Ensure CSS alignment
+    label.setAlignment(Pos.CENTER); // Ensure programmatic alignment
+}
+
+    
 
     private void styleCell(Label label) {
-        label.setStyle("-fx-text-fill: white; -fx-font-family: 'Sports World'; -fx-text-alignment: center; -fx-font-size: 14px;");
-    }
+    label.setStyle("-fx-text-fill: white; " +
+                   "-fx-padding: 15; " +
+                   "-fx-font-family: 'Sports World'; " +
+                   "-fx-font-size: 14px; " +
+                   "-fx-text-alignment: center; " + // Center text inside label
+                   "-fx-alignment: center;"); // Align in cell
+    label.setAlignment(Pos.CENTER); // Programmatic alignment
+}
+
 
     private Button createStyledButton(String text, String color, String hoverColor) {
         Button button = new Button(text);
@@ -202,3 +236,6 @@ public class RankingView {
         return this.NextButton ;
     }
 }
+
+    
+

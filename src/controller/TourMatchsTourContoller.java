@@ -16,13 +16,15 @@ import view.TourMatchsTourView;
 
 /**
  *
- * @author lenovo
+ * @author toumi
  */
-public class RankingController {
-    private final RankingView view;
+public class TourMatchsTourContoller {
+    
+
+    private final TourMatchsTourView view;
     private final Jeu jeu;
     
-    public RankingController(RankingView view, Jeu jeu) {
+    public TourMatchsTourContoller(TourMatchsTourView view, Jeu jeu) {
         this.view = view;
         this.jeu=jeu;
         view.getBackButton().setOnAction(e -> goBackToChoisirEquipeView());
@@ -42,24 +44,14 @@ public class RankingController {
         for (int i=0;i<8;i++){
             if (Matchs.get(i).getEquipe1()== E1 || Matchs.get(i).getEquipe2()== E1){
                 Match match= Matchs.get(i);
-                TourMatchsTourView tourMatchsTourView= new TourMatchsTourView(jeu);
-                stage.setScene(tourMatchsTourView.getScene());
-                new TourMatchsTourContoller(tourMatchsTourView, jeu);
+                GamePreview GamePreview= new GamePreview(match,jeu);
+                stage.setScene(GamePreview.getScene());
+                new GamePreviewController(GamePreview, jeu);
                 break;
             }
             
         }
     }
 }
-
-
     
 
-
-    
-    
-     
-    
-
-
-   
