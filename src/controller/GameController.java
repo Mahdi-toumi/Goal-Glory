@@ -34,12 +34,39 @@ public class GameController {
     private int maxRounds = 5; // Maximum penalty rounds per side
     private int currentRound = 1; // Current round
     private boolean suddenDeath = false; // Sudden death indicator
+    private double[][] centers;
 
 
     public GameController(GameView gameView, Jeu jeu) {
         this.gameView = gameView;
         this.jeu = jeu;
         setupPlayerControls();
+         this.centers = new double[][] {
+            {216 + 38 / 2.0, 95 + 25 / 2.0}, // cageRectTL1 center
+            {286 + 38 / 2.0, 95 + 25 / 2.0}, // cageRectTL2 center
+            {216 + 38 / 2.0, 141 + 25 / 2.0}, // cageRectTL3 center
+            {286 + 38 / 2.0, 141 + 25 / 2.0}, // cageRectTL4 center
+            
+            {216 + 38 / 2.0, 180 + 25 / 2.0}, // cageRectBL1 center
+            {286 + 38 / 2.0, 180 + 25 / 2.0}, // cageRectBL2 center
+            {216 + 38 / 2.0, 226 + 25 / 2.0}, // cageRectBL3 center
+            {286 + 38 / 2.0, 226 + 25 / 2.0}, // cageRectBL4 center
+            
+            {503 + 38 / 2.0, 95 + 25 / 2.0},  // cageRectTR1 center
+            {573 + 38 / 2.0, 95 + 25 / 2.0},  // cageRectTR2 center
+            {503 + 38 / 2.0, 141 + 25 / 2.0}, // cageRectTR3 center
+            {573 + 38 / 2.0, 141 + 25 / 2.0}, // cageRectTR4 center
+            
+            {503 + 38 / 2.0, 180 + 25 / 2.0}, // cageRectBR1 center
+            {573 + 38 / 2.0, 180 + 25 / 2.0}, // cageRectBR2 center
+            {503 + 38 / 2.0, 226 + 25 / 2.0}, // cageRectBR3 center
+            {573 + 38 / 2.0, 226 + 25 / 2.0}, // cageRectBR4 center
+            
+            {360 + 38 / 2.0, 95 + 69 / 2.0},  // cageRectM1 center
+            {430 + 38 / 2.0, 95 + 69 / 2.0},  // cageRectM2 center
+            {360 + 38 / 2.0, 185 + 69 / 2.0}, // cageRectM3 center
+            {430 + 38 / 2.0, 185 + 69 / 2.0}  // cageRectM4 center
+        };
     }
 
     private void setupPlayerControls() {
@@ -49,7 +76,12 @@ public class GameController {
                 double clickX = event.getX();
                 double clickY = event.getY();
                 handlePlayerTurn(clickX, clickY);
+                gameView.getGif().setVisible(false);
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(e -> gameView.getGif().setVisible(false));
+                pause.play();
             }
+            
         });
     }
 
@@ -57,7 +89,21 @@ public class GameController {
         System.out.println("Your Turn to Shoot!");
 
         // Animate the ball to the target position
-        gameView.animateBallToPosition(clickX, clickY);
+           double[] playerBallPosition = {clickX, clickY};
+            
+            
+        for (int i = 0; i < this.gameView.getCageRects().length; i++) {
+            Rectangle rect = this.gameView.getCageRects()[i];
+
+            if (rect.contains(playerBallPosition[0], playerBallPosition[1])) {
+                playerBallPosition[0] = centers[i][0];
+                playerBallPosition[1] = centers[i][1];
+            break;
+        }
+        };
+        
+        
+        gameView.animateBallToPosition( playerBallPosition[0],  playerBallPosition[1]);
 
         // AI Goalkeeper random position
         double[] aiGlovesPosition = randomGoalkeeperPosition();
@@ -91,18 +137,37 @@ public class GameController {
 
         double[] aiShotTarget = randomShotPosition();
         System.out.println("Move your gloves to save the shot!");
+        
+               
 
         Pane gamePane = gameView.getPane();
         gamePane.setOnMouseClicked(event -> {
             double playerGlovesX = event.getX();
             double playerGlovesY = event.getY();
+            
+            double[] playerGlovesPosition = {event.getX(), event.getY()};
+            
+            
+            for (int i = 0; i < this.gameView.getCageRects().length; i++) {
+            Rectangle rect = this.gameView.getCageRects()[i];
 
-            gameView.animateGlovesToPosition(playerGlovesX, playerGlovesY);
+            if (rect.contains(playerGlovesPosition[0], playerGlovesPosition[1])) {
+                playerGlovesPosition[0] = centers[i][0];
+                playerGlovesPosition[1] = centers[i][1];
+            break;
+        }
+        };
+            
+                        
+
+            
+
+            gameView.animateGlovesToPosition(playerGlovesPosition[0], playerGlovesPosition[1]);
             gameView.animateBallToPosition(aiShotTarget[0], aiShotTarget[1]);
 
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(e -> {
-                boolean isSaved = checkIfSaved(aiShotTarget, new double[]{playerGlovesX, playerGlovesY});
+                boolean isSaved = checkIfSaved(aiShotTarget, playerGlovesPosition);
 
                 if (isSaved) {
                     System.out.println("You saved the shot!");
@@ -218,30 +283,30 @@ public class GameController {
         Random random = new Random();
         int choice = random.nextInt(20);
             // Calculate the centers of each rectangle
-        double[] topLeft1Center = new double[]{216 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTL1 center
-        double[] topLeft2Center = new double[]{286 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTL2 center
-        double[] topLeft3Center = new double[]{216 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTL3 center
-        double[] topLeft4Center = new double[]{286 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTL4 center
+        double[] topLeft1Center = new double[]{216 + 38 / 2.0, 95 + 25 / 2.0}; // cageRectTL1 center
+        double[] topLeft2Center = new double[]{286 + 38 / 2.0, 95 + 25 / 2.0}; // cageRectTL2 center
+        double[] topLeft3Center = new double[]{216 + 38 / 2.0, 141 + 25 / 2.0}; // cageRectTL3 center
+        double[] topLeft4Center = new double[]{286 + 38 / 2.0, 141 + 25 / 2.0}; // cageRectTL4 center
 
-        double[] bottomLeft1Center = new double[]{216 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBL1 center
-        double[] bottomLeft2Center = new double[]{286 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBL2 center
-        double[] bottomLeft3Center = new double[]{216 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBL3 center
-        double[] bottomLeft4Center = new double[]{286 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBL4 center
+        double[] bottomLeft1Center = new double[]{216 + 38 / 2.0, 180 + 25 / 2.0}; // cageRectBL1 center
+        double[] bottomLeft2Center = new double[]{286 + 38 / 2.0, 180 + 25 / 2.0}; // cageRectBL2 center
+        double[] bottomLeft3Center = new double[]{216 + 38 / 2.0, 226 + 25 / 2.0}; // cageRectBL3 center
+        double[] bottomLeft4Center = new double[]{286 + 38 / 2.0, 226 + 25 / 2.0}; // cageRectBL4 center
 
-        double[] topRight1Center = new double[]{503 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTR1 center
-        double[] topRight2Center = new double[]{573 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTR2 center
-        double[] topRight3Center = new double[]{503 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTR3 center
-        double[] topRight4Center = new double[]{573 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTR4 center
+        double[] topRight1Center = new double[]{503 + 38 / 2.0, 95 + 25 / 2.0}; // cageRectTR1 center
+        double[] topRight2Center = new double[]{573 + 38 / 2.0, 95 + 25 / 2.0}; // cageRectTR2 center
+        double[] topRight3Center = new double[]{503 + 38 / 2.0, 141 + 25 / 2.0}; // cageRectTR3 center
+        double[] topRight4Center = new double[]{573 + 38 / 2.0, 141 + 25 / 2.0}; // cageRectTR4 center
 
-        double[] bottomRight1Center = new double[]{503 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBR1 center
-        double[] bottomRight2Center = new double[]{573 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBR2 center
-        double[] bottomRight3Center = new double[]{503 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBR3 center
-        double[] bottomRight4Center = new double[]{573 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBR4 center
+        double[] bottomRight1Center = new double[]{503 + 38 / 2.0, 180 + 25 / 2.0}; // cageRectBR1 center
+        double[] bottomRight2Center = new double[]{573 + 38 / 2.0, 180 + 25 / 2.0}; // cageRectBR2 center
+        double[] bottomRight3Center = new double[]{503 + 38 / 2.0, 226 + 25 / 2.0}; // cageRectBR3 center
+        double[] bottomRight4Center = new double[]{573 + 38 / 2.0, 226 + 25 / 2.0}; // cageRectBR4 center
 
-        double[] middle1Center = new double[]{360 + 65 / 2.0, 95 + 85 / 2.0}; // cageRectM1 center
-        double[] middle2Center = new double[]{430 + 65 / 2.0, 95 + 85 / 2.0}; // cageRectM2 center
-        double[] middle3Center = new double[]{360 + 65 / 2.0, 185 + 85 / 2.0}; // cageRectM3 center
-        double[] middle4Center = new double[]{430 + 65 / 2.0, 185 + 85 / 2.0}; // cageRectM4 center
+        double[] middle1Center = new double[]{360 + 38 / 2.0, 95 + 69 / 2.0}; // cageRectM1 center
+        double[] middle2Center = new double[]{430 + 38 / 2.0, 95 + 69 / 2.0}; // cageRectM2 center
+        double[] middle3Center = new double[]{360 + 38 / 2.0, 185 + 69 / 2.0}; // cageRectM3 center
+        double[] middle4Center = new double[]{430 + 38 / 2.0, 185 + 69 / 2.0}; // cageRectM4 center
 
         switch (choice) {
             case 0: return topLeft1Center; // Top left
@@ -264,6 +329,7 @@ public class GameController {
             case 17: return middle2Center; // Bottom right
             case 18: return middle3Center; // Bottom right
             case 19: return middle4Center; // Bottom right
+
             
             default: return new double[]{410, 140}; // Middle
         }
@@ -521,6 +587,7 @@ public class GameController {
             new ChampionsController(ChampionsView, jeu);
         }
 
+    
     
     
     

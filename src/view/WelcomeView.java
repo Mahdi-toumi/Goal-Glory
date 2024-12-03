@@ -26,10 +26,19 @@ public class WelcomeView {
     private Button startButton;
     private Button quitButton;
     private Stage primaryStage;
+    private MediaPlayer song ;
 
     public WelcomeView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
+        
+        
+        String Song = getClass().getResource("/audio/Song.mp3").toExternalForm();
+        song = new MediaPlayer(new Media(Song));
+        song.setAutoPlay(true);
+        song.setVolume(0.2);
+        song.setCycleCount(MediaPlayer.INDEFINITE);
+        
         // Créer une vidéo en arrière-plan
         String videoPath = getClass().getResource("/images/Intro.mp4").toExternalForm();
         Media media = new Media(videoPath);
@@ -40,6 +49,10 @@ public class WelcomeView {
         mediaView = new MediaView(mediaPlayer);
         mediaView.setFitWidth(900);
         mediaView.setFitHeight(600);
+        
+
+
+
 
         // Créer une image pour l'arrière-plan qui s'affiche après 4 secondes
         ImageView backgroundImage = new ImageView(new Image(getClass().getResourceAsStream("/images/Background.jpeg")));

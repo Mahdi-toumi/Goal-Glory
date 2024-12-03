@@ -1,5 +1,6 @@
 package view;
 
+import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
@@ -10,6 +11,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -23,6 +27,8 @@ public class GameView {
     private ImageView terrainView;
     private ImageView ballonView;
     private ImageView glovesView;
+    private ImageView gifView ;
+    private ImageView TargetView ;
     private double ballonStartX = 410;
     private double ballonStartY = 400;
     private double glovesStartX = 410;
@@ -73,70 +79,90 @@ public class GameView {
         terrainView = new ImageView(terrainImage);
         terrainView.setFitWidth(900);
         terrainView.setFitHeight(600);
-
-        // Initialize ball image
-        ballonView = new ImageView(ballonImage);
-        ballonView.setFitWidth(27);
-        ballonView.setFitHeight(27);
         
         // Initialize gloves image
         glovesView = new ImageView(glovesImage);
         glovesView.setFitWidth(37);
         glovesView.setFitHeight(37);
 
+        // Initialize ball image
+        ballonView = new ImageView(ballonImage);
+        ballonView.setFitWidth(27);
+        ballonView.setFitHeight(27);
+        
+
+        
+        //Gif
+        
+        gifView = new ImageView();
+        gifView.setImage(new Image("/images/Tir.gif")); // Chemin relatif ou absolu
+        gifView.setFitWidth(150); // Ajustez la largeur
+        gifView.setFitHeight(200); // Ajustez la hauteur
+        gifView.setLayoutX(300);
+        gifView.setLayoutY(195);
+        gifView.setVisible(false); // Cache le GIF par défaut
+        /*
+        //Target 
+        TargetView = new ImageView();
+        TargetView.setImage(new Image("/images/Target.png")); // Chemin relatif ou absolu
+        TargetView.setFitWidth(50); // Ajustez la largeur
+        TargetView.setFitHeight(50); // Ajustez la hauteur
+
+        TargetView.setVisible(false); // Cache le GIF par défaut
+*/
         // Initialize goal rectangles
 
 
         // Pour le rectangle cageRectTL
         this.cageRectTL1 = new Rectangle(216, 95, 70, 46);
-        cageRectTL1.setFill(Color.RED);
+        cageRectTL1.setFill(Color.TRANSPARENT);
         this.cageRectTL2 = new Rectangle(286, 95, 70, 46);
-        cageRectTL2.setFill(Color.BLUE);
+        cageRectTL2.setFill(Color.TRANSPARENT);
         this.cageRectTL3 = new Rectangle(216, 141, 70, 46);
-        cageRectTL3.setFill(Color.GREEN);
+        cageRectTL3.setFill(Color.TRANSPARENT);
         this.cageRectTL4 = new Rectangle(286, 141, 70, 46);
-        cageRectTL4.setFill(Color.YELLOW);
+        cageRectTL4.setFill(Color.TRANSPARENT);
 
         // Pour le rectangle cageRectBL
         this.cageRectBL1 = new Rectangle(216, 180, 70, 46);
-        cageRectBL1.setFill(Color.RED);
+        cageRectBL1.setFill(Color.TRANSPARENT);
         this.cageRectBL2 = new Rectangle(286, 180, 70, 46);
-        cageRectBL2.setFill(Color.BLUE);
+        cageRectBL2.setFill(Color.TRANSPARENT);
         this.cageRectBL3 = new Rectangle(216, 226, 70, 46);
-        cageRectBL3.setFill(Color.GREEN);
+        cageRectBL3.setFill(Color.TRANSPARENT);
         this.cageRectBL4 = new Rectangle(286, 226, 70, 46);
-        cageRectBL4.setFill(Color.YELLOW);
+        cageRectBL4.setFill(Color.TRANSPARENT);
 
         // Pour le rectangle cageRectTR
         this.cageRectTR1 = new Rectangle(503, 95, 70, 46);
-        cageRectTR1.setFill(Color.RED);
+        cageRectTR1.setFill(Color.TRANSPARENT);
         this.cageRectTR2 = new Rectangle(573, 95, 70, 46);
-        cageRectTR2.setFill(Color.BLUE);
+        cageRectTR2.setFill(Color.TRANSPARENT);
         this.cageRectTR3 = new Rectangle(503, 141, 70, 46);
-        cageRectTR3.setFill(Color.GREEN);
+        cageRectTR3.setFill(Color.TRANSPARENT);
         this.cageRectTR4 = new Rectangle(573, 141, 70, 46);
-        cageRectTR4.setFill(Color.YELLOW);
+        cageRectTR4.setFill(Color.TRANSPARENT);
 
         // Pour le rectangle cageRectBR
         this.cageRectBR1 = new Rectangle(503, 180, 70, 46);
-        cageRectBR1.setFill(Color.RED);
+        cageRectBR1.setFill(Color.TRANSPARENT);
         this.cageRectBR2 = new Rectangle(573, 180, 70, 46);
-        cageRectBR2.setFill(Color.BLUE);
+        cageRectBR2.setFill(Color.TRANSPARENT);
         this.cageRectBR3 = new Rectangle(503, 226, 70, 46);
-        cageRectBR3.setFill(Color.GREEN);
+        cageRectBR3.setFill(Color.TRANSPARENT);
         this.cageRectBR4 = new Rectangle(573, 226, 70, 46);
-        cageRectBR4.setFill(Color.YELLOW);
+        cageRectBR4.setFill(Color.TRANSPARENT);
 
         // Pour le rectangle cageRectM
         
         this.cageRectM1 = new Rectangle(357, 95, 75, 90);
-        cageRectM1.setFill(Color.RED);
+        cageRectM1.setFill(Color.TRANSPARENT);
         this.cageRectM2 = new Rectangle(430, 95, 72, 90);
-        cageRectM2.setFill(Color.BLUE);
+        cageRectM2.setFill(Color.TRANSPARENT);
         this.cageRectM3 = new Rectangle(357, 185, 75, 90);
-        cageRectM3.setFill(Color.GREEN);
+        cageRectM3.setFill(Color.TRANSPARENT);
         this.cageRectM4 = new Rectangle(430, 185, 72, 90);
-        cageRectM4.setFill(Color.YELLOW);
+        cageRectM4.setFill(Color.TRANSPARENT);
 
         
         // Player's name and score in the top-left corner
@@ -219,7 +245,7 @@ Pane.getChildren().addAll(
     cageRectTR1, cageRectTR2, cageRectTR3, cageRectTR4,
     cageRectBR1, cageRectBR2, cageRectBR3, cageRectBR4,
     cageRectM1, cageRectM2, cageRectM3, cageRectM4,
-    ballonView, glovesView, scoreBoardButton, playerNameText, TournoiNameText
+    ballonView, glovesView, scoreBoardButton, playerNameText, TournoiNameText, gifView
 );
 
         // Set scene
@@ -275,6 +301,8 @@ Pane.getChildren().addAll(
         // Calculate movement
         double deltaX = targetX - glovesView.getLayoutX();
         double deltaY = targetY - glovesView.getLayoutY();
+        
+        
 
         // Translate transition for the gloves
         TranslateTransition translateTransition = new TranslateTransition();
@@ -336,6 +364,14 @@ Pane.getChildren().addAll(
     public Pane getPane() {
         return Pane;
     }
+    public ImageView getGif () {
+        return this.gifView;
+    }
+    
+    public ImageView getTarget () {
+        return this.TargetView;
+    }
+    
     
     public Rectangle[] getCageRects() {
     return new Rectangle[]{cageRectTL1, cageRectTL2, cageRectTL3, cageRectTL4,
