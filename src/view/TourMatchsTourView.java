@@ -34,19 +34,13 @@ public class TourMatchsTourView {
     private Scene scene;
     private Button NextButton;
     private Button gobackButton;
-    private List<Match> matchs;
     private Jeu jeu ;
 
-    public TourMatchsTourView(Jeu jeu) {
+    public TourMatchsTourView(Jeu jeu , List <Match> matchs) {
         
         this.jeu = jeu ;
 
-        // Récupérer les équipes
-        if (jeu.getCoupe() != null) {
-            this.matchs = jeu.getCoupe().getTours().get(jeu.getCoupe().getTourActuel()+1).getMatchs();
-        } else if (jeu.getChampionnat() != null) {
-            this.matchs = jeu.getChampionnat().getTours().get(jeu.getTour()+1).getMatchs();
-        }
+
 
         // Fond d'écran
         ImageView background = new ImageView(new Image(getClass().getResourceAsStream("/images/Background.jpeg")));

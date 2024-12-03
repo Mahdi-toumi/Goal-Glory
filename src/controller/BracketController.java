@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import model.structure.Jeu;
 import view.ChoisirEquipeView;
 import view.GamePreview;
+import view.TourMatchsTourView;
 
 public class BracketController {
 
@@ -22,7 +23,7 @@ public class BracketController {
         this.view = view;
         this.jeu=jeu;
         view.getBackButton().setOnAction(e -> goBackToChoisirEquipeView());
-        view.getNextButton().setOnAction(e-> redirectToGamePreview());
+        view.getNextButton().setOnAction(e-> redirectToGameMatchs());
     }
     
      private void goBackToChoisirEquipeView() {
@@ -32,16 +33,16 @@ public class BracketController {
         stage.setScene(ChoisirEquipeView.getScene());
         new ChoisirEquipeController(ChoisirEquipeView, jeu);
     }
-     private void redirectToGamePreview(){
+     private void redirectToGameMatchs(){
         Stage stage = (Stage) view.getNextButton().getScene().getWindow();
         Equipe E1=jeu.getPlayer().getEquipe();
         List <Match> Matchs= jeu.getCoupe().getTours().get(this.jeu.getTour()).getMatchs();
         for (int i=0;i<jeu.getCoupe().getEquipesRestantes().size();i++){
             if (Matchs.get(i).getEquipe1()== E1 || Matchs.get(i).getEquipe2()== E1){
                 Match match= Matchs.get(i);
-                GamePreview GamePreview= new GamePreview(match,jeu);
-                stage.setScene(GamePreview.getScene());
-                new GamePreviewController(GamePreview, jeu);
+                TourMatchsTourView tourMatchsTourView= new TourMatchsTourView(jeu ,Matchs );
+                stage.setScene(tourMatchsTourView.getScene());
+                new TourMatchsTourContoller(tourMatchsTourView, jeu);
                 break;
             }
             

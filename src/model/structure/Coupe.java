@@ -42,7 +42,7 @@ public final class Coupe extends Tournoi {
         
     }
     
-    public void Initialiser_tour() {
+    public void Initialiser_tour() throws AjoutTourException {
         ArrayList<Match> tousLesMatchs = new ArrayList<>();
 
         // Mélanger les équipes pour générer des paires aléatoires pour le premier tour
@@ -67,6 +67,7 @@ public final class Coupe extends Tournoi {
             TourActuel+=1;  // Incrémente le numéro de tour
             Tour tour = new Tour(this.TourActuel);
             tour.setMatchs(matchsDuTour);
+            this.ajouterTour(tour);
             
             
 
@@ -81,7 +82,7 @@ public final class Coupe extends Tournoi {
     }
     
     
-    public void Commencer_tournoi() {
+    public void Commencer_tournoi() throws AjoutTourException {
         // Initialiser le premier tour
         this.Initialiser_tournoi();
 

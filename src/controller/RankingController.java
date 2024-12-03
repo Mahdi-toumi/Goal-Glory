@@ -26,7 +26,7 @@ public class RankingController {
         this.view = view;
         this.jeu=jeu;
         view.getBackButton().setOnAction(e -> goBackToChoisirEquipeView());
-        view.getNextButton().setOnAction(e-> redirectToGamePreview());
+        view.getNextButton().setOnAction(e-> redirectToGameMatchs());
     }
     private void goBackToChoisirEquipeView() {
         // Créer la vue de saisie
@@ -35,14 +35,14 @@ public class RankingController {
         stage.setScene(ChoisirEquipeView.getScene());
         new ChoisirEquipeController(ChoisirEquipeView, jeu);
     }
-    private void redirectToGamePreview(){
+    private void redirectToGameMatchs(){
         Stage stage = (Stage) view.getNextButton().getScene().getWindow();
         Equipe E1=jeu.getPlayer().getEquipe();
-        List <Match> Matchs= jeu.getChampionnat().getTours().get(this.jeu.getTour()+1).getMatchs();
+        List <Match> Matchs= jeu.getChampionnat().getTours().get(this.jeu.getTour()).getMatchs();
         for (int i=0;i<8;i++){
             if (Matchs.get(i).getEquipe1()== E1 || Matchs.get(i).getEquipe2()== E1){
                 Match match= Matchs.get(i);
-                TourMatchsTourView tourMatchsTourView= new TourMatchsTourView(jeu);
+                TourMatchsTourView tourMatchsTourView= new TourMatchsTourView(jeu ,  Matchs );
                 stage.setScene(tourMatchsTourView.getScene());
                 new TourMatchsTourContoller(tourMatchsTourView, jeu);
                 break;

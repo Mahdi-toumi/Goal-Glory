@@ -6,6 +6,8 @@ import view.GameView;
 import model.structure.Jeu;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,6 +18,7 @@ import javafx.stage.Stage;
 import model.elements.Equipe;
 import model.structure.Match;
 import model.structure.Player;
+import model.structure.exceptions.AjoutTourException;
 import view.BracketView;
 import view.ChampionsView;
 import view.EliminatedView;
@@ -360,7 +363,11 @@ public class GameController {
                         }
                     }
                     this.jeu.setTour(this.jeu.getTour()+1);
-                    this.jeu.getCoupe().Initialiser_tour();
+                    try {
+                        this.jeu.getCoupe().Initialiser_tour();
+                    } catch (AjoutTourException ex) {
+                        Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     transitionToBracketView();
                 }
                 else if (this.jeu.getTour()==3){
