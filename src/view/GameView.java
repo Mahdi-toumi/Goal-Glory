@@ -27,11 +27,26 @@ public class GameView {
     private double ballonStartY = 400;
     private double glovesStartX = 410;
     private double glovesStartY = 175;
-    private Rectangle cageRectTR;
-    private Rectangle cageRectTL;
-    private Rectangle cageRectBR;
-    private Rectangle cageRectBL;
-    private Rectangle cageRectM;
+    private Rectangle cageRectTR1;
+    private Rectangle cageRectTR2;
+    private Rectangle cageRectTR3;
+    private Rectangle cageRectTR4;
+    private Rectangle cageRectTL1;
+    private Rectangle cageRectTL2;
+    private Rectangle cageRectTL3;
+    private Rectangle cageRectTL4;
+    private Rectangle cageRectBR1;
+    private Rectangle cageRectBR2;
+    private Rectangle cageRectBR3;
+    private Rectangle cageRectBR4;
+    private Rectangle cageRectBL1;
+    private Rectangle cageRectBL2;
+    private Rectangle cageRectBL3;
+    private Rectangle cageRectBL4;
+    private Rectangle cageRectM1;
+    private Rectangle cageRectM2;
+    private Rectangle cageRectM3;
+    private Rectangle cageRectM4;
     private Button scoreBoardButton;
     private Jeu jeu ;
     private Text playerNameText;
@@ -70,30 +85,59 @@ public class GameView {
         glovesView.setFitHeight(37);
 
         // Initialize goal rectangles
-        cageRectTL =  new Rectangle(216,95,140,92);
-        cageRectTL.setFill(Color.TRANSPARENT);
-        cageRectTL.setStroke(Color.TRANSPARENT);
-        cageRectTL.setStrokeWidth(2);
+
+
+        // Pour le rectangle cageRectTL
+        this.cageRectTL1 = new Rectangle(216, 95, 70, 46);
+        cageRectTL1.setFill(Color.RED);
+        this.cageRectTL2 = new Rectangle(286, 95, 70, 46);
+        cageRectTL2.setFill(Color.BLUE);
+        this.cageRectTL3 = new Rectangle(216, 141, 70, 46);
+        cageRectTL3.setFill(Color.GREEN);
+        this.cageRectTL4 = new Rectangle(286, 141, 70, 46);
+        cageRectTL4.setFill(Color.YELLOW);
+
+        // Pour le rectangle cageRectBL
+        this.cageRectBL1 = new Rectangle(216, 180, 70, 46);
+        cageRectBL1.setFill(Color.RED);
+        this.cageRectBL2 = new Rectangle(286, 180, 70, 46);
+        cageRectBL2.setFill(Color.BLUE);
+        this.cageRectBL3 = new Rectangle(216, 226, 70, 46);
+        cageRectBL3.setFill(Color.GREEN);
+        this.cageRectBL4 = new Rectangle(286, 226, 70, 46);
+        cageRectBL4.setFill(Color.YELLOW);
+
+        // Pour le rectangle cageRectTR
+        this.cageRectTR1 = new Rectangle(503, 95, 70, 46);
+        cageRectTR1.setFill(Color.RED);
+        this.cageRectTR2 = new Rectangle(573, 95, 70, 46);
+        cageRectTR2.setFill(Color.BLUE);
+        this.cageRectTR3 = new Rectangle(503, 141, 70, 46);
+        cageRectTR3.setFill(Color.GREEN);
+        this.cageRectTR4 = new Rectangle(573, 141, 70, 46);
+        cageRectTR4.setFill(Color.YELLOW);
+
+        // Pour le rectangle cageRectBR
+        this.cageRectBR1 = new Rectangle(503, 180, 70, 46);
+        cageRectBR1.setFill(Color.RED);
+        this.cageRectBR2 = new Rectangle(573, 180, 70, 46);
+        cageRectBR2.setFill(Color.BLUE);
+        this.cageRectBR3 = new Rectangle(503, 226, 70, 46);
+        cageRectBR3.setFill(Color.GREEN);
+        this.cageRectBR4 = new Rectangle(573, 226, 70, 46);
+        cageRectBR4.setFill(Color.YELLOW);
+
+        // Pour le rectangle cageRectM
         
-        cageRectBL =  new Rectangle(216,180,140,92);
-        cageRectBL.setFill(Color.TRANSPARENT);
-        cageRectBL.setStroke(Color.TRANSPARENT);
-        cageRectBL.setStrokeWidth(2);
-        
-        cageRectTR =  new Rectangle(503,95,140,92);
-        cageRectTR.setFill(Color.TRANSPARENT);
-        cageRectTR.setStroke(Color.TRANSPARENT);
-        cageRectTR.setStrokeWidth(2);
-        
-        cageRectBR =  new Rectangle(503,180,140,92);
-        cageRectBR.setFill(Color.TRANSPARENT);
-        cageRectBR.setStroke(Color.TRANSPARENT);
-        cageRectBR.setStrokeWidth(2);
-        
-        cageRectM =  new Rectangle(360,95,140,180);
-        cageRectM.setFill(Color.TRANSPARENT);
-        cageRectM.setStroke(Color.TRANSPARENT);
-        cageRectM.setStrokeWidth(2);
+        this.cageRectM1 = new Rectangle(357, 95, 75, 90);
+        cageRectM1.setFill(Color.RED);
+        this.cageRectM2 = new Rectangle(430, 95, 72, 90);
+        cageRectM2.setFill(Color.BLUE);
+        this.cageRectM3 = new Rectangle(357, 185, 75, 90);
+        cageRectM3.setFill(Color.GREEN);
+        this.cageRectM4 = new Rectangle(430, 185, 72, 90);
+        cageRectM4.setFill(Color.YELLOW);
+
         
         // Player's name and score in the top-left corner
         
@@ -168,7 +212,15 @@ public class GameView {
 
         // Add all elements to the pane
         Pane = new Pane();
-        Pane.getChildren().addAll(terrainView, cageRectTL, cageRectBL, cageRectTR, cageRectBR, cageRectM, ballonView, glovesView, scoreBoardButton, playerNameText,TournoiNameText);
+Pane.getChildren().addAll(
+    terrainView,
+    cageRectTL1, cageRectTL2, cageRectTL3, cageRectTL4,
+    cageRectBL1, cageRectBL2, cageRectBL3, cageRectBL4,
+    cageRectTR1, cageRectTR2, cageRectTR3, cageRectTR4,
+    cageRectBR1, cageRectBR2, cageRectBR3, cageRectBR4,
+    cageRectM1, cageRectM2, cageRectM3, cageRectM4,
+    ballonView, glovesView, scoreBoardButton, playerNameText, TournoiNameText
+);
 
         // Set scene
         scene = new Scene(Pane, 900, 600);
@@ -286,7 +338,11 @@ public class GameView {
     }
     
     public Rectangle[] getCageRects() {
-        return new Rectangle[]{cageRectTL, cageRectBL, cageRectTR, cageRectBR, cageRectM};
+    return new Rectangle[]{cageRectTL1, cageRectTL2, cageRectTL3, cageRectTL4,
+                           cageRectBL1, cageRectBL2, cageRectBL3, cageRectBL4,
+                           cageRectTR1, cageRectTR2, cageRectTR3, cageRectTR4,
+                           cageRectBR1, cageRectBR2, cageRectBR3, cageRectBR4,
+                           cageRectM1, cageRectM2, cageRectM3, cageRectM4}; 
     }
     
     public void refereeWhistle(){

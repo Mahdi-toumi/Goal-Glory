@@ -9,9 +9,11 @@ import controller.WelcomeController;
 import controller.GameController;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.elements.Equipe;
 import model.structure.Championnat;
 import model.structure.Coupe;
 import model.structure.Jeu;
+import model.structure.Player;
 
 public class NewMain extends Application {
 
@@ -21,17 +23,23 @@ public class NewMain extends Application {
         Jeu jeu = new Jeu();
         Coupe Coupe= new Coupe("World Cup");
         jeu.setCoupe(Coupe);
+        Equipe e = new Equipe ("France" , "Hama " , "FRA") ;
+        Player p = new Player ("Mahdi",0) ;
+        jeu.setPlayer(p);
+        jeu.getPlayer().setEquipe(e);
+        
         // Créer la première vue (WelcomeView)
-        ChampionsView ChampionsView = new ChampionsView(jeu);
+        GameView gameView = new GameView(jeu);
 
         // Associer le contrôleur à la vue et au modèle
-        new ChampionsController( ChampionsView, jeu);
-        primaryStage.setScene(ChampionsView.getScene());
+        new GameController( gameView, jeu);
+        primaryStage.setScene(gameView.getScene());
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-}*/
+}
 
+*/

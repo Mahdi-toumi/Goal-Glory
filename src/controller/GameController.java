@@ -145,19 +145,55 @@ public class GameController {
         Rectangle rectangle3 = this.gameView.getCageRects()[2];
         Rectangle rectangle4 = this.gameView.getCageRects()[3];
         Rectangle rectangle5 = this.gameView.getCageRects()[4];
+        Rectangle rectangle6 = this.gameView.getCageRects()[5];
+        Rectangle rectangle7 = this.gameView.getCageRects()[6];
+        Rectangle rectangle8 = this.gameView.getCageRects()[7];
+        Rectangle rectangle9 = this.gameView.getCageRects()[8];
+        Rectangle rectangle10 = this.gameView.getCageRects()[9];
+        Rectangle rectangle11 = this.gameView.getCageRects()[10];
+        Rectangle rectangle12 = this.gameView.getCageRects()[11];
+        Rectangle rectangle13 = this.gameView.getCageRects()[12];
+        Rectangle rectangle14 = this.gameView.getCageRects()[13];
+        Rectangle rectangle15 = this.gameView.getCageRects()[14];
+        Rectangle rectangle16 = this.gameView.getCageRects()[15];
+        Rectangle rectangle17 = this.gameView.getCageRects()[16];
+        Rectangle rectangle18 = this.gameView.getCageRects()[17];
+        Rectangle rectangle19 = this.gameView.getCageRects()[18];
+        Rectangle rectangle20 = this.gameView.getCageRects()[19];
+        
+        
         boolean isBallInRectangle1 = rectangle1.contains(ballTarget[0], ballTarget[1]);
         boolean isBallInRectangle2 = rectangle2.contains(ballTarget[0], ballTarget[1]);
         boolean isBallInRectangle3 = rectangle3.contains(ballTarget[0], ballTarget[1]);
         boolean isBallInRectangle4 = rectangle4.contains(ballTarget[0], ballTarget[1]);
         boolean isBallInRectangle5 = rectangle5.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle6 = rectangle6.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle7 = rectangle7.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle8 = rectangle8.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle9 = rectangle9.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle10 = rectangle10.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle11 = rectangle11.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle12 = rectangle12.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle13 = rectangle13.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle14 = rectangle14.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle15 = rectangle15.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle16 = rectangle16.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle17 = rectangle17.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle18 = rectangle18.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle19 = rectangle19.contains(ballTarget[0], ballTarget[1]);
+        boolean isBallInRectangle20 = rectangle20.contains(ballTarget[0], ballTarget[1]);
+        
  
             // If the ball is not in any rectangle, return true
-            if (!isBallInRectangle1 && !isBallInRectangle2 && !isBallInRectangle3 && !isBallInRectangle4 && !isBallInRectangle5 ) {
-                return true;
+            if (!isBallInRectangle1 && !isBallInRectangle2 && !isBallInRectangle3 && !isBallInRectangle4 && !isBallInRectangle5 &&
+                !isBallInRectangle6 && !isBallInRectangle7 && !isBallInRectangle8 && !isBallInRectangle9 && !isBallInRectangle10 &&
+                !isBallInRectangle11 && !isBallInRectangle12 && !isBallInRectangle13 && !isBallInRectangle14 && !isBallInRectangle15 &&
+                !isBallInRectangle16 && !isBallInRectangle17 && !isBallInRectangle18 && !isBallInRectangle19 && !isBallInRectangle20) {
+                return true; // If the ball is not in any rectangle, it's a save
             }
             
             else {
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 20; i++) {
                      Rectangle rectangle = this.gameView.getCageRects()[i]; // Get the current rectangle
 
                     // Check if both the ball and gloves are in the same rectangle
@@ -180,13 +216,55 @@ public class GameController {
 
     private double[] randomGoalkeeperPosition() {
         Random random = new Random();
-        int choice = random.nextInt(5);
+        int choice = random.nextInt(20);
+            // Calculate the centers of each rectangle
+        double[] topLeft1Center = new double[]{216 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTL1 center
+        double[] topLeft2Center = new double[]{286 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTL2 center
+        double[] topLeft3Center = new double[]{216 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTL3 center
+        double[] topLeft4Center = new double[]{286 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTL4 center
+
+        double[] bottomLeft1Center = new double[]{216 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBL1 center
+        double[] bottomLeft2Center = new double[]{286 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBL2 center
+        double[] bottomLeft3Center = new double[]{216 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBL3 center
+        double[] bottomLeft4Center = new double[]{286 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBL4 center
+
+        double[] topRight1Center = new double[]{503 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTR1 center
+        double[] topRight2Center = new double[]{573 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTR2 center
+        double[] topRight3Center = new double[]{503 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTR3 center
+        double[] topRight4Center = new double[]{573 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTR4 center
+
+        double[] bottomRight1Center = new double[]{503 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBR1 center
+        double[] bottomRight2Center = new double[]{573 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBR2 center
+        double[] bottomRight3Center = new double[]{503 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBR3 center
+        double[] bottomRight4Center = new double[]{573 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBR4 center
+
+        double[] middle1Center = new double[]{360 + 65 / 2.0, 95 + 85 / 2.0}; // cageRectM1 center
+        double[] middle2Center = new double[]{430 + 65 / 2.0, 95 + 85 / 2.0}; // cageRectM2 center
+        double[] middle3Center = new double[]{360 + 65 / 2.0, 185 + 85 / 2.0}; // cageRectM3 center
+        double[] middle4Center = new double[]{430 + 65 / 2.0, 185 + 85 / 2.0}; // cageRectM4 center
 
         switch (choice) {
-            case 0: return new double[]{220, 110}; // Top left
-            case 1: return new double[]{220, 200}; // Bottom left
-            case 2: return new double[]{540, 110}; // Top right
-            case 3: return new double[]{540, 200}; // Bottom right
+            case 0: return topLeft1Center; // Top left
+            case 1: return topLeft2Center; // Bottom left
+            case 2: return topLeft3Center; // Top right
+            case 3: return topLeft4Center; // Bottom right
+            case 4: return bottomLeft1Center; // Bottom right
+            case 5: return bottomLeft2Center; // Bottom right
+            case 6: return bottomLeft3Center; // Bottom right
+            case 7: return bottomLeft4Center; // Bottom right
+            case 8: return topRight1Center; // Bottom right
+            case 9: return topRight2Center; // Bottom right
+            case 10: return topRight3Center; // Bottom right
+            case 11: return topRight4Center; // Bottom right
+            case 12: return bottomRight1Center; // Bottom right
+            case 13: return bottomRight2Center; // Bottom right
+            case 14: return bottomRight3Center; // Bottom right
+            case 15: return bottomRight4Center; // Bottom right
+            case 16: return middle1Center; // Bottom right
+            case 17: return middle2Center; // Bottom right
+            case 18: return middle3Center; // Bottom right
+            case 19: return middle4Center; // Bottom right
+            
             default: return new double[]{410, 140}; // Middle
         }
     }
