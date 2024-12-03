@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -50,7 +52,8 @@ public class GameView {
         Image terrainImage = new Image(getClass().getResource("/images/backgroud_penalty.png").toExternalForm());
         Image ballonImage = new Image(getClass().getResource("/images/ballon.png").toExternalForm());
         Image glovesImage = new Image(getClass().getResource("/images/gloves.png").toExternalForm());
-
+        
+               
         // Initialize terrain image
         terrainView = new ImageView(terrainImage);
         terrainView.setFitWidth(900);
@@ -286,5 +289,11 @@ public class GameView {
         return new Rectangle[]{cageRectTL, cageRectBL, cageRectTR, cageRectBR, cageRectM};
     }
     
+    public void refereeWhistle(){
+        String refereeWhistle = getClass().getResource("/audio/whistle.mp3").toExternalForm();
+        MediaPlayer whistle = new MediaPlayer(new Media(refereeWhistle));
+        whistle.setVolume(0.4);
+        whistle.play(); 
+    }
     
 }

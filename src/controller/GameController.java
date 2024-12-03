@@ -40,6 +40,7 @@ public class GameController {
     }
 
     private void setupPlayerControls() {
+        gameView.refereeWhistle();
         gameView.getPane().setOnMouseClicked(event -> {
             if (isPlayerTurn) {
                 double clickX = event.getX();
@@ -80,6 +81,7 @@ public class GameController {
     }
 
     private void handleAITurn() {
+        gameView.refereeWhistle();
         System.out.println("AI's Turn!");
 
         resetPositions();

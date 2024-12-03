@@ -31,6 +31,7 @@ import model.structure.Match;
  */
 public class GamePreview {
     private MediaView mediaView;
+    private MediaPlayer song;
     private Button startButton;
     private Scene scene;
     private Match match;
@@ -51,17 +52,30 @@ public class GamePreview {
         if (jeu.getCoupe()!=null){
             if (jeu.getCoupe().getNom()=="World Cup"){
                 backgroundImage = new ImageView(new Image(getClass().getResourceAsStream("/images/worldcup.jpg")));
+                String WCSong = getClass().getResource("/audio/WCSong.mp3").toExternalForm();
+                song = new MediaPlayer(new Media(WCSong));
+                song.setVolume(0.4);
+                
             }
             else if (jeu.getCoupe().getNom()=="Champions League"){
                 backgroundImage = new ImageView( new Image(getClass().getResourceAsStream("/images/championsleague.jpg")));
+                String CLSong = getClass().getResource("/audio/CLSong.mp3").toExternalForm();
+                song = new MediaPlayer(new Media(CLSong));
+                song.setVolume(0.4);
             }
         }
         else if (jeu.getChampionnat()!=null){
             if (jeu.getChampionnat().getNom()=="La Liga"){
                 backgroundImage = new ImageView(new Image(getClass().getResourceAsStream("/images/laliga.png")));
+                String LLSong = getClass().getResource("/audio/LLSong.mp3").toExternalForm();
+                song = new MediaPlayer(new Media(LLSong));
+                song.setVolume(0.4);
             }
             else if (jeu.getChampionnat().getNom()=="Premier League"){
                 backgroundImage = new ImageView(new Image(getClass().getResourceAsStream("/images/premierleague.jpeg")));
+                String PLSong = getClass().getResource("/audio/PLSong.mp3").toExternalForm();
+                song = new MediaPlayer(new Media(PLSong));
+                song.setVolume(0.4);
             }
         }
         
@@ -96,7 +110,7 @@ public class GamePreview {
         StackPane layout = new StackPane();
         layout.setAlignment(Pos.CENTER);
         layout.getChildren().addAll(mediaView, backgroundImage, titleText, startButton);
-
+        song.play();        
         // Positionnement
         StackPane.setAlignment(titleText, Pos.TOP_CENTER);
         StackPane.setMargin(titleText, new javafx.geometry.Insets(100, 0, 0, 0));
@@ -157,6 +171,9 @@ public class GamePreview {
     }
     public Button getNextButton(){
         return this.startButton;
+    }
+    public MediaPlayer getSong(){
+        return song;
     }
    
 }

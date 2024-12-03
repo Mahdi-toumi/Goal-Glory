@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.structure.Match;
 import view.BracketView;
+import view.ChoisirTournoiView;
 import view.RankingView;
 import view.SaisirPlayerView;
 
@@ -43,7 +44,7 @@ public class ChoisirEquipeController {
                 view.selectButton(equipeButton);
             });
         }
-        view.getBackButton().setOnAction(e -> goBackToSaisirPlayerView());
+        view.getBackButton().setOnAction(e -> goBackToChoisirTournoisView());
 
     }
 
@@ -91,12 +92,12 @@ public class ChoisirEquipeController {
         }
     }
     
-     private void goBackToSaisirPlayerView() {
+     private void goBackToChoisirTournoisView() {
         // Créer la vue de saisie
-        SaisirPlayerView SaisirPlayerView = new SaisirPlayerView();
+        ChoisirTournoiView ChoisirTournoiView = new ChoisirTournoiView();
         Stage stage = (Stage) view.getBackButton().getScene().getWindow();
-        stage.setScene(SaisirPlayerView.getScene());
-        new SaisirPlayerController(SaisirPlayerView, jeu);
+        stage.setScene(ChoisirTournoiView.getScene());
+        new ChoisirTournoiController(ChoisirTournoiView, jeu);
     }
      
 }
