@@ -5,12 +5,13 @@
 package model.structure;
 
 import model.elements.Equipe;
+import model.elements.Joueur;
 
 /**
  *
  * @author toumi
  */
-public class Player {
+public class Player implements Comparable<Player> {
     private String nom ; 
     private double score ; 
     private Equipe equipe ;
@@ -54,6 +55,12 @@ public class Player {
             System.out.println("Les points doivent être positifs.");
         }
     }
+    
+    @Override
+    public int compareTo(Player other) {
+        return Double.compare(this.score, other.score);
+    }
+    
     
     @Override
     public String toString() {
