@@ -31,6 +31,13 @@ public class WelcomeView {
     public WelcomeView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
+        
+        
+        String MenuSong = getClass().getResource("/audio/MenuSong.mp3").toExternalForm();
+        song = new MediaPlayer(new Media(MenuSong));
+        song.setVolume(0.4);
+        
+        
         // Créer une vidéo en arrière-plan
         String videoPath = getClass().getResource("/images/Intro.mp4").toExternalForm();
         Media media = new Media(videoPath);
@@ -41,6 +48,10 @@ public class WelcomeView {
         mediaView = new MediaView(mediaPlayer);
         mediaView.setFitWidth(900);
         mediaView.setFitHeight(600);
+        
+
+
+
 
         // Créer une image pour l'arrière-plan qui s'affiche après 4 secondes
         ImageView backgroundImage = new ImageView(new Image(getClass().getResourceAsStream("/images/Background.jpeg")));
@@ -177,13 +188,10 @@ public class WelcomeView {
         StackPane.setMargin(quitButton, new javafx.geometry.Insets(100, 0, 0, 0));
 
         
-        String MenuSong = getClass().getResource("/audio/MenuSong.mp3").toExternalForm();
-        song = new MediaPlayer(new Media(MenuSong));
-        song.setVolume(0.4);
-        song.play();
+        
         // Créer la scène
         Scene welcomeScene = new Scene(layout, 900, 600);
-
+        song.play();
         // Configurer la scène et afficher la fenêtre
         primaryStage.setTitle("Welcome to Goal Glory");
         primaryStage.setScene(welcomeScene);
