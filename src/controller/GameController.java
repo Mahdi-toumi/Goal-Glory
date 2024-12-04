@@ -55,15 +55,17 @@ public class GameController {
 
     private void handlePlayerTurn(double clickX, double clickY) {
         System.out.println("Your Turn to Shoot!");
-
+        
         // Animate the ball to the target position
-        gameView.animateBallToPosition(clickX, clickY);
+        //gameView.animateBallToPosition(clickX, clickY);
 
         // AI Goalkeeper random position
         double[] aiGlovesPosition = randomGoalkeeperPosition();
-        gameView.animateGlovesToPosition(aiGlovesPosition[0], aiGlovesPosition[1]);
+        //gameView.animateGlovesToPosition(aiGlovesPosition[0], aiGlovesPosition[1]);
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+        gameView.animation(clickX,clickY,aiGlovesPosition[0], aiGlovesPosition[1]);
+        
+        PauseTransition pause = new PauseTransition(Duration.seconds(2.7));
         pause.setOnFinished(e -> {
             boolean isSaved = checkIfSaved(new double[]{clickX, clickY}, aiGlovesPosition);
 
@@ -97,10 +99,11 @@ public class GameController {
             double playerGlovesX = event.getX();
             double playerGlovesY = event.getY();
 
-            gameView.animateGlovesToPosition(playerGlovesX, playerGlovesY);
-            gameView.animateBallToPosition(aiShotTarget[0], aiShotTarget[1]);
+            //gameView.animateGlovesToPosition(playerGlovesX, playerGlovesY);
+            //gameView.animateBallToPosition(aiShotTarget[0], aiShotTarget[1]);
+            gameView.animation(aiShotTarget[0], aiShotTarget[1],playerGlovesX, playerGlovesY);
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            PauseTransition pause = new PauseTransition(Duration.seconds(2.7));
             pause.setOnFinished(e -> {
                 boolean isSaved = checkIfSaved(aiShotTarget, new double[]{playerGlovesX, playerGlovesY});
 
@@ -132,6 +135,7 @@ public class GameController {
     private void resetPositions() {
         gameView.resetBallPosition();
         gameView.resetGlovesPosition();
+        gameView.resetPlayerPosition();
     }
     
 

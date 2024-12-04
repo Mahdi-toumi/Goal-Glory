@@ -23,6 +23,7 @@ import javafx.scene.media.MediaView;
 public class WelcomeView {
 
     private MediaView mediaView;
+    private MediaPlayer song;
     private Button startButton;
     private Button quitButton;
     private Stage primaryStage;
@@ -175,6 +176,11 @@ public class WelcomeView {
         StackPane.setAlignment(quitButton, Pos.CENTER);
         StackPane.setMargin(quitButton, new javafx.geometry.Insets(100, 0, 0, 0));
 
+        
+        String MenuSong = getClass().getResource("/audio/MenuSong.mp3").toExternalForm();
+        song = new MediaPlayer(new Media(MenuSong));
+        song.setVolume(0.4);
+        song.play();
         // Créer la scène
         Scene welcomeScene = new Scene(layout, 900, 600);
 

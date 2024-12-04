@@ -22,6 +22,7 @@ public class SaisirPlayerView {
 
     public SaisirPlayerView() {
         // Main container
+        
         StackPane root = new StackPane();
 
         // Background image with a football field theme

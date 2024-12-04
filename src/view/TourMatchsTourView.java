@@ -51,7 +51,7 @@ public class TourMatchsTourView {
         StackPane root = new StackPane();
 
         // Titre
-        int tour = this.jeu.getTour()+1 ;
+        int tour = this.jeu.getTour()+1;
         Label title = new Label("Match du Tour num : "+ tour);
         title.setFont(Font.font("Sports World", FontWeight.BOLD, 30));
         title.setTextFill(Color.WHITE);

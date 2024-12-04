@@ -1,5 +1,6 @@
 package view;
 
+import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
@@ -51,6 +52,8 @@ public class GameView {
     private Jeu jeu ;
     private Text playerNameText;
     private Text TournoiNameText ;
+    private ImageView player;
+    private ImageView playerGIF;
     Equipe equipe1 ;
     Equipe equipe2 ;
     
@@ -67,6 +70,26 @@ public class GameView {
         Image terrainImage = new Image(getClass().getResource("/images/backgroud_penalty.png").toExternalForm());
         Image ballonImage = new Image(getClass().getResource("/images/ballon.png").toExternalForm());
         Image glovesImage = new Image(getClass().getResource("/images/gloves.png").toExternalForm());
+        
+        Image shootingImage = new Image(getClass().getResource("/images/playerFirstFrame.png").toExternalForm());
+        player = new ImageView(shootingImage);
+    
+        // Set the size and initial position for the GIF
+        player.setFitWidth(178);  // Adjust width as needed
+        player.setFitHeight(199); // Adjust height as needed
+        player.setLayoutX(217);   // Initial x-position (centered below the ball)
+        player.setLayoutY(270);   // Initial y-position (adjust for layout)
+        
+        Image shootingGIF = new Image(getClass().getResource("/images/Tir.gif").toExternalForm());
+        playerGIF = new ImageView(shootingGIF);
+    
+        // Set the size and initial position for the GIF
+        playerGIF.setFitWidth(200);  // Adjust width as needed
+        playerGIF.setFitHeight(200); // Adjust height as needed
+        playerGIF.setLayoutX(220);   // Initial x-position (centered below the ball)
+        playerGIF.setLayoutY(255);   // Initial y-position (adjust for layout)
+        
+        playerGIF.setVisible(false);
         
                
         // Initialize terrain image
@@ -89,54 +112,54 @@ public class GameView {
 
         // Pour le rectangle cageRectTL
         this.cageRectTL1 = new Rectangle(216, 95, 70, 46);
-        cageRectTL1.setFill(Color.RED);
+        cageRectTL1.setFill(Color.TRANSPARENT);
         this.cageRectTL2 = new Rectangle(286, 95, 70, 46);
-        cageRectTL2.setFill(Color.BLUE);
+        cageRectTL2.setFill(Color.TRANSPARENT);
         this.cageRectTL3 = new Rectangle(216, 141, 70, 46);
-        cageRectTL3.setFill(Color.GREEN);
+        cageRectTL3.setFill(Color.TRANSPARENT);
         this.cageRectTL4 = new Rectangle(286, 141, 70, 46);
-        cageRectTL4.setFill(Color.YELLOW);
+        cageRectTL4.setFill(Color.TRANSPARENT);
 
         // Pour le rectangle cageRectBL
         this.cageRectBL1 = new Rectangle(216, 180, 70, 46);
-        cageRectBL1.setFill(Color.RED);
+        cageRectBL1.setFill(Color.TRANSPARENT);
         this.cageRectBL2 = new Rectangle(286, 180, 70, 46);
-        cageRectBL2.setFill(Color.BLUE);
+        cageRectBL2.setFill(Color.TRANSPARENT);
         this.cageRectBL3 = new Rectangle(216, 226, 70, 46);
-        cageRectBL3.setFill(Color.GREEN);
+        cageRectBL3.setFill(Color.TRANSPARENT);
         this.cageRectBL4 = new Rectangle(286, 226, 70, 46);
-        cageRectBL4.setFill(Color.YELLOW);
+        cageRectBL4.setFill(Color.TRANSPARENT);
 
         // Pour le rectangle cageRectTR
         this.cageRectTR1 = new Rectangle(503, 95, 70, 46);
-        cageRectTR1.setFill(Color.RED);
+        cageRectTR1.setFill(Color.TRANSPARENT);
         this.cageRectTR2 = new Rectangle(573, 95, 70, 46);
-        cageRectTR2.setFill(Color.BLUE);
+        cageRectTR2.setFill(Color.TRANSPARENT);
         this.cageRectTR3 = new Rectangle(503, 141, 70, 46);
-        cageRectTR3.setFill(Color.GREEN);
+        cageRectTR3.setFill(Color.TRANSPARENT);
         this.cageRectTR4 = new Rectangle(573, 141, 70, 46);
-        cageRectTR4.setFill(Color.YELLOW);
+        cageRectTR4.setFill(Color.TRANSPARENT);
 
         // Pour le rectangle cageRectBR
         this.cageRectBR1 = new Rectangle(503, 180, 70, 46);
-        cageRectBR1.setFill(Color.RED);
+        cageRectBR1.setFill(Color.TRANSPARENT);
         this.cageRectBR2 = new Rectangle(573, 180, 70, 46);
-        cageRectBR2.setFill(Color.BLUE);
+        cageRectBR2.setFill(Color.TRANSPARENT);
         this.cageRectBR3 = new Rectangle(503, 226, 70, 46);
-        cageRectBR3.setFill(Color.GREEN);
+        cageRectBR3.setFill(Color.TRANSPARENT);
         this.cageRectBR4 = new Rectangle(573, 226, 70, 46);
-        cageRectBR4.setFill(Color.YELLOW);
+        cageRectBR4.setFill(Color.TRANSPARENT);
 
         // Pour le rectangle cageRectM
         
         this.cageRectM1 = new Rectangle(357, 95, 75, 90);
-        cageRectM1.setFill(Color.RED);
+        cageRectM1.setFill(Color.TRANSPARENT);
         this.cageRectM2 = new Rectangle(430, 95, 72, 90);
-        cageRectM2.setFill(Color.BLUE);
+        cageRectM2.setFill(Color.TRANSPARENT);
         this.cageRectM3 = new Rectangle(357, 185, 75, 90);
-        cageRectM3.setFill(Color.GREEN);
+        cageRectM3.setFill(Color.TRANSPARENT);
         this.cageRectM4 = new Rectangle(430, 185, 72, 90);
-        cageRectM4.setFill(Color.YELLOW);
+        cageRectM4.setFill(Color.TRANSPARENT);
 
         
         // Player's name and score in the top-left corner
@@ -212,15 +235,15 @@ public class GameView {
 
         // Add all elements to the pane
         Pane = new Pane();
-Pane.getChildren().addAll(
-    terrainView,
-    cageRectTL1, cageRectTL2, cageRectTL3, cageRectTL4,
-    cageRectBL1, cageRectBL2, cageRectBL3, cageRectBL4,
-    cageRectTR1, cageRectTR2, cageRectTR3, cageRectTR4,
-    cageRectBR1, cageRectBR2, cageRectBR3, cageRectBR4,
-    cageRectM1, cageRectM2, cageRectM3, cageRectM4,
-    ballonView, glovesView, scoreBoardButton, playerNameText, TournoiNameText
-);
+        Pane.getChildren().addAll(
+        terrainView,
+        cageRectTL1, cageRectTL2, cageRectTL3, cageRectTL4,
+        cageRectBL1, cageRectBL2, cageRectBL3, cageRectBL4,
+        cageRectTR1, cageRectTR2, cageRectTR3, cageRectTR4,
+        cageRectBR1, cageRectBR2, cageRectBR3, cageRectBR4,
+        cageRectM1, cageRectM2, cageRectM3, cageRectM4,
+        ballonView, glovesView, scoreBoardButton, playerNameText, TournoiNameText,player, playerGIF
+        );
 
         // Set scene
         scene = new Scene(Pane, 900, 600);
@@ -243,12 +266,18 @@ Pane.getChildren().addAll(
         glovesView.setTranslateX(0);
         glovesView.setTranslateY(0);
     }
+    
+    public void resetPlayerPosition(){
+       
+        player.setVisible(true);
+        playerGIF.setVisible(false);        
+    }
 
     public void animateBallToPosition(double targetX, double targetY) {
         // Calculate movement
+        
         double deltaX = targetX - ballonView.getLayoutX();
         double deltaY = targetY - ballonView.getLayoutY();
-
         // Translate transition for the ball
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setNode(ballonView);
@@ -267,15 +296,22 @@ Pane.getChildren().addAll(
         rotateTransition.setAutoReverse(false);
 
         // Play transitions
+        
         translateTransition.play();
         rotateTransition.play();
+        
+                
+        
     }
     
     public void animateGlovesToPosition(double targetX, double targetY) {
         // Calculate movement
         double deltaX = targetX - glovesView.getLayoutX();
         double deltaY = targetY - glovesView.getLayoutY();
-
+        
+        
+        
+        
         // Translate transition for the gloves
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setNode(glovesView);
@@ -287,7 +323,40 @@ Pane.getChildren().addAll(
 
         // Play transition
         translateTransition.play();
+       
+        
     }
+    
+    public void animation(double targetX, double targetY, double saveX, double saveY){
+        startPlayerAnimation();
+        PauseTransition pause = new PauseTransition(Duration.seconds(1.35));
+        pause.setOnFinished(e -> {
+            stopPlayerAnimation();
+            animateBallToPosition( targetX,  targetY);
+            animateGlovesToPosition( saveX, saveY);
+        });
+        pause.play();
+
+        
+    }
+    
+    public void resetPlayerGIF() {
+        // Reload the GIF to reset its animation
+        Image shootingGIF = new Image(getClass().getResource("/images/Tir.gif").toExternalForm());
+        playerGIF.setImage(shootingGIF);
+        playerGIF.setVisible(true);
+    }
+
+    public void startPlayerAnimation() {
+        player.setVisible(false);
+        resetPlayerGIF(); 
+    }
+    
+    
+    public void stopPlayerAnimation() {
+        playerGIF.setVisible(false); 
+        player.setVisible(true); 
+    }    
 
     // Method to update the scoreboard
     public void updateScoreBoard(int playerScore, int aiScore) {

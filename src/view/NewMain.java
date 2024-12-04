@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-/*package view;
+package view;
 
 import controller.ChampionsController;
 import controller.WelcomeController;
@@ -23,6 +23,7 @@ public class NewMain extends Application {
         Jeu jeu = new Jeu();
         Coupe Coupe= new Coupe("World Cup");
         jeu.setCoupe(Coupe);
+        Coupe.Initialiser_tournoi();
         Equipe e = new Equipe ("France" , "Hama " , "FRA") ;
         Player p = new Player ("Mahdi",0) ;
         jeu.setPlayer(p);
@@ -42,4 +43,3 @@ public class NewMain extends Application {
     }
 }
 
-*/

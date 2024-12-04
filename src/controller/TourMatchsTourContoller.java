@@ -45,7 +45,7 @@ public class TourMatchsTourContoller {
         if (jeu.getCoupe() != null) {
             this.matchs = jeu.getCoupe().getTours().get(jeu.getTour()).getMatchs();
         } else if (jeu.getChampionnat() != null) {
-            this.matchs = jeu.getChampionnat().getTours().get(jeu.getTour()+1).getMatchs();
+            this.matchs = jeu.getChampionnat().getTours().get(jeu.getTour()).getMatchs();
         }
         
 
