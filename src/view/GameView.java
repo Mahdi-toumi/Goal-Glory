@@ -71,9 +71,25 @@ public class GameView {
         Image terrainImage = new Image(getClass().getResource("/images/backgroud_penalty.png").toExternalForm());
         Image ballonImage = new Image(getClass().getResource("/images/ballon.png").toExternalForm());
         Image glovesImage = new Image(getClass().getResource("/images/gloves.png").toExternalForm());
-        Image scoreImage = new Image(getClass().getResource("/images/PLscore.png").toExternalForm());
         
-        scoreImage = new Image(getClass().getResource("/images/Scoreboard.png").toExternalForm());
+        Image scoreImage = new Image(getClass().getResource("/images/Scoreboard.png").toExternalForm());
+        
+        if (this.jeu.getCoupe()!= null && this.jeu.getCoupe().getNom() == "Champions League" ){
+            scoreImage = new Image(getClass().getResource("/images/Cscore.jpg").toExternalForm());
+            scoreView = new ImageView(scoreImage);
+            scoreView.setFitWidth(580);
+            scoreView.setFitHeight(80);
+            scoreView.setLayoutX(150);   // Initial x-position (centered below the ball)
+            scoreView.setLayoutY(490);   // Initial y-position (adjust for layout)
+        }
+        if (this.jeu.getChampionnat()!= null && this.jeu.getChampionnat().getNom() == "Premier League" ){
+            scoreImage = new Image(getClass().getResource("/images/PLscore.png").toExternalForm());
+            scoreView = new ImageView(scoreImage);
+            scoreView.setFitWidth(700);
+            scoreView.setFitHeight(500);
+            scoreView.setLayoutX(190);   // Initial x-position (centered below the ball)
+            scoreView.setLayoutY(260);   // Initial y-position (adjust for layout)
+        }
         
         
         
@@ -98,11 +114,7 @@ public class GameView {
         
         playerGIF.setVisible(false);
         
-        scoreView = new ImageView(scoreImage);
-        scoreView.setFitWidth(500);
-        scoreView.setFitHeight(500);
-        scoreView.setLayoutX(190);   // Initial x-position (centered below the ball)
-        scoreView.setLayoutY(260);   // Initial y-position (adjust for layout)
+        
         
         
                
@@ -229,7 +241,7 @@ public class GameView {
         }
         
         int fixedLength = 34; // Longueur totale pour "Team Alpha" et l'espace avant "0"
-        int espaceavantnom2 = fixedLength  - equipe2.getNom().length() ;
+        int espaceavantnom2 = fixedLength  - equipe2.getAbr().length() ;
         
 
 
@@ -252,7 +264,7 @@ public class GameView {
 
         scoreBoardButton = new Button(buttonText);
         scoreBoardButton.setFont(Font.font("Sports World", 20));
-        scoreBoardButton.setTextFill(Color.BLACK);
+        scoreBoardButton.setTextFill(Color.WHITE);
         scoreBoardButton.setStyle(
             "-fx-background-color: transparent; " + // Football field gradient
             "-fx-border-color: transparent; " +                                // White border
@@ -267,7 +279,7 @@ public class GameView {
         scoreBoardButton.setPrefWidth(500);  // Set button width
         scoreBoardButton.setPrefHeight(200); // Set button height
         scoreBoardButton.setLayoutX(190);   // Center the button horizontally
-        scoreBoardButton.setLayoutY(410);   // Position at the bottom of the screen
+        scoreBoardButton.setLayoutY(430);   // Position at the bottom of the screen
         scoreBoardButton.setFocusTraversable(false); // Remove focus highlight
 
         // Add all elements to the pane
@@ -399,7 +411,7 @@ public class GameView {
     public void updateScoreBoard(int playerScore, int aiScore) {
         
         int fixedLength = 34; // Longueur totale pour "Team Alpha" et l'espace avant "0"
-        int espaceavantnom2 = fixedLength -  equipe2.getNom().length() ;
+        int espaceavantnom2 = fixedLength -  equipe2.getAbr().length() ;
 
         // Formater le texte de chaque équipe
         String equipe1Formatted = "   "+playerScore+"    "+equipe1.getAbr()  ;

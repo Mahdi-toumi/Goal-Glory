@@ -44,6 +44,26 @@ public class GameController {
 
     private void setupPlayerControls() {
         gameView.refereeWhistle();
+        Text TurnText = new Text() ;
+        TurnText.setText("Your Turn to Shoot!");
+        
+            TurnText.setFill(Color.WHITE);
+            TurnText.setLayoutX(250); // Center the text horizontally
+            TurnText.setLayoutY(230); // Position it vertically
+                TurnText.setFont(Font.font("Sports World", 30));
+                TurnText.setStyle(
+                    "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #00FF00, #008000);" +  // Dégradé vert clair à vert foncé
+                    "-fx-stroke: black;" +                                                   // Contour noir
+                    "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                );
+                gameView.getPane().getChildren().add(TurnText);
+          PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
+        pause1.setOnFinished(e->{
+            TurnText.setText("");
+        });
+         pause1.play();
+                
         gameView.getPane().setOnMouseClicked(event -> {
             if (isPlayerTurn) {
                 double clickX = event.getX();
@@ -55,6 +75,8 @@ public class GameController {
 
     private void handlePlayerTurn(double clickX, double clickY) {
         System.out.println("Your Turn to Shoot!");
+        
+         
         
         // Animate the ball to the target position
         //gameView.animateBallToPosition(clickX, clickY);
@@ -92,7 +114,24 @@ public class GameController {
         resetPositions();
 
         double[] aiShotTarget = randomShotPosition();
-        System.out.println("Move your gloves to save the shot!");
+        System.out.println("Your Turn to save!");
+        Text TurnText = new Text() ;
+        TurnText.setLayoutX(250); // Center the text horizontally
+        TurnText.setLayoutY(230); // Position it vertically
+        TurnText.setText("Your Turn to save!");
+                TurnText.setFont(Font.font("Sports World", 30));
+                TurnText.setStyle(
+                    "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #00FF00, #008000);" +  // Dégradé vert clair à vert foncé
+                    "-fx-stroke: black;" +                                                   // Contour noir
+                    "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                    "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                );
+         gameView.getPane().getChildren().add(TurnText);
+        PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
+        pause1.setOnFinished(e->{
+            TurnText.setVisible(false);
+        });
+        pause1.play();
 
         Pane gamePane = gameView.getPane();
         gamePane.setOnMouseClicked(event -> {
