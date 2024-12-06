@@ -46,7 +46,8 @@ public final class Coupe extends Tournoi {
         ArrayList<Match> tousLesMatchs = new ArrayList<>();
 
         // Mélanger les équipes pour générer des paires aléatoires pour le premier tour
-        Collections.shuffle(equipesRestantes);
+        if (this.getTourActuel()==0)
+            Collections.shuffle(equipesRestantes);
 
         // Créer des matchs pour le premier tour
         ArrayList<Match> matchsDuTour = new ArrayList<Match>();
