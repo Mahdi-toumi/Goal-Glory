@@ -4,8 +4,6 @@
  */
 package view;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import model.elements.Equipe;
+import model.elements.Joueur;
 import model.structure.Jeu;
 import model.structure.Match;
 
@@ -29,16 +28,16 @@ import model.structure.Match;
  *
  * @author toumi
  */
-public class TourMatchsTourView {
-    
+public class JoeursEquipeView {
     private Scene scene;
-    private Button NextButton;
+    private Equipe equipe ; 
     private Button gobackButton;
     private Jeu jeu ;
 
-    public TourMatchsTourView(Jeu jeu , List <Match> matchs) {
+    public JoeursEquipeView(Jeu jeu , Equipe equipe) {
         
         this.jeu = jeu ;
+        this.equipe = equipe ;
 
 
 
@@ -52,7 +51,7 @@ public class TourMatchsTourView {
 
         // Titre
         int tour = this.jeu.getTour()+1;
-        Label title = new Label("Match du Tour num : "+ tour);
+        Label title = new Label(equipe.getNom());
         title.setFont(Font.font("Sports World", FontWeight.BOLD, 30));
         title.setTextFill(Color.WHITE);
 
@@ -77,44 +76,36 @@ public class TourMatchsTourView {
                  "-fx-text-alignment: center;" );
 
         // En-têtes de colonnes
-        Label team1Header = new Label("Equipe 1");
-        Label VSHeader = new Label("  ");
-        Label team2Header = new Label("Equipe 2");
+        Label team1Header = new Label("Nom");
+        Label team2Header = new Label("Poste");
         team1Header.setAlignment(Pos.CENTER);
-        VSHeader.setAlignment(Pos.CENTER);
         team2Header.setAlignment(Pos.CENTER);
         styleHeader(team1Header);
-        styleHeader(VSHeader);
         styleHeader(team2Header);
 
         gridPane.add(team1Header, 0, 0);
-        gridPane.add(VSHeader, 1, 0);
         gridPane.add(team2Header, 2, 0);
         gridPane.setAlignment(Pos.CENTER);
 
         
 
-    for (int i = 0; i < matchs.size(); i++) {
-        Match match = matchs.get(i);
+    for (int i = 0; i < equipe.getJoueurs().size(); i++) {
+        Joueur joueur = equipe.getJoueurs().get(i);
 
         // Créer les labels pour afficher le classement
 
-        Label teamLabel1 = new Label(match.getEquipe1().getNom());
-        Label VsLabel = new Label("VS");
-        Label teamLabel2 = new Label(match.getEquipe2().getNom());
-        teamLabel1.setAlignment(Pos.CENTER);
-        VsLabel.setAlignment(Pos.CENTER);
-        teamLabel2.setAlignment(Pos.CENTER);
+        Label Nomjoeur = new Label(joueur.getPrenom() +" " +joueur.getNom());
+        Label Poste = new Label(joueur.getPoste().toString());
+        Nomjoeur.setAlignment(Pos.CENTER);
+        Poste.setAlignment(Pos.CENTER);
 
         // Appliquer le style à chaque cellule (optionnel)
-        styleCell(teamLabel1);
-        styleCell(VsLabel);
-        styleCell(teamLabel2);
+        styleCell(Nomjoeur);
+        styleCell(Poste);
 
         // Ajouter les labels à la GridPane
-        gridPane.add(teamLabel1, 0, i + 1); // La première colonne est pour le rang
-        gridPane.add(VsLabel, 1, i + 1);  // La deuxième colonne est pour le nom de l'équipe
-        gridPane.add(teamLabel2, 2, i + 1); // La troisième colonne est pour les points
+        gridPane.add(Nomjoeur, 0, i + 1); // La première colonne est pour le rang
+        gridPane.add(Poste, 2, i + 1); // La troisième colonne est pour les points
         gridPane.setAlignment(Pos.CENTER);
     }
 
@@ -124,6 +115,8 @@ public class TourMatchsTourView {
         scrollPane.setStyle("-fx-background: transparent; -fx-padding: 0;");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         
+        scrollPane.setPrefHeight(400);  // Largeur préférée de 500 px
+        
         scrollPane.setPrefWidth(500);  // Largeur préférée de 500 px
 
         scrollPane.setMaxWidth(500);   // Largeur maximale de 600 px
@@ -131,10 +124,9 @@ public class TourMatchsTourView {
         scrollPane.setMinWidth(500);   // Largeur minimale de 400 px
 
         // Boutons
-        NextButton = createStyledButton("Next", "linear-gradient(to right, #00FF00, #008000)", "linear-gradient(to right, #32CD32, #006400)");
         gobackButton = createStyledButton("Retour", "#1e90ff", "#4682b4");
         
-        HBox  hbox = new HBox (20 , gobackButton,NextButton  ) ;
+        HBox  hbox = new HBox (20 , gobackButton) ;
         hbox.setAlignment(Pos.CENTER);
 
         // Conteneur principal vertical
@@ -226,10 +218,7 @@ public class TourMatchsTourView {
         return this.gobackButton ;
     }
     
-    public Button getNextButton(){
-        return this.NextButton ;
-    }
+    
 }
-
     
 

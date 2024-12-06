@@ -8,6 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.stage.Stage;
 import model.elements.Equipe;
+import model.elements.Gardien;
+import model.elements.Joueur;
+import model.elements.Poste;
+import model.elements.Tireur;
 import model.structure.Championnat;
 import model.structure.Coupe;
 import model.structure.Jeu;
@@ -88,9 +92,11 @@ public class ChoisirTournoiController {
     }
 
     private void setupChampionsLeague() throws AjoutEquipeException, AjoutTourException {
-        Coupe coupe = new Coupe("Champions League");
+        
         jeu.setChampionnat(null);
         jeu.setCoupe(null);
+        Coupe coupe = new Coupe("Champions League");
+        
 
         // Ajouter les équipes à la coupe
         String[][] equipesData = {
@@ -98,14 +104,48 @@ public class ChoisirTournoiController {
             {"PSG", "Luis Enrique","PSG"}, {"Bayern", "Thomas Tuchel","FCB"}, {"Chelsea", "Mauricio Pochettino","CHE"},
             {"Liverpool", "Jurgen Klopp","LIV"}, {"Juventus", "Massimiliano Allegri","JUV"}, {"Atletico", "Diego Simeone","ATM"},
             {"Inter", "Simone Inzaghi","INT"}, {"Milan", "Stefano Pioli","MIL"}, {"Dortmund", "Edin Terzic","DOR"},
-            {"Arsenal", "Mikel Arteta","ARS"}, {"Tottenham", "Ange Postecoglou","TOT"}, {"Napoli", "Rudi Garcia","NAP"}, {"Benfica", "Roger Schmidt","BEN"}
+            {"Arsenal", "Mikel Arteta","ARS"}, {"Tottenham", "Ange Postecoglou","TOT"}, {"Napoli", "Rudi Garcia","NAP"}, 
+            {"Benfica", "Roger Schmidt","BEN"}
+                
         };
 
         for (String[] data : equipesData) {
             coupe.ajouterEquipe(new Equipe(data[0], data[1],data[2]));
         }
-
         jeu.setCoupe(coupe);
+
+        // Ajouter 11 joueurs pour l'équipe de Real Madrid (RMA)
+        Equipe madrid = this.jeu.getCoupe().getEquipes().get(0);
+
+        // Gardien
+        madrid.ajouterJoueur(new Gardien("Courtois", "Thibaut", 31));
+
+        // Défenseurs
+        madrid.ajouterJoueur(new Tireur("Carvajal", "Dani", 32, Poste.DEFENSEUR));
+        madrid.ajouterJoueur(new Tireur("Alaba", "David", 31, Poste.DEFENSEUR));
+        madrid.ajouterJoueur(new Tireur("Rüdiger", "Antonio", 30, Poste.DEFENSEUR));
+        madrid.ajouterJoueur(new Tireur("Mendy", "Ferland", 29, Poste.DEFENSEUR));
+
+        // Milieux
+        madrid.ajouterJoueur(new Tireur("Modric", "Luka", 37, Poste.MILIEU));
+        madrid.ajouterJoueur(new Tireur("Kroos", "Toni", 34, Poste.MILIEU));
+        madrid.ajouterJoueur(new Tireur("Camavinga", "Eduardo", 21, Poste.MILIEU));
+
+        // Attaquants
+        madrid.ajouterJoueur(new Tireur("Vinicius", "Junior", 22, Poste.ATTAQUANT));
+        madrid.ajouterJoueur(new Tireur("Rodrygo", "Goes", 23, Poste.ATTAQUANT));
+        madrid.ajouterJoueur(new Tireur("Joselu", "Mato", 34, Poste.ATTAQUANT));
+
+        
+                           
+             
+
+        
+        
+                                
+
+
+       
         coupe.Initialiser_tournoi();
         coupe.Initialiser_tour();
         System.out.println("Tournoi 'Champions League' configuré avec " + coupe.getEquipes().size() + " équipes.");

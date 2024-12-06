@@ -24,6 +24,7 @@ public class GameView {
     private ImageView terrainView;
     private ImageView ballonView;
     private ImageView glovesView;
+    private ImageView scoreView;
     private double ballonStartX = 410;
     private double ballonStartY = 400;
     private double glovesStartX = 410;
@@ -70,6 +71,12 @@ public class GameView {
         Image terrainImage = new Image(getClass().getResource("/images/backgroud_penalty.png").toExternalForm());
         Image ballonImage = new Image(getClass().getResource("/images/ballon.png").toExternalForm());
         Image glovesImage = new Image(getClass().getResource("/images/gloves.png").toExternalForm());
+        Image scoreImage = new Image(getClass().getResource("/images/PLscore.png").toExternalForm());
+        
+        scoreImage = new Image(getClass().getResource("/images/Scoreboard.png").toExternalForm());
+        
+        
+        
         
         Image shootingImage = new Image(getClass().getResource("/images/playerFirstFrame.png").toExternalForm());
         player = new ImageView(shootingImage);
@@ -90,6 +97,13 @@ public class GameView {
         playerGIF.setLayoutY(255);   // Initial y-position (adjust for layout)
         
         playerGIF.setVisible(false);
+        
+        scoreView = new ImageView(scoreImage);
+        scoreView.setFitWidth(500);
+        scoreView.setFitHeight(500);
+        scoreView.setLayoutX(190);   // Initial x-position (centered below the ball)
+        scoreView.setLayoutY(260);   // Initial y-position (adjust for layout)
+        
         
                
         // Initialize terrain image
@@ -214,23 +228,46 @@ public class GameView {
             }   
         }
         
+        int fixedLength = 34; // Longueur totale pour "Team Alpha" et l'espace avant "0"
+        int espaceavantnom2 = fixedLength  - equipe2.getNom().length() ;
+        
 
-        scoreBoardButton = new Button(equipe1.getNom() + "    0 | 0    " + equipe2.getNom());
+
+        
+
+
+        // Formater le texte de chaque équipe
+        String equipe1Formatted = "   0      "+equipe1.getAbr()  ;
+        String equipe2Formatted = " ".repeat(espaceavantnom2) + equipe2.getAbr()+"      0   " ;
+
+
+
+        // Créer le texte final
+        String buttonText = equipe1Formatted + equipe2Formatted;
+
+        // Appliquer le texte au bouton
+        scoreBoardButton = new Button(buttonText);
+        
+
+
+        scoreBoardButton = new Button(buttonText);
         scoreBoardButton.setFont(Font.font("Sports World", 20));
-        scoreBoardButton.setTextFill(Color.WHITE);
+        scoreBoardButton.setTextFill(Color.BLACK);
         scoreBoardButton.setStyle(
-            "-fx-background-color: linear-gradient(#4caf50, #087f23); " + // Football field gradient
-            "-fx-border-color: #ffffff; " +                                // White border
-            "-fx-border-width: 3px; " +                                   // Thick border
+            "-fx-background-color: transparent; " + // Football field gradient
+            "-fx-border-color: transparent; " +                                // White border
+            "-fx-border-width: 1px; " +                                   // Thick border
             "-fx-background-radius: 20; " +                               // Rounded corners
             "-fx-border-radius: 20; " +                                   // Match background radius
-            "-fx-padding: 10; "   +                                        // Padding for better spacing
-            "-fx-background-opacity: 0.5;"          
+            "-fx-padding: 0 ; "   +                                        // Padding for better spacing
+            "-fx-background-opacity: 0;"          
         );
-        scoreBoardButton.setPrefWidth(450);  // Set button width
-        scoreBoardButton.setPrefHeight(60); // Set button height
-        scoreBoardButton.setLayoutX(225);   // Center the button horizontally
-        scoreBoardButton.setLayoutY(530);   // Position at the bottom of the screen
+        scoreBoardButton.setMaxWidth(500);  // Set button width
+        scoreBoardButton.setMinWidth(500);  // Set button width
+        scoreBoardButton.setPrefWidth(500);  // Set button width
+        scoreBoardButton.setPrefHeight(200); // Set button height
+        scoreBoardButton.setLayoutX(190);   // Center the button horizontally
+        scoreBoardButton.setLayoutY(410);   // Position at the bottom of the screen
         scoreBoardButton.setFocusTraversable(false); // Remove focus highlight
 
         // Add all elements to the pane
@@ -242,7 +279,7 @@ public class GameView {
         cageRectTR1, cageRectTR2, cageRectTR3, cageRectTR4,
         cageRectBR1, cageRectBR2, cageRectBR3, cageRectBR4,
         cageRectM1, cageRectM2, cageRectM3, cageRectM4,
-        ballonView, glovesView, scoreBoardButton, playerNameText, TournoiNameText,player, playerGIF
+        ballonView, glovesView,scoreView, scoreBoardButton, playerNameText, TournoiNameText,player, playerGIF
         );
 
         // Set scene
@@ -360,7 +397,17 @@ public class GameView {
 
     // Method to update the scoreboard
     public void updateScoreBoard(int playerScore, int aiScore) {
-        scoreBoardButton.setText( equipe1.getNom()+ "   " + playerScore + "    |    " + aiScore + "   "+ equipe2.getNom());
+        
+        int fixedLength = 34; // Longueur totale pour "Team Alpha" et l'espace avant "0"
+        int espaceavantnom2 = fixedLength -  equipe2.getNom().length() ;
+
+        // Formater le texte de chaque équipe
+        String equipe1Formatted = "   "+playerScore+"    "+equipe1.getAbr()  ;
+        String equipe2Formatted = " ".repeat(espaceavantnom2) + equipe2.getAbr()+"    "+aiScore+"   " ;
+
+        // Créer le texte final
+        String buttonText = equipe1Formatted + equipe2Formatted;        
+        scoreBoardButton.setText( buttonText);
         playerNameText.setText("   "+this.jeu.getPlayer().getNom() + " -   Score: " + this.jeu.getPlayer().getScore()); // Update player's name and score
     }
 

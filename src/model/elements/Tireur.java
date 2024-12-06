@@ -12,9 +12,9 @@ public final class Tireur extends Joueur {
     private double precisionDeTir;
     private int penaltiesReussis ; 
 
-    public Tireur(String nom, String prenom, int age,Poste poste, Equipe equipe, double precisionDeTir) {
-        super(nom, prenom, age, poste, equipe);
-        this.precisionDeTir = precisionDeTir;
+    public Tireur(String nom, String prenom, int age,Poste poste) {
+        super(nom, prenom, age, poste);
+    //    this.precisionDeTir = precisionDeTir;
     }
 
     // Getters 

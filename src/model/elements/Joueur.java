@@ -14,15 +14,13 @@ public abstract sealed class Joueur implements Comparable<Joueur> permits Tireur
     private String prenom;
     private int age;
     private Poste poste;
-    private Equipe equipe;
     
 
-    public Joueur(String nom, String prenom, int age, Poste poste, Equipe equipe) {
+    public Joueur(String nom, String prenom, int age, Poste poste) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
         this.poste = poste;
-        this.equipe = equipe;
     }
 
     // Getters
@@ -34,7 +32,6 @@ public abstract sealed class Joueur implements Comparable<Joueur> permits Tireur
 
     public Poste getPoste() {return poste;}
 
-    public Equipe getEquipe() {return equipe;}
     
 
     // Setters
@@ -46,7 +43,6 @@ public abstract sealed class Joueur implements Comparable<Joueur> permits Tireur
 
     public void setPoste(Poste poste) {this.poste = poste;}
 
-    public void setEquipe(Equipe equipe) {this.equipe = equipe;}
     
     
     @Override
@@ -62,7 +58,6 @@ public abstract sealed class Joueur implements Comparable<Joueur> permits Tireur
                ", prenom='" + prenom + '\'' +
                ", age=" + age +
                ", poste=" + poste +
-               ", equipe=" + equipe +
                '}';
     }
     

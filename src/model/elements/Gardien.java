@@ -10,11 +10,8 @@ import javafx.scene.image.ImageView;
 public final class Gardien extends Joueur {
     private double pourcentageDeSauvetage;
     private ImageView gloves;
-    private String Position;
-    public Gardien(String nom, String prenom, int age, Equipe equipe,ImageView gloves,String Position ) {
-        super(nom, prenom, age, Poste.GARDIEN, equipe);
-        this.gloves=gloves;
-        this.Position=Position;
+    public Gardien(String nom, String prenom, int age) {
+        super(nom, prenom, age, Poste.GARDIEN);
         //this.pourcentageDeSauvetage = pourcentageDeSauvetage;
     }
 
@@ -36,11 +33,11 @@ public final class Gardien extends Joueur {
     public void setPourcentageDeSauvetage(double pourcentageDeSauvetage) {
         this.pourcentageDeSauvetage = pourcentageDeSauvetage;
     }*/
-    public String getPosition() {
-        return Position;
+    public double getpourcentageDeSauvetage() {
+        return pourcentageDeSauvetage;
     }
 
-    public void setPosition(String pos) {
-        this.Position=pos;
+    public void setpourcentageDeSauvetage(double pos) {
+        this.pourcentageDeSauvetage=pos;
     }
 }

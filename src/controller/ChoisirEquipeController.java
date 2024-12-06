@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import model.structure.Match;
 import view.BracketView;
 import view.ChoisirTournoiView;
+import view.JoeursEquipeView;
 import view.RankingView;
 import view.SaisirPlayerView;
 
@@ -41,10 +42,12 @@ public class ChoisirEquipeController {
             int finalI = i * 4 + j;  // Calculer l'index global
             equipeButton.setOnAction(e -> {
                 handleEquipeSelection(finalI);
+                view.getEquipeButton().setVisible(true);
                 view.selectButton(equipeButton);
             });
         }
         view.getBackButton().setOnAction(e -> goBackToChoisirTournoisView());
+        view.getEquipeButton().setOnAction(e -> goToEquipejoeurView());
 
     }
 
@@ -100,6 +103,13 @@ public class ChoisirEquipeController {
         new ChoisirTournoiController(ChoisirTournoiView, jeu);
     }
      
+    private void goToEquipejoeurView(){
+        JoeursEquipeView joeursEquipeView = new JoeursEquipeView(jeu,equipeSelectionnee);
+        Stage stage = (Stage) view.getBackButton().getScene().getWindow();
+        stage.setScene(joeursEquipeView.getScene());
+        new JoeursEquipeController(joeursEquipeView, jeu);
+        
+    }
 }
 
 
