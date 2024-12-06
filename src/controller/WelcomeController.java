@@ -4,6 +4,7 @@
  */
 package controller;
 
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.structure.Jeu;
 import view.SaisirPlayerView;
@@ -13,6 +14,7 @@ public class WelcomeController {
 
     private final WelcomeView welcomeView;
     private final Jeu jeu;
+    
 
     public WelcomeController(WelcomeView welcomeView, Jeu jeu) {
         this.welcomeView = welcomeView;
@@ -31,12 +33,15 @@ public class WelcomeController {
         SaisirPlayerView saisirPlayerView = new SaisirPlayerView();
         Stage stage = welcomeView.getPrimaryStage();
         stage.setScene(saisirPlayerView.getScene());
-
         new SaisirPlayerController(saisirPlayerView, jeu);
+        
     }
 
     private void quitApplication() {
         System.exit(0);
     }
+    
+   
+    
 }
 

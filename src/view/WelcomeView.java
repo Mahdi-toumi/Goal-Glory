@@ -257,4 +257,5 @@ public class WelcomeView {
     public Button getQuitButton() {
         return quitButton;
     }
+   
 }

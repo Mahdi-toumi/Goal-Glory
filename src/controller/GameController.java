@@ -109,7 +109,8 @@ public class GameController {
                 
                 String sound = getClass().getResource("/audio/NGoal.mp3").toExternalForm();
                 MediaPlayer Sound = new MediaPlayer(new Media(sound));
-                Sound.setVolume(0.4);
+                Sound.stop();
+                Sound.seek(Duration.ZERO); 
                 Sound.play(); 
                 
                 System.out.println("AI saved your shot!");
@@ -136,7 +137,8 @@ public class GameController {
                 System.out.println("You scored!");
                 String sound = getClass().getResource("/audio/Goal.mp3").toExternalForm();
                 MediaPlayer Sound = new MediaPlayer(new Media(sound));
-                Sound.setVolume(0.4);
+                Sound.stop();
+                Sound.seek(Duration.ZERO);                
                 Sound.play(); 
                 Text TurnText = new Text() ;
                 TurnText.setText("Goal!");
@@ -219,7 +221,8 @@ public class GameController {
                     System.out.println("You saved the shot!");
                     String sound = getClass().getResource("/audio/Goal.mp3").toExternalForm();
                 MediaPlayer Sound = new MediaPlayer(new Media(sound));
-                Sound.setVolume(0.4);
+                Sound.stop();
+                Sound.seek(Duration.ZERO);
                 Sound.play(); 
                     Text TurnTextAI = new Text() ;
                     TurnTextAI.setLayoutX(300); // Center the text horizontally
@@ -245,7 +248,8 @@ public class GameController {
                     System.out.println("AI scored!");
                     String sound = getClass().getResource("/audio/NGoal.mp3").toExternalForm();
                     MediaPlayer Sound = new MediaPlayer(new Media(sound));
-                    Sound.setVolume(0.4);
+                    Sound.stop();
+                    Sound.seek(Duration.ZERO);
                     Sound.play(); 
                     Text TurnTextAI = new Text() ;
                     TurnTextAI.setText("Goal!");
@@ -405,8 +409,8 @@ public class GameController {
             Text gameOverText = new Text();
             gameOverText.setFont(Font.font("Sports World", 30));
             gameOverText.setFill(Color.WHITE);
-            gameOverText.setLayoutX(300); // Center the text horizontally
-            gameOverText.setLayoutY(250); // Position it vertically
+            gameOverText.setLayoutX(270); // Center the text horizontally
+            gameOverText.setLayoutY(200); // Position it vertically
 
             if (playerScore > aiScore) {
                 this.jeu.getChampionnat().AjoutPointsEquipe(3, this.jeu.getPlayer().getEquipe()); // bech yetzedoulek el poinet 
@@ -487,8 +491,8 @@ public class GameController {
             Text gameOverText = new Text();
             gameOverText.setFont(Font.font("Sports World", 30));
             gameOverText.setFill(Color.WHITE);
-            gameOverText.setLayoutX(300); // Center the text horizontally
-            gameOverText.setLayoutY(250); // Position it vertically
+            gameOverText.setLayoutX(270); // Center the text horizontally
+            gameOverText.setLayoutY(200); // Position it vertically
             if (playerScore > aiScore) {
                 for( Match match : this.jeu.getCoupe().getTours().get(this.jeu.getTour()).getMatchs() ){
                     if (match.getEquipe1().getNom()==this.jeu.getPlayer().getEquipe().getNom() || match.getEquipe2().getNom()==this.jeu.getPlayer().getEquipe().getNom()){

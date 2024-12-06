@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -19,6 +20,7 @@ public class SaisirPlayerView {
     private TextField nomField;
     private Button validerButton;
     private Button gobackButton;
+    
 
     public SaisirPlayerView() {
         // Main container
@@ -191,4 +193,6 @@ public class SaisirPlayerView {
         Stage stage = (Stage) nomField.getScene().getWindow();
         stage.close();
     }
+    
+
 }

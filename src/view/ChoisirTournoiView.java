@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 
 public class ChoisirTournoiView {
 
@@ -21,10 +22,13 @@ public class ChoisirTournoiView {
     private Button championsLeagueButton;
     private Button laLigaButton ; 
     private Button premierLeagueButton ;
+    
+
 
     public ChoisirTournoiView() {
         // Création du conteneur principal
         StackPane root = new StackPane();
+        
 
         // Ajouter une image en arrière-plan (terrain de football)
         ImageView background = new ImageView(new Image(getClass().getResourceAsStream("/images/Background.jpeg")));

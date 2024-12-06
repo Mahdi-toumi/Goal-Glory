@@ -5,6 +5,7 @@
 package controller;
 
 
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.structure.Jeu;
 import model.structure.Player;
@@ -17,10 +18,12 @@ public class SaisirPlayerController {
     private final SaisirPlayerView view;
     private final Jeu jeu;
 
+
+
     public SaisirPlayerController(SaisirPlayerView view, Jeu jeu) {
         this.view = view;
         this.jeu = jeu;
-
+        
         // Gestion du clic sur le bouton "Valider"
         view.getValiderButton().setOnAction(e -> handlePlayerCreation());
         view.getBackButton().setOnAction(e -> goBackToWelcomeView());
@@ -43,6 +46,7 @@ public class SaisirPlayerController {
         ChoisirTournoiView choisirTournoiView = new ChoisirTournoiView();
         Stage stage = (Stage) view.getNomField().getScene().getWindow();
         stage.setScene(choisirTournoiView.getScene());
+        
         new ChoisirTournoiController(choisirTournoiView, jeu);
     }
     private void goBackToWelcomeView(){
@@ -53,6 +57,8 @@ public class SaisirPlayerController {
         new WelcomeController(welcomeView, jeu);
 
     }
+    
+  
 }
 
 
