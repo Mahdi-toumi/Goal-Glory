@@ -85,10 +85,26 @@ public class GameView {
         if (this.jeu.getChampionnat()!= null && this.jeu.getChampionnat().getNom() == "Premier League" ){
             scoreImage = new Image(getClass().getResource("/images/PLscore.png").toExternalForm());
             scoreView = new ImageView(scoreImage);
-            scoreView.setFitWidth(700);
-            scoreView.setFitHeight(500);
-            scoreView.setLayoutX(190);   // Initial x-position (centered below the ball)
-            scoreView.setLayoutY(260);   // Initial y-position (adjust for layout)
+            scoreView.setFitWidth(550);
+            scoreView.setFitHeight(300);
+            scoreView.setLayoutX(170);   // Initial x-position (centered below the ball)
+            scoreView.setLayoutY(395);   // Initial y-position (adjust for layout)
+        }
+        if (this.jeu.getCoupe()!= null && this.jeu.getCoupe().getNom() == "World Cup" ){
+            scoreImage = new Image(getClass().getResource("/images/WCScore.png").toExternalForm());
+            scoreView = new ImageView(scoreImage);
+            scoreView.setFitWidth(530);
+            scoreView.setFitHeight(80);
+            scoreView.setLayoutX(180);   // Initial x-position (centered below the ball)
+            scoreView.setLayoutY(483);   // Initial y-position (adjust for layout)
+        }
+        if (this.jeu.getChampionnat()!= null && this.jeu.getChampionnat().getNom() == "La Liga" ){
+            scoreImage = new Image(getClass().getResource("/images/LLScore.png").toExternalForm());
+            scoreView = new ImageView(scoreImage);
+            scoreView.setFitWidth(600);
+            scoreView.setFitHeight(70);
+            scoreView.setLayoutX(150);   // Initial x-position (centered below the ball)
+            scoreView.setLayoutY(500);   // Initial y-position (adjust for layout)
         }
         
         
@@ -248,21 +264,21 @@ public class GameView {
         
 
 
-        // Formater le texte de chaque équipe
+        /*// Formater le texte de chaque équipe
         String equipe1Formatted = "   0      "+equipe1.getAbr()  ;
         String equipe2Formatted = " ".repeat(espaceavantnom2) + equipe2.getAbr()+"      0   " ;
 
 
 
         // Créer le texte final
-        String buttonText = equipe1Formatted + equipe2Formatted;
+        String buttonText = equipe1Formatted + equipe2Formatted;*/
 
         // Appliquer le texte au bouton
-        scoreBoardButton = new Button(buttonText);
+        scoreBoardButton = new Button("");
         
+        updateScoreBoard(0, 0);
 
-
-        scoreBoardButton = new Button(buttonText);
+        //scoreBoardButton = new Button(buttonText);
         scoreBoardButton.setFont(Font.font("Sports World", 20));
         scoreBoardButton.setTextFill(Color.WHITE);
         scoreBoardButton.setStyle(
@@ -414,8 +430,8 @@ public class GameView {
         int espaceavantnom2 = fixedLength -  equipe2.getAbr().length() ;
 
         // Formater le texte de chaque équipe
-        String equipe1Formatted = "   "+playerScore+"    "+equipe1.getAbr()  ;
-        String equipe2Formatted = " ".repeat(espaceavantnom2) + equipe2.getAbr()+"    "+aiScore+"   " ;
+        String equipe1Formatted = "   "+equipe1.getAbr()+"    " +playerScore ;
+        String equipe2Formatted = " ".repeat(espaceavantnom2)+aiScore+"    " + equipe2.getAbr()+"   " ;
 
         // Créer le texte final
         String buttonText = equipe1Formatted + equipe2Formatted;        
