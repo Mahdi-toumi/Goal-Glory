@@ -29,26 +29,13 @@ public class GameView {
     private double ballonStartY = 400;
     private double glovesStartX = 410;
     private double glovesStartY = 175;
-    private Rectangle cageRectTR1;
-    private Rectangle cageRectTR2;
-    private Rectangle cageRectTR3;
-    private Rectangle cageRectTR4;
-    private Rectangle cageRectTL1;
-    private Rectangle cageRectTL2;
-    private Rectangle cageRectTL3;
-    private Rectangle cageRectTL4;
-    private Rectangle cageRectBR1;
-    private Rectangle cageRectBR2;
-    private Rectangle cageRectBR3;
-    private Rectangle cageRectBR4;
-    private Rectangle cageRectBL1;
-    private Rectangle cageRectBL2;
-    private Rectangle cageRectBL3;
-    private Rectangle cageRectBL4;
-    private Rectangle cageRectM1;
-    private Rectangle cageRectM2;
-    private Rectangle cageRectM3;
-    private Rectangle cageRectM4;
+    private Rectangle cageRectTR;
+    private Rectangle cageRectTL;
+    private Rectangle cageRectBR;
+    private Rectangle cageRectBL;
+    private Rectangle cageRectMU;
+    private Rectangle cageRectMD;
+
     private Button scoreBoardButton;
     private Jeu jeu ;
     private Text playerNameText;
@@ -153,55 +140,23 @@ public class GameView {
 
 
         // Pour le rectangle cageRectTL
-        this.cageRectTL1 = new Rectangle(216, 95, 70, 46);
-        cageRectTL1.setFill(Color.TRANSPARENT);
-        this.cageRectTL2 = new Rectangle(286, 95, 70, 46);
-        cageRectTL2.setFill(Color.TRANSPARENT);
-        this.cageRectTL3 = new Rectangle(216, 141, 70, 46);
-        cageRectTL3.setFill(Color.TRANSPARENT);
-        this.cageRectTL4 = new Rectangle(286, 141, 70, 46);
-        cageRectTL4.setFill(Color.TRANSPARENT);
-
+        this.cageRectTL = new Rectangle(216, 95, 140, 92);
+        cageRectTL.setFill(Color.TRANSPARENT);
         // Pour le rectangle cageRectBL
-        this.cageRectBL1 = new Rectangle(216, 180, 70, 46);
-        cageRectBL1.setFill(Color.TRANSPARENT);
-        this.cageRectBL2 = new Rectangle(286, 180, 70, 46);
-        cageRectBL2.setFill(Color.TRANSPARENT);
-        this.cageRectBL3 = new Rectangle(216, 226, 70, 46);
-        cageRectBL3.setFill(Color.TRANSPARENT);
-        this.cageRectBL4 = new Rectangle(286, 226, 70, 46);
-        cageRectBL4.setFill(Color.TRANSPARENT);
-
+        this.cageRectBL = new Rectangle(216, 180, 140, 92);
+        cageRectBL.setFill(Color.TRANSPARENT);
         // Pour le rectangle cageRectTR
-        this.cageRectTR1 = new Rectangle(503, 95, 70, 46);
-        cageRectTR1.setFill(Color.TRANSPARENT);
-        this.cageRectTR2 = new Rectangle(573, 95, 70, 46);
-        cageRectTR2.setFill(Color.TRANSPARENT);
-        this.cageRectTR3 = new Rectangle(503, 141, 70, 46);
-        cageRectTR3.setFill(Color.TRANSPARENT);
-        this.cageRectTR4 = new Rectangle(573, 141, 70, 46);
-        cageRectTR4.setFill(Color.TRANSPARENT);
-
+        this.cageRectTR = new Rectangle(503, 95, 140, 92);
+        cageRectTR.setFill(Color.TRANSPARENT);
         // Pour le rectangle cageRectBR
-        this.cageRectBR1 = new Rectangle(503, 180, 70, 46);
-        cageRectBR1.setFill(Color.TRANSPARENT);
-        this.cageRectBR2 = new Rectangle(573, 180, 70, 46);
-        cageRectBR2.setFill(Color.TRANSPARENT);
-        this.cageRectBR3 = new Rectangle(503, 226, 70, 46);
-        cageRectBR3.setFill(Color.TRANSPARENT);
-        this.cageRectBR4 = new Rectangle(573, 226, 70, 46);
-        cageRectBR4.setFill(Color.TRANSPARENT);
-
+        this.cageRectBR = new Rectangle(503, 180, 140, 92);
+        cageRectBR.setFill(Color.TRANSPARENT);
         // Pour le rectangle cageRectM
-        
-        this.cageRectM1 = new Rectangle(357, 95, 75, 90);
-        cageRectM1.setFill(Color.TRANSPARENT);
-        this.cageRectM2 = new Rectangle(430, 95, 72, 90);
-        cageRectM2.setFill(Color.TRANSPARENT);
-        this.cageRectM3 = new Rectangle(357, 185, 75, 90);
-        cageRectM3.setFill(Color.TRANSPARENT);
-        this.cageRectM4 = new Rectangle(430, 185, 72, 90);
-        cageRectM4.setFill(Color.TRANSPARENT);
+        this.cageRectMU = new Rectangle(357, 95, 144, 86);
+        cageRectMU.setFill(Color.TRANSPARENT);
+        this.cageRectMD = new Rectangle(357, 182, 144, 88);
+        cageRectMD.setFill(Color.TRANSPARENT);
+
 
         
         // Player's name and score in the top-left corner
@@ -302,12 +257,12 @@ public class GameView {
         Pane = new Pane();
         Pane.getChildren().addAll(
         terrainView,
-        cageRectTL1, cageRectTL2, cageRectTL3, cageRectTL4,
-        cageRectBL1, cageRectBL2, cageRectBL3, cageRectBL4,
-        cageRectTR1, cageRectTR2, cageRectTR3, cageRectTR4,
-        cageRectBR1, cageRectBR2, cageRectBR3, cageRectBR4,
-        cageRectM1, cageRectM2, cageRectM3, cageRectM4,
-        ballonView, glovesView,scoreView, scoreBoardButton, playerNameText, TournoiNameText,player, playerGIF
+        cageRectTL,
+        cageRectBL, 
+        cageRectTR, 
+        cageRectBR, 
+        cageRectMU, cageRectMD,glovesView ,
+        ballonView ,scoreView, scoreBoardButton, playerNameText, TournoiNameText,player, playerGIF
         );
 
         // Set scene
@@ -341,6 +296,13 @@ public class GameView {
     public void animateBallToPosition(double targetX, double targetY) {
         // Calculate movement
         
+        for (int i=0 ; i<6 ; i++) {
+            if (getCageRects()[i].contains(targetX, targetY)){
+                targetX = getCageRectsMil()[i][0];
+                targetY = getCageRectsMil()[i][1];
+            }
+        }
+        
         double deltaX = targetX - ballonView.getLayoutX();
         double deltaY = targetY - ballonView.getLayoutY();
         // Translate transition for the ball
@@ -370,6 +332,14 @@ public class GameView {
     }
     
     public void animateGlovesToPosition(double targetX, double targetY) {
+        
+        for (int i=0 ; i<6 ; i++) {
+            if (getCageRects()[i].contains(targetX, targetY)){
+                targetX = getCageRectsMil()[i][0];
+                targetY = getCageRectsMil()[i][1];
+            }
+        }
+        
         // Calculate movement
         double deltaX = targetX - glovesView.getLayoutX();
         double deltaY = targetY - glovesView.getLayoutY();
@@ -393,6 +363,7 @@ public class GameView {
     }
     
     public void animation(double targetX, double targetY, double saveX, double saveY){
+        
         startPlayerAnimation();
         PauseTransition pause = new PauseTransition(Duration.seconds(1.35));
         pause.setOnFinished(e -> {
@@ -482,11 +453,22 @@ public class GameView {
     }
     
     public Rectangle[] getCageRects() {
-    return new Rectangle[]{cageRectTL1, cageRectTL2, cageRectTL3, cageRectTL4,
-                           cageRectBL1, cageRectBL2, cageRectBL3, cageRectBL4,
-                           cageRectTR1, cageRectTR2, cageRectTR3, cageRectTR4,
-                           cageRectBR1, cageRectBR2, cageRectBR3, cageRectBR4,
-                           cageRectM1, cageRectM2, cageRectM3, cageRectM4}; 
+    return new Rectangle[]{cageRectTL,  cageRectBL, cageRectTR, cageRectBR,
+                           cageRectMU, cageRectMD}; 
+    }
+    
+    public double[][] getCageRectsMil() {
+    
+    
+        double[] topLeftCenter = new double[]{216 + 110 / 2.0, 95 + 77 / 2.0}; // cageRectTL1 center
+        double[] bottomLeftCenter = new double[]{216 + 110 / 2.0, 180 + 77 / 2.0}; // cageRectBL1 center
+        double[] topRightCenter = new double[]{503 + 110 / 2.0, 95 + 77 / 2.0}; // cageRectTR1 center
+        double[] bottomRightCenter = new double[]{503 + 110 / 2.0, 180 + 77 / 2.0}; // cageRectBR1 center
+        double[] middle1Center = new double[]{357 + 114 / 2.0, 95 + 71 / 2.0}; // cageRectM1 center
+        double[] middle2Center = new double[]{357 + 114 / 2.0, 182 + 73 / 2.0}; // cageRectM2 center
+        
+        return new double[][]{topLeftCenter,  bottomLeftCenter, topRightCenter, bottomRightCenter,
+                           middle1Center, middle2Center}; 
     }
     
     public void refereeWhistle(){

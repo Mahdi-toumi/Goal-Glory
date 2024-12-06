@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -45,11 +47,11 @@ public class GameController {
     private void setupPlayerControls() {
         gameView.refereeWhistle();
         Text TurnText = new Text() ;
-        TurnText.setText("Your Turn to Shoot!");
+        TurnText.setText("");
         
             TurnText.setFill(Color.WHITE);
             TurnText.setLayoutX(250); // Center the text horizontally
-            TurnText.setLayoutY(230); // Position it vertically
+            TurnText.setLayoutY(200); // Position it vertically
                 TurnText.setFont(Font.font("Sports World", 30));
                 TurnText.setStyle(
                     "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #00FF00, #008000);" +  // Dégradé vert clair à vert foncé
@@ -58,11 +60,17 @@ public class GameController {
                     "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
                 );
                 gameView.getPane().getChildren().add(TurnText);
-          PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
+          PauseTransition pause1 = new PauseTransition(Duration.seconds(1.4));
         pause1.setOnFinished(e->{
-            TurnText.setText("");
+            TurnText.setText("Your Turn to Shoot!");
         });
          pause1.play();
+         
+          PauseTransition pause3 = new PauseTransition(Duration.seconds(3));
+        pause3.setOnFinished(e->{
+            TurnText.setText("");
+        });
+         pause3.play();
                 
         gameView.getPane().setOnMouseClicked(event -> {
             if (isPlayerTurn) {
@@ -85,6 +93,11 @@ public class GameController {
         double[] aiGlovesPosition = randomGoalkeeperPosition();
         //gameView.animateGlovesToPosition(aiGlovesPosition[0], aiGlovesPosition[1]);
 
+        
+        
+        
+        
+
         gameView.animation(clickX,clickY,aiGlovesPosition[0], aiGlovesPosition[1]);
         
         PauseTransition pause = new PauseTransition(Duration.seconds(2.7));
@@ -92,9 +105,59 @@ public class GameController {
             boolean isSaved = checkIfSaved(new double[]{clickX, clickY}, aiGlovesPosition);
 
             if (isSaved) {
+                
+                
+                String sound = getClass().getResource("/audio/NGoal.mp3").toExternalForm();
+                MediaPlayer Sound = new MediaPlayer(new Media(sound));
+                Sound.setVolume(0.4);
+                Sound.play(); 
+                
                 System.out.println("AI saved your shot!");
+                Text TurnText = new Text() ;
+                TurnText.setText("Saved!");
+
+                    TurnText.setFill(Color.WHITE);
+                    TurnText.setLayoutX(300); // Center the text horizontally
+                    TurnText.setLayoutY(290); // Position it vertically
+                        TurnText.setFont(Font.font("Sports World", 90));
+                        TurnText.setStyle(
+                            "-fx-fill: red;" +  // Dégradé vert clair à vert foncé
+                            "-fx-stroke: black;" +                                                   // Contour noir
+                            "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                        );
+                        gameView.getPane().getChildren().add(TurnText);
+                  PauseTransition pause1 = new PauseTransition(Duration.seconds(1.2));
+                pause1.setOnFinished(f->{
+                    TurnText.setText("");
+                });
+                 pause1.play();
             } else {
                 System.out.println("You scored!");
+                String sound = getClass().getResource("/audio/Goal.mp3").toExternalForm();
+                MediaPlayer Sound = new MediaPlayer(new Media(sound));
+                Sound.setVolume(0.4);
+                Sound.play(); 
+                Text TurnText = new Text() ;
+                TurnText.setText("Goal!");
+
+                    TurnText.setFill(Color.WHITE);
+                    TurnText.setLayoutX(300); // Center the text horizontally
+                    TurnText.setLayoutY(290); // Position it vertically
+                        TurnText.setFont(Font.font("Sports World", 90));
+                        TurnText.setStyle(
+                            "-fx-fill: green;" +  // Dégradé vert clair à vert foncé
+                            "-fx-stroke: black;" +                                                   // Contour noir
+                            "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                        );
+                        gameView.getPane().getChildren().add(TurnText);
+                  PauseTransition pause1 = new PauseTransition(Duration.seconds(1.2));
+                pause1.setOnFinished(f->{
+                    TurnText.setText("");
+                });
+                 pause1.play();
+                 
                 this.jeu.getPlayer().setScore(this.jeu.getPlayer().getScore()+10);
                 playerScore++;
                 gameView.updateScoreBoard(playerScore, aiScore);
@@ -114,11 +177,11 @@ public class GameController {
         resetPositions();
 
         double[] aiShotTarget = randomShotPosition();
-        System.out.println("Your Turn to save!");
+        System.out.println("");
         Text TurnText = new Text() ;
         TurnText.setLayoutX(250); // Center the text horizontally
-        TurnText.setLayoutY(230); // Position it vertically
-        TurnText.setText("Your Turn to save!");
+        TurnText.setLayoutY(200); // Position it vertically
+        TurnText.setText("");
                 TurnText.setFont(Font.font("Sports World", 30));
                 TurnText.setStyle(
                     "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #00FF00, #008000);" +  // Dégradé vert clair à vert foncé
@@ -127,11 +190,17 @@ public class GameController {
                     "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
                 );
          gameView.getPane().getChildren().add(TurnText);
-        PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
+          PauseTransition pause1 = new PauseTransition(Duration.seconds(1.4));
         pause1.setOnFinished(e->{
-            TurnText.setVisible(false);
+            TurnText.setText("Your Turn to save!");
         });
-        pause1.play();
+         pause1.play();
+         
+          PauseTransition pause3 = new PauseTransition(Duration.seconds(3));
+        pause3.setOnFinished(e->{
+            TurnText.setText("");
+        });
+         pause3.play();
 
         Pane gamePane = gameView.getPane();
         gamePane.setOnMouseClicked(event -> {
@@ -148,9 +217,55 @@ public class GameController {
 
                 if (isSaved) {
                     System.out.println("You saved the shot!");
+                    String sound = getClass().getResource("/audio/Goal.mp3").toExternalForm();
+                MediaPlayer Sound = new MediaPlayer(new Media(sound));
+                Sound.setVolume(0.4);
+                Sound.play(); 
+                    Text TurnTextAI = new Text() ;
+                    TurnTextAI.setLayoutX(300); // Center the text horizontally
+                    TurnTextAI.setLayoutY(290); // Position it vertically
+                    TurnTextAI.setText("Saved!");
+                            TurnTextAI.setFont(Font.font("Sports World", 90));
+                            TurnTextAI.setStyle(
+                                "-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #00FF00, #008000);" +  // Dégradé vert clair à vert foncé
+                                "-fx-stroke: black;" +                                                   // Contour noir
+                                "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                            );
+                     gameView.getPane().getChildren().add(TurnTextAI);
+                    PauseTransition pause2 = new PauseTransition(Duration.seconds(1.2));
+                    pause2.setOnFinished(s->{
+                        TurnTextAI.setText("");
+                    });
+                    pause2.play();
+                    
                     this.jeu.getPlayer().setScore(this.jeu.getPlayer().getScore()+15);
+                    
                 } else {
                     System.out.println("AI scored!");
+                    String sound = getClass().getResource("/audio/NGoal.mp3").toExternalForm();
+                    MediaPlayer Sound = new MediaPlayer(new Media(sound));
+                    Sound.setVolume(0.4);
+                    Sound.play(); 
+                    Text TurnTextAI = new Text() ;
+                    TurnTextAI.setText("Goal!");
+                    TurnTextAI.setLayoutX(300); // Center the text horizontally
+                    TurnTextAI.setLayoutY(290); // Position it vertically
+                    
+                            TurnTextAI.setFont(Font.font("Sports World", 90));
+                            TurnTextAI.setStyle(
+                                "-fx-fill: red;" +  // Dégradé vert clair à vert foncé
+                                "-fx-stroke: black;" +                                                   // Contour noir
+                                "-fx-stroke-width: 2px;" +                                               // Épaisseur du contour
+                                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 4);"   // Ombre portée pour le texte
+                            );
+                     gameView.getPane().getChildren().add(TurnTextAI);
+                    PauseTransition pause2 = new PauseTransition(Duration.seconds(1.2));
+                    pause2.setOnFinished(s->{
+                        TurnTextAI.setText("");
+                    });
+                    pause2.play();
+                    
                     aiScore++;
                     gameView.updateScoreBoard(playerScore, aiScore);
                 }
@@ -189,20 +304,7 @@ public class GameController {
         Rectangle rectangle4 = this.gameView.getCageRects()[3];
         Rectangle rectangle5 = this.gameView.getCageRects()[4];
         Rectangle rectangle6 = this.gameView.getCageRects()[5];
-        Rectangle rectangle7 = this.gameView.getCageRects()[6];
-        Rectangle rectangle8 = this.gameView.getCageRects()[7];
-        Rectangle rectangle9 = this.gameView.getCageRects()[8];
-        Rectangle rectangle10 = this.gameView.getCageRects()[9];
-        Rectangle rectangle11 = this.gameView.getCageRects()[10];
-        Rectangle rectangle12 = this.gameView.getCageRects()[11];
-        Rectangle rectangle13 = this.gameView.getCageRects()[12];
-        Rectangle rectangle14 = this.gameView.getCageRects()[13];
-        Rectangle rectangle15 = this.gameView.getCageRects()[14];
-        Rectangle rectangle16 = this.gameView.getCageRects()[15];
-        Rectangle rectangle17 = this.gameView.getCageRects()[16];
-        Rectangle rectangle18 = this.gameView.getCageRects()[17];
-        Rectangle rectangle19 = this.gameView.getCageRects()[18];
-        Rectangle rectangle20 = this.gameView.getCageRects()[19];
+       
         
         
         boolean isBallInRectangle1 = rectangle1.contains(ballTarget[0], ballTarget[1]);
@@ -211,32 +313,17 @@ public class GameController {
         boolean isBallInRectangle4 = rectangle4.contains(ballTarget[0], ballTarget[1]);
         boolean isBallInRectangle5 = rectangle5.contains(ballTarget[0], ballTarget[1]);
         boolean isBallInRectangle6 = rectangle6.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle7 = rectangle7.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle8 = rectangle8.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle9 = rectangle9.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle10 = rectangle10.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle11 = rectangle11.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle12 = rectangle12.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle13 = rectangle13.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle14 = rectangle14.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle15 = rectangle15.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle16 = rectangle16.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle17 = rectangle17.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle18 = rectangle18.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle19 = rectangle19.contains(ballTarget[0], ballTarget[1]);
-        boolean isBallInRectangle20 = rectangle20.contains(ballTarget[0], ballTarget[1]);
+      
         
  
             // If the ball is not in any rectangle, return true
             if (!isBallInRectangle1 && !isBallInRectangle2 && !isBallInRectangle3 && !isBallInRectangle4 && !isBallInRectangle5 &&
-                !isBallInRectangle6 && !isBallInRectangle7 && !isBallInRectangle8 && !isBallInRectangle9 && !isBallInRectangle10 &&
-                !isBallInRectangle11 && !isBallInRectangle12 && !isBallInRectangle13 && !isBallInRectangle14 && !isBallInRectangle15 &&
-                !isBallInRectangle16 && !isBallInRectangle17 && !isBallInRectangle18 && !isBallInRectangle19 && !isBallInRectangle20) {
+                !isBallInRectangle6 ) {
                 return true; // If the ball is not in any rectangle, it's a save
             }
             
             else {
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < 6; i++) {
                      Rectangle rectangle = this.gameView.getCageRects()[i]; // Get the current rectangle
 
                     // Check if both the ball and gloves are in the same rectangle
@@ -259,54 +346,24 @@ public class GameController {
 
     private double[] randomGoalkeeperPosition() {
         Random random = new Random();
-        int choice = random.nextInt(20);
+        int choice = random.nextInt(6);
             // Calculate the centers of each rectangle
-        double[] topLeft1Center = new double[]{216 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTL1 center
-        double[] topLeft2Center = new double[]{286 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTL2 center
-        double[] topLeft3Center = new double[]{216 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTL3 center
-        double[] topLeft4Center = new double[]{286 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTL4 center
+        double[] topLeftCenter = new double[]{216 + 115 / 2.0, 95 + 82 / 2.0}; // cageRectTL1 center
+        double[] bottomLeftCenter = new double[]{216 + 115 / 2.0, 180 + 82 / 2.0}; // cageRectBL1 center
+        double[] topRightCenter = new double[]{503 + 115 / 2.0, 95 + 82 / 2.0}; // cageRectTR1 center
+        double[] bottomRightCenter = new double[]{503 + 115 / 2.0, 180 + 82 / 2.0}; // cageRectBR1 center
+        double[] middle1Center = new double[]{357 + 119 / 2.0, 95 + 76 / 2.0}; // cageRectM1 center
+        double[] middle2Center = new double[]{357 + 119 / 2.0, 182 + 78 / 2.0}; // cageRectM2 center
 
-        double[] bottomLeft1Center = new double[]{216 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBL1 center
-        double[] bottomLeft2Center = new double[]{286 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBL2 center
-        double[] bottomLeft3Center = new double[]{216 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBL3 center
-        double[] bottomLeft4Center = new double[]{286 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBL4 center
-
-        double[] topRight1Center = new double[]{503 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTR1 center
-        double[] topRight2Center = new double[]{573 + 65 / 2.0, 95 + 41 / 2.0}; // cageRectTR2 center
-        double[] topRight3Center = new double[]{503 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTR3 center
-        double[] topRight4Center = new double[]{573 + 65 / 2.0, 141 + 41 / 2.0}; // cageRectTR4 center
-
-        double[] bottomRight1Center = new double[]{503 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBR1 center
-        double[] bottomRight2Center = new double[]{573 + 65 / 2.0, 180 + 41 / 2.0}; // cageRectBR2 center
-        double[] bottomRight3Center = new double[]{503 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBR3 center
-        double[] bottomRight4Center = new double[]{573 + 65 / 2.0, 226 + 41 / 2.0}; // cageRectBR4 center
-
-        double[] middle1Center = new double[]{360 + 65 / 2.0, 95 + 85 / 2.0}; // cageRectM1 center
-        double[] middle2Center = new double[]{430 + 65 / 2.0, 95 + 85 / 2.0}; // cageRectM2 center
-        double[] middle3Center = new double[]{360 + 65 / 2.0, 185 + 85 / 2.0}; // cageRectM3 center
-        double[] middle4Center = new double[]{430 + 65 / 2.0, 185 + 85 / 2.0}; // cageRectM4 center
 
         switch (choice) {
-            case 0: return topLeft1Center; // Top left
-            case 1: return topLeft2Center; // Bottom left
-            case 2: return topLeft3Center; // Top right
-            case 3: return topLeft4Center; // Bottom right
-            case 4: return bottomLeft1Center; // Bottom right
-            case 5: return bottomLeft2Center; // Bottom right
-            case 6: return bottomLeft3Center; // Bottom right
-            case 7: return bottomLeft4Center; // Bottom right
-            case 8: return topRight1Center; // Bottom right
-            case 9: return topRight2Center; // Bottom right
-            case 10: return topRight3Center; // Bottom right
-            case 11: return topRight4Center; // Bottom right
-            case 12: return bottomRight1Center; // Bottom right
-            case 13: return bottomRight2Center; // Bottom right
-            case 14: return bottomRight3Center; // Bottom right
-            case 15: return bottomRight4Center; // Bottom right
-            case 16: return middle1Center; // Bottom right
-            case 17: return middle2Center; // Bottom right
-            case 18: return middle3Center; // Bottom right
-            case 19: return middle4Center; // Bottom right
+            case 0: return topLeftCenter; // Top left
+            case 1: return bottomLeftCenter; // Bottom right
+            case 2: return topRightCenter; // Bottom right
+            case 3: return bottomRightCenter; // Bottom right
+            case 4: return middle1Center; // Bottom right
+            case 5: return middle2Center; // Bottom right
+
             
             default: return new double[]{410, 140}; // Middle
         }

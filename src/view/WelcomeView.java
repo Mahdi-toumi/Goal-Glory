@@ -35,7 +35,7 @@ public class WelcomeView {
         
         String MenuSong = getClass().getResource("/audio/MenuSong.mp3").toExternalForm();
         song = new MediaPlayer(new Media(MenuSong));
-        song.setVolume(0.4);
+        song.setVolume(0.2);
         
         
         // Créer une vidéo en arrière-plan
