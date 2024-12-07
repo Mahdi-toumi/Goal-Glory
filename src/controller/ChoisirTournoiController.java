@@ -113,43 +113,15 @@ public class ChoisirTournoiController {
             coupe.ajouterEquipe(new Equipe(data[0], data[1],data[2]));
         }
         jeu.setCoupe(coupe);
-
-        // Ajouter 11 joueurs pour l'équipe de Real Madrid (RMA)
-        Equipe madrid = this.jeu.getCoupe().getEquipes().get(0);
-
-        // Gardien
-        madrid.ajouterJoueur(new Gardien("Courtois", "Thibaut", 31));
-
-        // Défenseurs
-        madrid.ajouterJoueur(new Tireur("Carvajal", "Dani", 32, Poste.DEFENSEUR));
-        madrid.ajouterJoueur(new Tireur("Alaba", "David", 31, Poste.DEFENSEUR));
-        madrid.ajouterJoueur(new Tireur("Rüdiger", "Antonio", 30, Poste.DEFENSEUR));
-        madrid.ajouterJoueur(new Tireur("Mendy", "Ferland", 29, Poste.DEFENSEUR));
-
-        // Milieux
-        madrid.ajouterJoueur(new Tireur("Modric", "Luka", 37, Poste.MILIEU));
-        madrid.ajouterJoueur(new Tireur("Kroos", "Toni", 34, Poste.MILIEU));
-        madrid.ajouterJoueur(new Tireur("Camavinga", "Eduardo", 21, Poste.MILIEU));
-
-        // Attaquants
-        madrid.ajouterJoueur(new Tireur("Vinicius", "Junior", 22, Poste.ATTAQUANT));
-        madrid.ajouterJoueur(new Tireur("Rodrygo", "Goes", 23, Poste.ATTAQUANT));
-        madrid.ajouterJoueur(new Tireur("Joselu", "Mato", 34, Poste.ATTAQUANT));
-
         
-                           
-             
+        Data data = new Data () ;
+        data.DataChampionsLeague(jeu);
 
-        
-        
-                                
-
-
-       
         coupe.Initialiser_tournoi();
         coupe.Initialiser_tour();
         System.out.println("Tournoi 'Champions League' configuré avec " + coupe.getEquipes().size() + " équipes.");
     }
+    
     
     private void setupWorldCup() throws AjoutEquipeException, AjoutTourException {
         Coupe coupe = new Coupe("World Cup");
@@ -170,6 +142,9 @@ public class ChoisirTournoiController {
         }
 
         jeu.setCoupe(coupe);
+        Data data = new Data () ;
+        data.DataWorldCup(jeu);
+        
         coupe.Initialiser_tournoi();
         coupe.Initialiser_tour();
         System.out.println("Tournoi 'World Cup' configuré avec " + coupe.getEquipes().size() + " équipes.");
@@ -195,6 +170,8 @@ public class ChoisirTournoiController {
         }
 
         jeu.setChampionnat(championnat);
+        Data data = new Data () ;
+        data.DataLaliga(jeu);
         championnat.Initialiser_tournoi();
         System.out.println("Tournoi 'La Liga' configuré avec " + championnat.getEquipes().size() + " équipes.");
         
@@ -220,6 +197,9 @@ public class ChoisirTournoiController {
         }
 
         jeu.setChampionnat(championnat);
+        Data data = new Data () ;
+        data.DataPL(jeu);
+        
         championnat.Initialiser_tournoi();
         System.out.println("Tournoi 'Premier League' configuré avec " + championnat.getEquipes().size() + " équipes.");
         
