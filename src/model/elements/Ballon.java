@@ -7,21 +7,18 @@ import javafx.scene.image.ImageView;
 
 // Ballon.java
 public class Ballon {
-    //private Vector2D position;
-    //private double vitesse;
-    //private Vector2D direction;
+    private Vector2D position;
+    private double vitesse;
+    private Vector2D direction;
     private ImageView Balloon;
-    public Ballon(/*Vector2D position, double vitesse, Vector2D direction*/ImageView ballon) {
-        //this.position = position;
-        //this.vitesse = vitesse;
-        //this.direction = direction;
+    public Ballon(ImageView ballon) {
+
         this.Balloon=ballon;
     }
 
-    // Méthode pour vérifier si le tir est un but
-    /*public boolean estBut(Gardien gardien, Tireur tireur) {
+   public boolean estBut(Gardien gardien, Tireur tireur) {
         double precisionTir = tireur.getPrecisionDeTir();
-        double chanceArrêt = gardien.getPourcentageDeSauvetage();
+        double chanceArrêt = gardien.getpourcentageDeSauvetage();
         
         // Chance de marquer un but
         double chanceBut = precisionTir - chanceArrêt;
@@ -47,7 +44,7 @@ public class Ballon {
         this.direction = direction;
         this.vitesse = vitesse;
         this.position = this.position.ajouter(direction.multiplier(vitesse));
-    }*/
+    }
     public ImageView getBallon(){
         return Balloon;
     }

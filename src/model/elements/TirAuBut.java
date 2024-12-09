@@ -9,22 +9,20 @@ package model.elements;
  * @author toumi
  */
 public class TirAuBut implements Comparable<TirAuBut> {
-    /*private Tireur tireur;
-    private Gardien gardien;*/
+    private Tireur tireur;
+    private Gardien gardien;
     private Ballon ballon;
     private String position;
     private boolean estBut;
 
-    public TirAuBut(//Tireur tireur, Gardien gardien, 
-            Ballon ballon, String position) {
-        /*this.tireur = tireur;
-        this.gardien = gardien;*/
+    public TirAuBut( Ballon ballon, String position) {
+
         this.ballon = ballon;
         this.position=position;
         this.estBut = false;
     }
 
-    /*public void effectuerTir() {
+    public void effectuerTir() {
         this.estBut = ballon.estBut(gardien, tireur);
     }
 
@@ -36,7 +34,7 @@ public class TirAuBut implements Comparable<TirAuBut> {
     public Gardien getGardien() {
         return gardien;
     }
-*/
+
     public Ballon getBallon() {
         return ballon;
     }

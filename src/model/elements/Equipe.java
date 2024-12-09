@@ -14,6 +14,9 @@ import model.elements.exceptions.EquipePleineException;
 import model.elements.exceptions.EquipeVideException;
 import model.elements.exceptions.JoueurNonTrouveException;
 import model.elements.exceptions.PointsInvalideException;
+import model.structure.ActionMatch;
+import model.structure.Match;
+import model.structure.Tour;
 
 /**
  *
@@ -62,6 +65,13 @@ public class  Equipe  implements Comparable<Equipe> {
         this.points = points;
     }
 
+    
+    public void appliquerActionSurJoueurs(PlayerAction action) {
+        for (Joueur joueur : joueurs) {
+                action.apply(joueur);
+            
+        }
+    }
 
     
     

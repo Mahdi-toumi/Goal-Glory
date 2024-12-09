@@ -10,7 +10,7 @@ package model.elements;
  */
 public final class Tireur extends Joueur {  
     private double precisionDeTir;
-    private int penaltiesReussis ; 
+        private int penaltiesReussis ; 
 
     public Tireur(String nom, String prenom, int age,Poste poste) {
         super(nom, prenom, age, poste);
