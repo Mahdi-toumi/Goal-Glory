@@ -51,8 +51,5 @@ Goal Glory is an immersive Java-based penalty shootout simulator developed as a 
 - **Youssef Srasra**
 - **Mahdi Toumi**
 
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
 ## Acknowledgments
 Developed as part of the Java Project course at the National Engineering School of Carthage, University of Carthage, for the academic year 2024-2025.
