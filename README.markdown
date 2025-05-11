@@ -41,6 +41,13 @@ Goal Glory is an immersive Java-based penalty shootout simulator developed as a 
 - No support for full-match gameplay; focused solely on penalty shootouts.
 - Limited to single-player mode; no multiplayer functionality.
 
+## Screenshots
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/640167eb-ee0e-4b37-a8ba-958e72fbd367" alt="Ticket Selection" width="300"/>
+  <img src="https://github.com/user-attachments/assets/7e4d1b17-8db8-46a0-a8ea-b4c64376b9e0" alt="Payment" width="300"/>
+  <img src="https://github.com/user-attachments/assets/256af730-37db-4a79-87ae-fa2da009c1e1" alt="Confirmation" width="300"/>
+</p>
+
 ## Future Improvements
 - Implement predictive AI for goalkeepers and shooters using machine learning.
 - Add multiplayer support for local two-player matches.
@@ -53,3 +60,6 @@ Goal Glory is an immersive Java-based penalty shootout simulator developed as a 
 
 ## Acknowledgments
 Developed as part of the Java Project course at the National Engineering School of Carthage, University of Carthage, for the academic year 2024-2025.
+
+
+
